@@ -13,8 +13,13 @@
 		4.等待伙伴确认
 		5.有权限的伙伴,克隆地址
 		6.进行开发
-	
-	步骤：
+
+	如果有冲突的情况：
+		1.git fetch  先将远程仓库的代码拉取下来
+		2.git diff master origin/master  查看版本库与远程的差异（冲突）
+		3.git merge origin/master  版本库与远程的代码进行合并
+		4.手动修改冲突
+		5.修改完之后，版本控制 -> push
 		
 	
 </script>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}	
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+<script type="text/javascript">
+	var div1 = document.getElementById('div1');
+	
+	var X = 0,Y = 0;
+	div1.onmousedown = function(ev){
+		var disX = ev.pageX - div1.offsetLeft;
+		var disY = ev.pageY - div1.offsetTop;
+		var div = document.createElement('div');
+		
+		div.style.cssText = 'opacity: .3;width:100px;height: 100px;background: red;top:'+Y+'px;left:'+X+'px;position: absolute;';
+		
+		document.body.appendChild(div);
+		
+		
+		document.onmousemove = function(ev){
+			div.style.left = ev.pageX - disX + 'px';
+			div.style.top = ev.pageY - disY + 'px';
+			X = ev.pageX - disX;
+			Y = ev.pageY - disY;
+		}
+		document.onmouseup = function(ev){
+			div1.style.left = X + 'px';
+			div1.style.top = Y + 'px';
+			document.body.removeChild(div);
+			document.onmousemove = document.onmouseup = null;
+		}
+		return false;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input{
+            width: 100%;
+            height: 30px;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+        li{
+            list-style: none;
+            background-color: #009999;
+            margin-top: 3px;
+            line-height: 30px;
+            width: 100%;
+        }
+        a{
+            text-decoration: none;
+            color:white;
+            display: block;
+            width: 100%;
+        }
+        a:hover,.hover{
+            background-color: #00FF99;
+        }
+        #box{
+            width: 500px;
+            margin: 100px auto 0;
+        }
+        .select{
+            background-color: #60625b;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <input type="text" id="s"/>
+    <ul id="list">
+        <li><a href="javascript:;">《第七个读者》</a></li>
+        <li><a href="javascript:;">《 心理罪 画像》</a></li>
+        <li><a href="javascript:;">《 心理罪 教化场》</a></li>
+        <li><a href="javascript:;">《 心理罪 暗河》</a></li>
+        <li><a href="javascript:;">《 心理罪 城市之光》</a></li>
+        <li><a href="javascript:;">《地球往事》</a></li>
+        <li><a href="javascript:;">《黑暗森林》</a></li>
+        <li><a href="javascript:;">《死神永生》</a></li>
+        <li><a href="javascript:;">《乡村教师》</a></li>
+        <li><a href="javascript:;">《地球大炮》</a></li>
+    </ul>
+</div>
+<script>
+   var s = document.getElementById('s');//搜索框
+   var ul = document.getElementById('list');//ul
+   var li = ul.children;
+   var as = ul.getElementsByTagName('a');//所有的a
+   var arr = [];//存被选中的内容
+   var lis = Array.from(li);//我们要用到数组的方法
+   var num = -1;//记录hover效果的值
+   var old = 0; //初始的值
+   
+   document.addEventListener('click',c);
+   function c(){
+   		ul.style.display = 'none';
+   }
+   
+    s.onclick = function(ev){
+    	ev.cancelBubble = true;
+    }
+  
+   //1.先点击
+   s.addEventListener('focus',foFn);
+   function foFn(){
+   		ul.style.display = 'block';
+   }
+   
+   lis.forEach(function(e,i){
+   		lis[i].addEventListener('click',fnClick);
+   });
+   //点击的时候做的事情
+   function fnClick(ev){
+		//多选：
+		s.focus();
+		if(ev.ctrlKey){
+			moreChange(ev.target.innerHTML,ev.target);
+		}else{
+			s.blur();
+			oneChange(ev.target.innerHTML,ev.target);
+			ul.style.display = 'none';
+		}
+		ev.cancelBubble = true;//取消冒泡都是在目标点（子级）身上取消。
+	}
+   
+   //按下方向键
+   s.addEventListener('keydown',fnDown);
+   
+   function fnDown(ev){
+   		switch(ev.keyCode){
+   			//向下
+   			case 40 :
+   				num++;
+   				if(num > as.length-1)num=0;
+   				//当选中的时候加上一个标记，如果old有标记，那么就让old变黑
+   				if(as[old].getAttribute('index')){
+   					as[old].className = 'select';
+   				}else{
+   					as[old].className = '';
+   				}
+   				as[num].className = 'hover';
+   				old = num;
+   			break;
+   			//向上
+   			case 38 :
+   				num--;
+   				if(num<0)num=as.length-1;
+   				if(as[old].getAttribute('index')){
+   					as[old].className = 'select';
+   				}else{
+   					as[old].className = '';
+   				}
+   				as[num].className = 'hover';
+   				old = num;
+   			break;
+   			case 13 :
+   				if(ev.ctrlKey){
+   					moreChange(as[num].innerHTML,as[num]);
+   				}else{
+   					oneChange(as[num].innerHTML,as[num]);
+   				}
+   			break;
+   		}
+   		ev.preventDefault();
+   }
+   
+  //清除函数
+  function clear(){
+  	for(var i=0;i<as.length;i++){
+  		as[i].className = '';
+  		as[i].removeAttribute('index');
+  	}
+  }
+  
+  	function moreChange(val,a){
+  		if(!arr.length){
+			//直接添加
+			arr.push(val);
+   			s.value = val;
+   			a.className = 'select';
+   			a.setAttribute('index',1);
+		}else{
+			//点击的有没有在数组中
+			if(arr.indexOf(val)!=-1){
+				//如果有就删
+				arr.splice(arr.indexOf(val),1);
+				a.className = '';
+				a.removeAttribute('index');
+			}else{
+				//如果没有就push
+				arr.push(val);
+   				a.className = 'select';
+   				a.setAttribute('index',1);
+			}
+			s.value = arr.join('');
+		}
+	}
+  
+  //单选oneChange
+  function oneChange(val,a){
+	clear();//清除class
+	if(arr.indexOf(val)!=-1){//查看点击的内容是否在数组中出现
+		//如果数组中的length大于1，那么把所有的清掉，把当前的加上
+		if(arr.length > 1){
+			arr.length = 0;
+			arr[0] = val;
+			s.value = val;
+			a.className = 'select';
+			a.setAttribute('index',1);
+		}else{
+			//说明有1个内容并且是重复的。
+			arr.length = 0;
+			s.value = '';
+			a.removeAttribute('index');
+		}
+	}else{
+		arr.length = 0;
+		arr[0] = val;
+		s.value = val;
+		a.className = 'select';
+		a.setAttribute('index',1);
+	}
+  }
+  
+  
+  
+  
+  
+  
+  	
+   
+  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+</script>
+</body>
+</html>

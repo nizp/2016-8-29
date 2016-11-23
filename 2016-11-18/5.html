@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" id="btn" value="关闭" />
+<script type="text/javascript">
+	//window.close();
+	//目前FF需要通过open打开的方式才能关闭，别的直接使用即可。
+	document.getElementById('btn').onclick = function(){
+		window.close();
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style>
+*{margin:0;padding: 0;}
+body{
+
+  font: 12px/150% Arial,Verdana,"\5b8b\4f53";
+}
+a{
+  color: #666;
+  text-decoration: none;
+}
+ul li{list-style: none;}
+  .sl-wrap {
+  position: relative;
+  _zoom: 1;
+  line-height: 34px;
+  border-bottom: 1px solid #DDD;}
+ .sl-key {
+  float: left;
+  width: 100px;
+  padding-left: 10px;}
+  .sl-value {
+  margin-left: 110px;
+  padding-right: 130px;
+  padding-left: 10px;
+  overflow: hidden;
+  zoom: 1;}
+  .sl-v-list {
+  overflow: hidden;
+  zoom: 1;
+  padding-top: 4px;
+}
+img{
+  border: none;
+}
+.sl-v-list ul {
+  float: left;
+  overflow: hidden;
+  zoom: 1;
+  position: relative;
+  height: 30px;}
+  .sl-v-list li {
+  float: left;
+  _display: inline;
+  margin-right: 16px;
+  margin-bottom: 4px;
+  height: 26px;
+  line-height: 26px;}
+  .sl-v-list li a {
+  float: left;
+  white-space: nowrap;
+  zoom: 1;
+  color: #005aa0;
+  text-decoration:none;
+}
+
+.crumbs-nav-item {
+  float: left;
+  margin-right: 8px;
+  margin-top: 5px;
+}
+  .crumbs-nav-item .selector-set {
+  float: left;
+  margin-right: 5px;}
+  .selector-set .ss-item{
+    position: relative;
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  border: 1px solid #DDD;
+  font-size: 12px;
+  vertical-align: top;
+  margin: 0 5px 5px 0;
+  padding: 0 26px 0 4px;
+  cursor: pointer;
+  }
+  .selector-set .ss-item b{
+    font-weight:400;
+  }
+  .selector-set .ss-item em{
+    color: #e4393c;
+  }
+  .selector-set .ss-item i{
+    display: block;
+  position: absolute;
+  width: 25px;
+  height: 22px;
+  right: 0;
+  top: 0;
+  background: url(http://misc.360buyimg.com/product/list/1.0.2/css/i/search.ele.png) no-repeat 7px -140px;
+  }
+</style>
+<body>
+  <div class="sl-wrap">
+    <div class="sl-key">
+      <span>价格：</span>
+    </div>
+    <div class="sl-value">
+      <div class="sl-v-list">
+        <ul class="J_valueList" num="1" myName="价格">
+          <li><a href="javascript:;">0-299</a></li>
+          <li><a href="javascript:;">300-699</a></li>
+          <li><a href="javascript:;">700-1099</a></li>
+          <li><a href="javascript:;">1100-1999</a></li>
+          <li><a href="javascript:;">2000-3599</a></li>
+          <li><a href="javascript:;">3600-4299</a></li>
+          <li><a href="javascript:;">4300以上</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sl-wrap">
+    <div class="sl-key">
+      <span>类别：</span>
+    </div>
+    <div class="sl-value">
+      <div class="sl-v-list">
+        <ul class="J_valueList" num="2"  myName="类别">
+          <li><a href="javascript:;">文件夹</a></li>
+          <li><a href="javascript:;">办公套装</a></li>
+          <li><a href="javascript:;">文件筐</a></li>
+          <li><a href="javascript:;">美工刀</a></li>
+          <li><a href="javascript:;">三针一钉</a></li>
+          <li><a href="javascript:;">风琴包</a></li>
+          <li><a href="javascript:;">票夹</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sl-wrap">
+    <div class="sl-key">
+      <span>品牌:</span>
+    </div>
+    <div class="sl-value">
+      <div class="sl-v-list">
+        <ul class="J_valueList" num="3" myName="品牌">
+          <li><a href="javascript:;">得力</a></li>
+          <li><a href="javascript:;">齐心</a></li>
+          <li><a href="javascript:;">优必利</a></li>
+          <li><a href="javascript:;">三木</a></li>
+          <li><a href="javascript:;">GBC</a></li>
+          <li><a href="javascript:;">广博</a></li>
+          <li><a href="javascript:;">利兰</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<div id="box">
+	<div class="crumbs-nav-item"></div>
+	<div class="crumbs-nav-item"></div>
+	<div class="crumbs-nav-item"></div>
+</div>
+<script>
+  var aLi = document.querySelectorAll('li');
+  var oBox = document.getElementById('box');
+  var ul = document.getElementsByClassName('J_valueList');
+  var div = document.getElementsByClassName('crumbs-nav-item');
+  
+  for(var i=0;i<ul.length;i++){
+  	(function(ul,div){
+  			var li = ul.getElementsByTagName('li');
+  			for(var i=0;i<li.length;i++){
+  				(function(index){
+  						li[index].onclick = function(){
+  							//alert(index);
+  							if(!this.parentNode.getAttribute('index')){
+  								this.style.display = 'none';
+ 									this.parentNode.setAttribute('index',this.parentNode.getAttribute('num'));
+ 									div.setAttribute('num',index);
+ 									
+ 									var newdiv = document.createElement('div');
+	  							newdiv.className = 'selector-set';
+	  							newdiv.innerHTML = '<a href="javascript:;" class="ss-item"><b>'+this.parentNode.getAttribute('myName')+':</b><em>'+this.children[0].innerHTML+'</em><i></i></a>';
+	  							div.appendChild(newdiv);
+	  							
+	  							//删除
+	  							var i = newdiv.getElementsByTagName('i')[0];
+	  							i.onclick = function(){
+	  								//alert(1)
+	  									div.removeChild(newdiv);
+	  									li[div.getAttribute('num')].style.display = 'block';
+	  										li[div.getAttribute('num')].parentNode.removeAttribute('num');
+	  								li[div.getAttribute('num')].parentNode.removeAttribute('index');
+	  								
+	  							}
+  							}
+  						}
+  				})(i);
+  			}
+  	})(ul[i],div[i]);
+  }
+  
+//console.log(ul.length)
+  
+  
+  
+  /*
+  	<div class="crumbs-nav-item"><div class="selector-set" num="3"><a href="javascript:;" class="ss-item"><b>价格：</b><em>得力</em><i></i></a></div></div> 
+  */
+  
+</script>
+</body>
+</html>

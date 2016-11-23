@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+			}
+			#div1 {
+				width: 900px;
+				margin: 0px auto;
+			}
+			#div1 ul {
+				margin-top: 10px;
+				width: 900px;
+				height: 550px;
+				padding: 10px;
+				border: 1px dashed #000;
+				overflow: hidden;
+				position: relative;
+			}
+			#div1 ul li {
+				float: left;
+				margin: 10px;
+				width: 200px;
+				height: 150px;
+				overflow: hidden;
+				z-index: 1;
+			}
+			#div1 ul li {
+				width: 200px;
+				height: 150px;
+			}
+			#div1 ul li.active{
+				border: 2px dashed red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<input type="button" value="随机" id="btn" />
+			<ul id="oUl">
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+				<li>
+					<img src="./image/3.jpg" />
+				</li>
+				<li>
+					<img src="./image/4.jpg" />
+				</li>
+				<li>
+					<img src="./image/5.jpg" />
+				</li>
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+				<li>
+					<img src="./image/3.jpg" />
+				</li>
+				<li>
+					<img src="./image/4.jpg" />
+				</li>
+				<li>
+					<img src="./image/5.jpg" />
+				</li>
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+			</ul>
+		</div>
+<script>
+	var ul = document.getElementById('oUl');
+	var lis = ul.children;
+	var aPos = [];
+	var zIndex = 1;
+	
+	//布局转换
+	/*
+		[
+			{
+				top:0,
+				left:0
+			},
+			{}
+		]
+	*/
+	for(var i=0;i<lis.length;i++){
+		aPos[i] = {
+			left:lis[i].offsetLeft,
+			top:lis[i].offsetTop
+		}
+		
+		lis[i].style.left = lis[i].offsetLeft + 'px';
+		lis[i].style.top = lis[i].offsetTop + 'px';
+		lis[i].style.zIndex = 1;
+	}
+	
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.position = 'absolute';
+		lis[i].style.margin = 0;
+		Drag(lis[i]);
+	}
+	
+	
+	
+	
+	
+	//拖拽
+	function Drag(obj){
+		var disX = 0,disY = 0;
+		obj.addEventListener('mousedown',fnDown);
+		function fnDown(ev){
+			//当按下当前这个li的时候，将zIndex++，再把这个值赋值给当前这个li保证每次zIndex都是最大的；
+			obj.style.zIndex = ++zIndex;
+			
+//			console.log(zIndex)
+			
+			disX = ev.pageX - obj.offsetLeft;
+			disY = ev.pageY - obj.offsetTop;
+			
+			document.addEventListener('mousemove',fnMove);
+			document.addEventListener('mouseup',fnUp);
+			
+			ev.preventDefault();
+		}
+		
+		function fnMove(ev){
+			obj.style.left = ev.pageX - disX + 'px'; 
+			obj.style.top = ev.pageY - disY + 'px';
+		}
+		
+		function fnUp(){
+			document.removeEventListener('mousemove',fnMove);
+			document.removeEventListener('mouseup',fnUp);
+		}
+	}
+	
+	
+	
+</script>
+</body>
+</html>

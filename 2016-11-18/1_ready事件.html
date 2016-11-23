@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+
+<body>
+	<img src="http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/96.jpg"/>
+<script type="text/javascript">
+	//当页面所有资源加载完成时就执行里面的代码
+//	window.onload = function(){
+//		alert(1);
+//	}
+	
+	//当DOM加载完成就执行里面的代码（高版本用）
+	
+//	document.addEventListener('DOMContentLoaded',function(){
+//		alert(1);
+//	});
+
+	/*
+	 	低版本：
+	 		http://javascript.nwbox.com/IEContentLoaded/
+	 	
+	 	原理：
+	 		低版本IE下，当dom加载完成之后会有一个doscroll('left'),
+	 		如果没有，那么开个定时器，50毫秒再去检测一次。
+	 		配合onreadystatechange来使用
+	 		
+	*/
+
+
+	
+	
+	//性能很低，在try中如果有报错，那么会走catch，保证之后的代码正常运行。
+	try{
+		a
+	}catch(e){
+		a = 10;
+		console.log(e);
+	}
+
+	alert(a);
+	
+	
+	
+	
+</script>
+</body>
+</html>

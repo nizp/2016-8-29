@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+			}
+			#div1 {
+				width: 900px;
+				margin: 0px auto;
+			}
+			#div1 ul {
+				margin-top: 10px;
+				width: 900px;
+				height: 550px;
+				padding: 10px;
+				border: 1px dashed #000;
+				overflow: hidden;
+				position: relative;
+			}
+			#div1 ul li {
+				float: left;
+				margin: 10px;
+				width: 200px;
+				height: 150px;
+				overflow: hidden;
+				z-index: 1;
+			}
+			#div1 ul li {
+				width: 200px;
+				height: 150px;
+			}
+			#div1 ul li.active{
+				border: 2px dashed red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<input type="button" value="随机" id="btn" />
+			<ul id="oUl">
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+				<li>
+					<img src="./image/3.jpg" />
+				</li>
+				<li>
+					<img src="./image/4.jpg" />
+				</li>
+				<li>
+					<img src="./image/5.jpg" />
+				</li>
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+				<li>
+					<img src="./image/3.jpg" />
+				</li>
+				<li>
+					<img src="./image/4.jpg" />
+				</li>
+				<li>
+					<img src="./image/5.jpg" />
+				</li>
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+			</ul>
+		</div>
+<script>
+	var ul = document.getElementById('oUl');
+	var lis = ul.children;
+	var aPos = [];
+	var zIndex = 1;
+	
+	//布局转换
+	/*
+		[
+			{
+				top:0,
+				left:0
+			},
+			{}
+		]
+	*/
+	for(var i=0;i<lis.length;i++){
+		aPos[i] = {
+			left:lis[i].offsetLeft,
+			top:lis[i].offsetTop
+		}
+		
+		lis[i].style.left = lis[i].offsetLeft + 'px';
+		lis[i].style.top = lis[i].offsetTop + 'px';
+		lis[i].style.zIndex = 1;
+	}
+	
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.position = 'absolute';
+		lis[i].style.margin = 0;
+		lis[i].index = i;
+		Drag(lis[i]);
+	}
+	
+	
+	
+	
+	
+	//拖拽
+	function Drag(obj){
+		var disX = 0,
+		disY = 0,
+		arr = [],
+		objIndex = null;
+		;//为了记录有几被碰撞
+		
+		obj.addEventListener('mousedown',fnDown);
+		function fnDown(ev){
+			
+			for(var i=0;i<lis.length;i++){
+				lis[i].style.transition = '';
+			}
+			
+			//当按下当前这个li的时候，将zIndex++，再把这个值赋值给当前这个li保证每次zIndex都是最大的；
+			obj.style.zIndex = ++zIndex;
+			
+//			console.log(zIndex)
+			
+			disX = ev.pageX - obj.offsetLeft;
+			disY = ev.pageY - obj.offsetTop;
+			
+			document.addEventListener('mousemove',fnMove);
+			document.addEventListener('mouseup',fnUp);
+			
+			ev.preventDefault();
+		}
+		
+		function fnMove(ev){
+			var max = Infinity;
+			var objIndex2 = null;
+			
+			obj.style.left = ev.pageX - disX + 'px'; 
+			obj.style.top = ev.pageY - disY + 'px';
+			
+			arr.length = 0;
+			
+			
+			for(var i=0;i<lis.length;i++){
+				if(duang(obj,lis[i])){
+					if(obj != lis[i]){
+						arr.push(lis[i]);
+						//lis[i].className = 'active';
+					}
+				}
+			}
+			
+			
+			arr.forEach(function(e,i){
+				var a = e.offsetTop - obj.offsetTop;
+				var b = e.offsetLeft - obj.offsetLeft;
+				/*
+					Math.sqrt根号
+					Math.pow 多少次平方 
+					
+					c = Math.sqrt(a*a + b*b);
+					
+				*/
+				var sqrt = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+				//找最小的
+				if(max > sqrt){
+					max = sqrt;
+					objIndex2 = e;
+				}
+			});
+			
+			if(objIndex2){//如果有最小的
+				//如果第一次碰撞了,将之前碰撞的className清空
+				if(objIndex)objIndex.className = '';
+				objIndex2.className = 'active';
+			}
+			
+			//把当前最小的赋值给objIndex
+			objIndex = objIndex2;
+			
+//			console.log(objIndex2);
+//			console.log(arr);
+		}
+		
+		function fnUp(){
+			//Up的时候要交换位置。
+			//如果有最近的
+			if(objIndex){
+				//把当前拖拽的这个元素和被碰撞的元素加上transition
+				obj.style.transition = objIndex.style.transition = '.5s';
+				
+				//互换位置
+				obj.style.left = aPos[objIndex.index ].left + 'px';
+				objIndex.style.left = aPos[obj.index].left + 'px';
+				
+				obj.style.top = aPos[objIndex.index].top + 'px';
+				objIndex.style.top = aPos[obj.index].top + 'px';
+				
+				//交换完位置之后还要把索引值调换。
+				var newIndex = objIndex.index;
+				objIndex.index = obj.index;
+				obj.index = newIndex;
+				
+				//当运动结束之后，把被碰撞的元素的class名清空。
+				setTimeout(function(){
+					objIndex.className = '';
+				},501);
+				
+			}
+			
+			document.removeEventListener('mousemove',fnMove);
+			document.removeEventListener('mouseup',fnUp);
+		}
+	}
+	
+	
+	function duang(obj,obj2){
+		var l1 = obj.offsetLeft;
+		var t1 = obj.offsetTop;
+		var r1 = l1 + obj.offsetWidth;
+		var b1 = t1 + obj.offsetHeight;
+		
+		var l2 = obj2.offsetLeft;
+		var t2 = obj2.offsetTop;
+		var r2 = l2 + obj2.offsetWidth;
+		var b2 = t2 + obj2.offsetHeight;
+		
+		if(r1 < l2 || t1 > b2 || l1 > r2 || b1 < t2){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

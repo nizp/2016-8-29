@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<textarea name="" rows="10" cols="30" id="txt"></textarea>
+	<input type="button" id="btn" value="运行" />
+<script type="text/javascript">
+/*
+	新打开的窗口
+		window.open(url,_blank,style);
+	刷新页面
+		window.location.reload();
+		被人为主动触发的事件所驱动之后，可以用window.location.search = window.location.search;
+	
+*/
+
+	var txt = document.getElementById('txt'),
+	btn = document.getElementById('btn');
+	
+	btn.onclick = function(){
+		var val = txt.value;
+		
+		/*
+			 文档输入流:
+			 	当在别的页面使用了，document.wirt()的时候，会开放文档输入流，
+			 	如果不关闭，那么会一直等待输入，当注入代码之后会影响JS正常运行，
+			 	所以，在打开文档输入流，还要关闭：（close()）
+		*/
+		var newOpen = window.open('5.html');
+		
+		//console.log(newOpen)
+		
+		newOpen.document.write(val);
+		newOpen.document.close();
+		
+	}
+	
+
+
+
+
+//window.onload = function(){
+//	
+//	window.open();
+//}
+//window.location.search = window.location.search;
+//document.onclick = function(){
+//	//window.open('http://www.miaov.com','','width=200');
+//	
+//	//window.location.reload();
+//}
+</script>
+</body>
+</html>

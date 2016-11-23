@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+			}
+			#div1 {
+				width: 900px;
+				margin: 0px auto;
+			}
+			#div1 ul {
+				margin-top: 10px;
+				width: 900px;
+				height: 550px;
+				padding: 10px;
+				border: 1px dashed #000;
+				overflow: hidden;
+				position: relative;
+			}
+			#div1 ul li {
+				float: left;
+				margin: 10px;
+				width: 200px;
+				height: 150px;
+				overflow: hidden;
+				z-index: 1;
+			}
+			#div1 ul li {
+				width: 200px;
+				height: 150px;
+			}
+			#div1 ul li.active{
+				border: 2px dashed red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<ul id="oUl">
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+				<li>
+					<img src="./image/3.jpg" />
+				</li>
+				<li>
+					<img src="./image/4.jpg" />
+				</li>
+				<li>
+					<img src="./image/5.jpg" />
+				</li>
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+				<li>
+					<img src="./image/3.jpg" />
+				</li>
+				<li>
+					<img src="./image/4.jpg" />
+				</li>
+				<li>
+					<img src="./image/5.jpg" />
+				</li>
+				<li>
+					<img src="./image/1.jpg" />
+				</li>
+				<li>
+					<img src="./image/2.jpg" />
+				</li>
+			</ul>
+		</div>
+<script src="MTween.js" type="text/javascript"></script>
+<script>
+	var ul = document.getElementById('oUl');
+	var lis = ul.children;
+	var aPos = [];
+	var zIndex = 1;
+	
+	//布局转换
+	/*
+		[
+			{
+				top:0,
+				left:0
+			},
+			{}
+		]
+	*/
+	for(var i=0;i<lis.length;i++){
+		aPos[i] = {
+			left:lis[i].offsetLeft,
+			top:lis[i].offsetTop
+		}
+		
+		lis[i].style.left = lis[i].offsetLeft + 'px';
+		lis[i].style.top = lis[i].offsetTop + 'px';
+		lis[i].style.zIndex = 1;
+	}
+	
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.position = 'absolute';
+		lis[i].style.margin = 0;
+		lis[i].index = i;
+		Drag(lis[i]);
+	}
+	
+	
+	
+	
+	
+	//拖拽
+	function Drag(obj){
+		var disX = 0,
+		disY = 0;
+		
+		
+		obj.addEventListener('mousedown',fnDown);
+		function fnDown(ev){
+			
+			
+			//当按下当前这个li的时候，将zIndex++，再把这个值赋值给当前这个li保证每次zIndex都是最大的；
+			obj.style.zIndex = ++zIndex;
+			
+//			console.log(zIndex)
+			
+			disX = ev.pageX - obj.offsetLeft;
+			disY = ev.pageY - obj.offsetTop;
+			
+			document.addEventListener('mousemove',fnMove);
+			document.addEventListener('mouseup',fnUp);
+			
+			ev.preventDefault();
+		}
+		function fnMove(ev){
+			obj.style.left = ev.pageX - disX + 'px'; 
+			obj.style.top = ev.pageY - disY + 'px';
+			
+			//找到最近的
+			var minObj = minFn(obj);
+			
+			//如果有最近的并且最近的不是自己
+			if(minObj && obj!=minObj){
+				//存2个索引值
+				var oldIndex = obj.index;
+				var newIndex = minObj.index;
+				
+				//如果移动的索引小于被碰撞的索引
+				if(oldIndex < newIndex){
+					//循环所有的li，找到要变换的li
+					for(var i=0;i<lis.length;i++){
+						//如果每个li的所以大于等于 当前的拖拽的索引+1并且不能超过碰撞的索引  （至少比拖拽元素多一个，而且要么小于被碰撞元素的索引，要么等于被碰撞元素的索引）
+						if(lis[i].index >= oldIndex+1 && lis[i].index<=newIndex){
+							//把挑出来的li的索引依次减减
+							lis[i].index--;
+							//改变他们的位置。
+							muchTween(lis[i],{
+								left:aPos[lis[i].index].left,
+								top:aPos[lis[i].index].top
+							},500,'bounceOut');
+						}
+					}
+					
+					obj.index = newIndex;//将obj的索引值改变成碰撞到的那个索引值
+					
+				}else{
+					for(var i=0;i<lis.length;i++){
+						if(lis[i].index <= oldIndex-1 && lis[i].index>=newIndex){
+							lis[i].index++;
+							muchTween(lis[i],{
+								left:aPos[lis[i].index].left,
+								top:aPos[lis[i].index].top
+							},500,'bounceOut');
+						}
+					}
+					obj.index = newIndex;
+					
+				}
+			}
+			
+		}
+		
+		function fnUp(){
+			//Up的时候要交换位置。
+			muchTween(obj,{
+				left:aPos[obj.index].left,
+				top:aPos[obj.index].top
+			},500,'bounceOut');
+			document.removeEventListener('mousemove',fnMove);
+			document.removeEventListener('mouseup',fnUp);
+		}
+	}
+	
+	
+	function minFn(obj){
+		var max = Infinity;
+		var objIndex = -1;
+		for(var i=0;i<lis.length;i++){
+			if(duang(obj,lis[i])){
+				var a = aPos[lis[i].index].left - obj.offsetLeft;
+				var b = aPos[lis[i].index].top - obj.offsetTop;
+				var sqrt = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+				if(max > sqrt){
+					max = sqrt;
+					objIndex = i;
+				}
+			}
+		}
+		if(objIndex == -1){
+			return null;
+		}else{
+			return lis[objIndex];
+		}
+	}
+	
+	function duang(obj,obj2){
+		var l1 = obj.offsetLeft;
+		var t1 = obj.offsetTop;
+		var r1 = l1 + obj.offsetWidth;
+		var b1 = t1 + obj.offsetHeight;
+		
+		var l2 = obj2.offsetLeft;
+		var t2 = obj2.offsetTop;
+		var r2 = l2 + obj2.offsetWidth;
+		var b2 = t2 + obj2.offsetHeight;
+		
+		if(r1 < l2 || t1 > b2 || l1 > r2 || b1 < t2){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

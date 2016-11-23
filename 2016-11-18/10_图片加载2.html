@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:200px;
+	height: 20px;
+	border: 1px solid #000;
+	position: relative;
+}	
+#div2{
+	width:0;
+	height: 20px;
+	background:greenyellow;
+	position: absolute;
+	top:0;
+	left:0;
+}
+html{
+	transition:1s;
+}
+</style>
+</head>
+<body>
+	<div id="div1">
+		<div id="div2"></div>
+	</div>
+<script type="text/javascript">
+		//http://www.miaov.com/static/normal/images/index/M.png
+		
+		/*
+			创建一个img元素，给它src加上一个图片地址，
+			通过onload事件可以监听这个图片是否加载完成。
+		*/
+		
+		var arr = [
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/81.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/82.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/80.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/84.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/67.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/18.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/54.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/95.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/22.jpg',
+			'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/11.jpg']
+		var num = 0;
+		for(var i=0;i<arr.length;i++){
+			var img = document.createElement('img');
+			img.src = arr[i];
+			img.onload = function(){
+				num++;
+				div2.style.width =  (num/10) * 200 + 'px';
+				if(num == 10){
+					
+					document.documentElement.style.background = 'yellow';
+				}
+				//document.body.appendChild(img);
+			}
+			
+			img.onerror = function(){
+				num++;
+				div2.style.width =  (num/10) * 200 + 'px';
+				if(num == 10){
+					
+					document.documentElement.style.background = 'yellow';
+				}
+			}
+		}
+		
+		
+		
+	//	var img = document.createElement('img');
+//		img.src = 'http://www.rhntw.cc/imgall/nfwwomrognwgsylofzrw63i/2014/f6/146/d/1.jpg';
+//		
+//		img.onload = function(){
+//			alert(1);
+//			document.body.appendChild(img);
+//		}
+//		img.onerror = function(){
+//				alert('没有图片')
+//		}
+		
+		
+		
+		
+</script>
+</body>
+</html>

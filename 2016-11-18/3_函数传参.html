@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//	function fn1(b){
+//		
+//		var a = 10;
+//		b(a);
+////		alert(2)
+//	}
+//	
+//	fn1(
+//		function(o){
+//			alert(o);
+//		}
+//	);
+
+	var a = 10;
+	function fn1(b){
+		a = 20;
+		return function(){
+			alert(window.a);
+			//alert(b);
+			console.log(b);
+		}
+	}
+	var b = fn1(
+		{
+			arr:[1,2,3,4,5]
+		}
+	);
+	b();
+	
+</script>
+</body>
+</html>

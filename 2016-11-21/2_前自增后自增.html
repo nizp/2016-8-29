@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	var i = 0;
+	
+	//i++;
+	//++i;
+	
+	//console.log(i)
+	
+	/*
+		i++ 如果在等号的左边，就已经运算了，所以 i++ = 1
+
+	*/
+//	console.log(i++ == ++i);
+
+	/*
+		在右边比较的时候，找到i就进行比较，这个时候，i因为是后自增，所以还没来的及自增就进行比较了，所以 ++i 为 1 == i
+	*/
+	console.log(++i == i++);
+	
+	console.log(i)
+	
+</script>
+</body>
+</html>

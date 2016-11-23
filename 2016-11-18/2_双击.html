@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+
+<body>
+	<input type="button" name="btn" id="btn" value="点击" />
+<script type="text/javascript">
+	/*
+		ondblclick  双击事件 
+	*/
+	var btn = document.getElementById('btn');
+	
+//	btn.ondblclick = function(){
+//		alert(1)
+//	}
+	var old = null;
+	btn.onclick = function(){
+		if((+new Date() - old) < 150){
+			alert('双击了');
+		}
+		old =  +new Date();
+	}
+	
+</script>
+</body>
+</html>

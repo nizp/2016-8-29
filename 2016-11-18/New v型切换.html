@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+<style type="text/css">
+#content{
+	position:relative;
+	width:260px;
+	height:260px;
+	margin:0 auto;
+	padding:0px;
+	}
+#main{
+	width:260px;
+	height:260px;
+	margin:0 auto;
+	padding:0px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	}
+#main div{
+	width:50px;
+	height:50px;
+	background:#ccc;
+	float:left;
+	margin-right:1px;
+	margin-bottom:1px;
+	}
+#conts{
+	width:260px;
+	height:260px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	}
+#cont1{
+	position:absolute;
+	width:254px;
+	height:254px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	}
+#cont1 div{
+	width:50px;
+	height:50px;
+	background:#c00;
+	position:absolute;
+	line-height:50px;
+	text-align:center;
+	}
+#content input{
+	position:absolute;
+	top:270px;
+	left:100px;
+	width:50px;
+	height:30px;
+	line-height:30px;
+	z-index:10000;
+	}
+</style>
+<script type="text/javascript">
+window.onload=function (){
+	var oDiv=document.getElementById('main');
+	var aDiv=document.getElementById('conts').getElementsByTagName('div')[0];
+	var oBtn=document.getElementById('content').getElementsByTagName('input')[0];
+	var m=25;
+	var n=5;
+	var num=Math.ceil(n/2);
+	var str='';
+	var Str='';
+	var iNow=0;
+	var arr=[Left,Top,Right,Bottom];
+	for(var i=0;i<m;i++){
+		str+='<div></div>';
+		}
+    oDiv.innerHTML=str;
+    function Top(){
+		for(var i=0;i<n;i++){
+			if(i<num){
+			     Str+='<div style="top:'+i*51+'px; left:'+i*51+'px;">'+i+'</div>';}
+			else{
+				Str+='<div style="top:'+(n-1-i)*51+'px; left:'+i*51+'px;">'+i+'</div>';
+				}
+		    }
+		aDiv.innerHTML=Str;
+		}
+		
+	function Left(){
+		for(var i=0;i<n;i++){
+			if(i<num){
+			     Str+='<div style="top:'+i*51+'px; left:'+i*51+'px;">'+i+'</div>';}
+			else{
+				Str+='<div style="top:'+i*51+'px; left:'+(n-1-i)*51+'px;">'+i+'</div>';
+				}
+		    }
+		aDiv.innerHTML=Str;
+		}
+	
+	function Bottom(){
+		for(var i=0;i<n;i++){
+			if(i<num){
+			     Str+='<div style="bottom:'+i*51+'px; left:'+i*51+'px;">'+i+'</div>';}
+			else{
+				Str+='<div style="bottom:'+(n-1-i)*51+'px; left:'+i*51+'px;">'+i+'</div>';
+				}
+		    }
+		aDiv.innerHTML=Str;
+		}
+	
+	function Right(){
+		for(var i=0;i<n;i++){
+			if(i<num){
+			     Str+='<div style="top:'+i*51+'px; right:'+i*51+'px;">'+i+'</div>';}
+			else{
+				Str+='<div style="top:'+i*51+'px; right:'+(n-1-i)*51+'px;">'+i+'</div>';
+				}
+		    }
+		aDiv.innerHTML=Str;
+		}
+	oBtn.onclick=function (){
+		Str='';
+		arr[iNow]();
+		iNow++;
+		if(iNow>3){
+			iNow=0;
+			}
+		}
+}
+</script>
+</head>
+
+<body>
+<div id="content">
+   <div id="main">
+   </div>
+   <div id="conts">
+    <div id="cont1">
+    </div>
+   </div>
+    <input type="button" value="click" />
+</div>
+
+</body>
+</html>

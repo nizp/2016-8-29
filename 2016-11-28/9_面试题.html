@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		计算下面字符串的字节长度？（中文为3个字节，英文为1个字节）
+		
+		中文的区间范围：/[\u4e00-\u9fa5]/
+		
+	*/
+	
+	var str = '你好世界hello呵呵'; //18+5 23
+	var num = 0;
+	for(var i=0;i<str.length;i++){
+		if(/[\u4e00-\u9fa5]/.test(str.charAt(i))){
+			num+=3;
+		}else{
+			num++;
+		}
+	}
+	console.log(num);
+	
+	//console.log(/[\u4e00-\u9fa5]/.test('戆'));
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

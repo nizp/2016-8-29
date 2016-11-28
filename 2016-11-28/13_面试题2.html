@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	//找出重复次数最多的是哪个字符？
+	var str = '11111122222222223333333333333344444444444444444555555';
+	var json = {};
+	/*
+		{
+			1:4,
+			2:3,
+			3:1
+		}
+	*/
+	for(var i=0;i<str.length;i++){
+		if(!json[str.charAt(i)]){
+			json[str.charAt(i)] = 1;
+		}else{
+			json[str.charAt(i)]++;
+		}
+	}
+	var min = -Infinity;
+	var n = '';
+	
+	for(var key in json){
+		if(min < json[key]){
+			min = json[key];
+			n = key;
+		}
+	}
+	
+	console.log('出现最多的是'+n+'出现了'+min+'次');
+	
+	
+	
+</script>
+</body>
+</html>

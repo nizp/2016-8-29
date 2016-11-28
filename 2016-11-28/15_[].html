@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		括号：()
+			子项
+			提权
+		[] 里面可以为任意一个字符
+	*/
+	var str = 'a1ca2ca3ca4ca12c';
+	
+//	console.log(str.match(/a\dc/g))
+	//console.log(str.match(/a(1|2|4)c/g))
+	console.log(str.match(/a[124]2?c/g)); //a1c,a2c,a4c,a12c
+//	console.log(str.match(/(a[124]c)|a12c/g));
+	
+</script>
+</body>
+</html>

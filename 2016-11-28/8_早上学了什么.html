@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+	正则：
+		主要用来匹配（擅长匹配模糊范围的）字符串，是一种规则，效率更高
+	 		速度更快，但是，可维护性较差（因为读起来很费劲）
+	 		
+	 	/规则/
+	 	new RegExp('');
+	 	
+	 	
+	 	
+*/
+	var str = 'jhd1113jksh22111';
+	
+	//console.log(str.search(/\d/));
+	
+	//console.log(str.match(/\d+/g))
+	
+	//console.log(/k/.test(str));
+	
+//	壹
+	
+//	console.log(str.replace(/1/g,'壹'));
+	
+	var num = 0;
+	console.log(str.replace(/1/g,function($0,$1,$2,$3){
+		//console.log($3)
+		num++;
+		return 1;
+	}));
+	//console.log(num);
+
+</script>
+</body>
+</html>

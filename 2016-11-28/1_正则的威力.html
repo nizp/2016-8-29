@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+	 	正则：
+	 		主要用来匹配（擅长匹配模糊范围的）字符串，是一种规则，效率更高
+	 		速度更快，但是，可维护性较差（因为读起来很费劲）
+
+	 		啥玩意儿
+	 		高大上
+	 		公式
+	 		火星文
+	 		一种规则
+	 	
+	 	需求
+			1. 找到字符串中的数字，存在数组中
+				
+				创建一个新的数组，循环每个字符，
+				如果某个字符为数字那么就把这个数字push到数组中.
+				
+				string[i] 在IE6下不支持，所以用string.charAt(i)
+				
+			
+			2. 找到字符串中的数字以及连续的数字，存在数组中
+				str = '3d1sa1d21s1ax'  ->3,1,1,21,1
+				
+				建一个空的字符串，当某个字符为数字的时候，那么给这个空的字符串进行拼接，当某个不是数字的时候就把已经拼接好的字符串push到数组中并且清空拼接的字符，以便下次使用。
+				
+				
+				var temp = '';
+				
+				temp += 3 -> push(temp)  temp = '' 
+				
+				
+				
+	 	
+	 	正则的威力：
+	 		
+	*/
+	var arr = [];
+	var str = '3d1sa1d2123232322s1ax9';
+	
+//	for(var i=0;i<str.length;i++){
+//		var v = parseInt(str.charAt(i));
+//		//不是NaN就是数字
+//		if(!isNaN(v)){
+//			arr.push(v);
+//		}
+//	}
+
+	var temp = '';
+	
+	for(var i=0;i<str.length;i++){
+		var v = parseInt(str.charAt(i));
+		//不是NaN就是数字
+		if(!isNaN(v)){
+			temp += v;
+		}else{
+			if(temp){
+				arr.push(temp);
+				temp = '';	
+			}
+		}
+	}
+	if(temp){
+		arr.push(temp);
+		temp = '';	
+	}
+	
+	//console.log(arr,temp);
+	
+	console.log(str.match(/\d+/g));
+	
+	
+	
+	
+</script>
+</body>
+</html>

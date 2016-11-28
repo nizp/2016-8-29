@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		修饰符：不分前后顺序
+		
+		replace()：
+			字符串的方法
+		
+		将字符串指定的字符（正则）替换成另外的字符。
+		
+		str.replace(要替换哪个||正则,替换成什么||回调函数);
+		
+		回调中必须写return，不然会为undefined
+		如果只传一个参数，那么匹配到的字符就会被替换为undefined
+		
+	*/
+	
+	//var str = '你好，世界!';
+	
+	var str = 'djskldddDjklDsa'; //弟
+	
+	//var s = str.replace('你好','hello');
+	
+//	var s = str.replace('你好',function(){
+//		return 'hello2';
+//	});
+
+	var s = str.replace(/d/gi,function($0,$1,$2,$3,$4){ 
+		/*
+			$0就为正则每次匹配的字符  
+			$1就为每次匹配到字符的位置。index
+			$2整个字符串  all
+			$3 undefined 后面的参数都是未定义。
+			
+		*/
+//		console.log($0);
+		//console.log($1);
+//		console.log($2);
+		console.log($4);
+		return '弟';
+	});
+	
+	//var a = str.replace(/d/gi)
+	
+	//console.log(a);
+	
+</script>
+</body>
+</html>

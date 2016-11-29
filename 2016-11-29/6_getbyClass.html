@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li active"></li>
+		<li></li>
+		<li class="li"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+	</ul>	
+<script type="text/javascript">
+	var ul = document.getElementById('ul');
+	//var lis = ul.getElementsByClassName('li');
+	var lis = ul.children;
+	
+	for(var i=0;i<lis.length;i++){
+		if(lis[i].className === 'li'){
+			lis[i].style.background = 'red';
+		}
+	}
+	
+	
+//	for(var i=0;i<lis.length;i++){
+//		lis[i].style.background = 'red';
+//	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

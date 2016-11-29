@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li active"></li>
+		<li></li>
+		<li class="li"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+	</ul>
+	
+	<ul id="ul2">
+		<li class="li1 active"></li>
+		<li></li>
+		<li class="li"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+	</ul>
+	<div class="li">32321</div>
+<script type="text/javascript">
+	var ul = document.getElementById('ul');
+	//var lis = ul.getElementsByClassName('li');
+	var lis = ul.children;
+	
+	
+	function getByClass(cName,parent){
+		parent = parent?parent:document;
+		//找到所有的元素
+		var aEle = parent.getElementsByTagName('*');
+		var arr = [];//存已经找到的元素
+		//console.log(aEle)
+		for(var i=0;i<aEle.length;i++){
+			//为了避免一个元素上有多个class,所以用空格分开['li','active']
+			var sClass = aEle[i].className.split(' ');
+			//循环这个被切过之后的数组，查找每一项中的字符串是否匹配要找的那个字符串
+			for(var j=0;j<sClass.length;j++){
+				if(sClass[j] === cName){
+					arr.push(aEle[i]);
+				}
+			}
+		}
+		//console.log(arr)
+		return arr;
+	}
+//	var lis = getByClass('li',ul);
+//	for(var i=0;i<lis.length;i++){
+//		lis[i].style.background = 'red';
+//	}
+	
+	
+	var arr = [1,1,2,3,4];
+	
+	function indexOf(arr,val,index){
+		var onOff = true;
+		index = index?index:0;
+		for(var i=index;i<arr.length;i++){
+			if(arr[i] === val){
+				onOff = false;
+				return i;
+			}
+		}
+		if(onOff){
+			return -1;
+		}
+	}
+	
+	console.log(indexOf(arr,1))
+	
+	
+	
+	
+</script>
+</body>
+</html>

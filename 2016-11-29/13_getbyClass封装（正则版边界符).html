@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li active"></li>
+		<li></li>
+		<li class="li"></li>
+		<li class="active"></li>
+		<li class="active"></li>
+	</ul>
+	
+	<ul id="ul2">
+		<li class="li1 active"></li>
+		<li></li>
+		<li class="li"></li>
+		<li class="active li"></li>
+		<li class="active"></li>
+	</ul>
+	<div class="li">32321</div>
+<script type="text/javascript">
+
+
+	var ul = document.getElementById('ul');
+	//var lis = ul.getElementsByClassName('li');
+	var lis = ul.children;
+	
+	
+	/*
+		li active
+		active li
+		
+		|li|  li
+		
+		
+		new RegExp(***必须为字符串) 
+		
+		/a/
+		new RegExp('/a/') ->  /\/a\//   \\s   \s
+		
+	*/
+	
+	function getByClass(cName,parent){
+		parent = parent?parent:document;
+		//找到所有的元素
+		if(parent.getElementsByClassName){
+			return parent.getElementsByClassName(cName);
+		}else{
+			var aEle = parent.getElementsByTagName('*');
+			var arr = [];//存已经找到的元素
+			for(var i=0;i<aEle.length;i++){
+				//为了避免一个元素上有多个class,所以用空格分开['li','active']
+				var re = new RegExp('\\b'+cName+'\\b','g');
+				if(re.test(aEle[i].className)){
+					arr.push(aEle[i]);
+				}
+			}
+			console.log(arr);
+			return arr;
+		}
+	}
+	
+//	[1,2,[],'',{},function(){},true,ele];
+	
+	
+	var lis = getByClass('li',ul2);
+	
+	console.log(lis);
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.background = 'red';
+	}
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

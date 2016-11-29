@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		\s  空格 
+		\S  非空格
+	*/
+	var str = '    123   456      ';
+	
+	for(var i=0;i<str.length;i++){
+		if(str[i] != ' '){
+			break;
+		}
+	}
+	str = str.substring(i);
+	for(var i=0;i<str.length;i++){
+		if(str[i] == ' '){
+			break;
+		}
+	}
+	//console.log(str.substring(0,i));
+	
+//	console.log(str.replace(/\s+/g,''))
+
+	//console.log(str.replace(/^\s+|\s+$/g,''))//开头为一堆空格或者结尾为一堆空格
+	
+	var arr = str.match(/\S+\s+\S+/)[0]; //匹配一堆非空格一堆空格一堆非空格
+	console.log(arr);
+	
+	
+	
+//	console.log(str.trim());
+
+	
+	
+</script>
+</body>
+</html>

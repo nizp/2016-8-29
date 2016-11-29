@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" name="txt" id="txt" value="" />
+	<input type="button" id="btn" value="按钮" />
+<script type="text/javascript">
+	/*
+		qq:
+			全是数字、最小5位最大11，不能以0开头
+		
+		
+		
+	*/
+	
+	var str = '1111';
+	
+	var txt = document.querySelector('#txt');
+	var btn = document.querySelector('#btn');
+	
+	btn.addEventListener('click',click);
+	
+	function click(){
+		var val = txt.value;
+		if(/^[1-9]\d{4,10}$/.test(val.trim())){
+			alert('是QQ');
+		}else{
+			alert('不是QQ');
+		}
+	}
+	
+	
+	
+	console.log(/^[1-9]\d{4,10}$/.test(str));
+
+</script>
+</body>
+</html>

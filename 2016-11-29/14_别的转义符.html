@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		\d 一个数字 
+		\D 非数字
+		\s 一个空格
+		\S 非空格
+		\w 数字 字母 下划线
+		\W 非数字，字母，下划线
+		\b 单词的边界符	
+	    \B 非边界符
+		.任意一个字符(除了\n)
+	*/
+	
+	var str = 'a1cabca_ca中文c';
+	//找到a1c  abc  a_c
+//	console.log(str.match(/a\wc/g))
+	
+	//找到 a中文c
+//	console.log(str.match(/a\W+c/g));
+	
+	//a1cabca_c
+//	console.log(str.match(/a\w+c/g));
+
+	console.log(str.match(/a.{1,2}c/g));
+	
+</script>
+</body>
+</html>

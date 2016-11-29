@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		量词：
+			+
+			?
+			{n,m}  最小多少个，最大多少个
+			
+			{n,}   最小多少，最多不限
+			
+			{1,}  最小1次，最多不限    +
+			
+			{0,1}   最小0次，最多1次  ?
+			
+			{0,}   最小可以没有，最大无限
+			
+			
+			注意：
+				量词都是修饰前面那个规则的
+				比如：
+					a*    a可以没有也可以无限
+					[a-z]*  a-z 可以没有也可以无限
+					\d2+  一个数字和至少1个2   
+					(\d2)+  32526272
+			
+			n:最小
+			m:最大
+			{3,}
+	*/
+	
+	var str = 'aca1ca22ca333ca4444c';
+	
+	//console.log(str.match(/a\d{3,}c/g))
+	
+	console.log(str.match(/a*c/g));
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

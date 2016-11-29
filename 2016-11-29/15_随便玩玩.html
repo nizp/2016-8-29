@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		电话号码：
+			手机、座机的、400
+		
+		开头必须是1,11位,
+		第二位没有1,2,6,9,0
+		
+		/^1[34578]\d{9}$/   手机号码
+		
+		6~18个字符，可使用字母、数字、下划线，需以字母开头,com|.cn|.com.cn
+		
+		/^[a-zA-Z]\w{5,17}@[a-z1-9]+.(com|com.cn|cn)$/  邮箱号
+		
+		邮箱：
+			dada@163.com
+			djsdjas@126.com
+			djsadja_dsda@139.com
+			djskdl_32dsa@sina.com
+			miaov@miaov.com
+			dsdsa@yahoo.com.cn
+			
+		6~18个字符，可使用字母、数字、下划线，需以字母开头
+		
+		com
+		com.cn
+		cn
+		
+		(com|com.cn|cn)
+		
+		
+		
+		3.人民币金额检测
+
+			应用开发时，通常要对人民币金额进行检测，按参考人民币的数字表示规则，编写相应的检测正则式。
+
+	人民币规则：
+	
+	人民币可以精确到２位小数，但也可以不出现小数，如１.２９元。
+	
+	人民币可以没有整数部分，如.２９元或０.２９元。
+	
+	人民币可以有正负金额，如-.29元或+0.29元。
+		
+	
+	/^[\-\+]?(\d+)?.\d{2}$/.test(str2)
+		
+	
+		
+	*/
+	
+	var str2 = '0.29';
+	
+	console.log(/^[\-\+]?(\d+)?.\d{2}$/.test(str2));
+	
+	
+	
+	
+	
+	var str = 'ad_a42213@sina.com.cn';
+	//console.log(/^[a-zA-Z]\w{5,17}@[a-z1-9]+.(com|com.cn|cn)$/.test(str))
+	//console.log(/^[a-zA-Z]\w{5,17}@[a-z1-9]+(.com)?(.cn)?$/.test(str))
+	
+	
+
+
+//	var str = '13888888888';
+////	
+//	console.log(/^1[34578]\d{9}$/.test(str))
+
+
+
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var json = {
+		name:'小明',
+		age:18
+	}
+	
+	var str = '今天{name}说:我今年{age}';
+	
+	var s = str.replace(/{[a-z]+}/g,function($0){
+		
+		return json[$0.replace(/{|}/g,'')];///^{|}$/g     /[{}]/g 
+	});
+	
+	console.log(s);
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

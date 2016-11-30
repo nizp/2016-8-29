@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	function Teacher(name,age){
+		this.age = age;
+		this.name = name;
+		this.say = function(){
+			alert('我叫'+this.name+'我的高龄'+this.age+'岁');
+		}
+		//return '是不是我！'
+	}
+	
+	/*
+		对象 
+	*/
+	var t1 = new Teacher('momo',400);//实例化对象
+	var t2 = new Teacher('fuqiang',1000);
+	//...  say  say  say
+	
+	/*
+	 	张三  红色   
+	 	李四  红色
+	*/
+	
+	
+
+	
+	console.log(t1.say == t2.say);
+	
+	
+//	t1.say();
+//	t2.say();
+//	
+	//var arr = [];
+	//var arr2 = [];
+	
+	
+	//它们2个相等是为了节省空间
+	//console.log(arr.push == arr2.push);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

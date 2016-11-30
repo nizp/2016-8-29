@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		原型：
+			prototype
+				给某个类定义一个class
+			
+			.a{
+				background:red
+			}
+			
+			class="a"
+		
+		fn1.prototype = {}
+		
+		当一个函数被申明的时候，该函数下默认有一个属性：prototype，
+		（该属性的值是一个**对象**）当我们去调用一个对象的属性或者方法的时候，如果该对象自身没有该属性或方法，则会调用到该对象的构造函数下的prototype下面属性或方法.
+
+		
+			
+	*/
+	function Teacher(name,age){
+		this.age = age;
+		this.name = name;
+	}
+	
+	//console.dir(Teacher);
+	Teacher.prototype.say = function(){
+		alert('我叫'+this.name+'我的高龄'+this.age+'岁');
+	}
+	/*
+		对象 
+	*/
+	var t1 = new Teacher('momo',400);//实例化对象
+	var t2 = new Teacher('fuqiang',1000);
+	//...  say  say  say
+	
+	/*
+	 	张三  红色   
+	 	李四  红色
+	*/
+	
+	
+	//console.log(t1.say == t2.say);
+	
+	t1.say = function(){
+		alert(1);
+	}
+	
+	t1.say();
+	
+	/*
+		t2.say   ->  t2构造函数上原型上查找有没有say，如果有就执行 
+	*/
+	
+	t2.say();
+//	
+	//var arr = [];
+	//var arr2 = [];
+	
+	
+	//它们2个相等是为了节省空间
+	//console.log(arr.push == arr2.push);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

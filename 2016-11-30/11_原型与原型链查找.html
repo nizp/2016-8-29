@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	
+	/*
+		 Teacher.say  -> Teacher.__proto__ -> Function.prototype
+		 
+		 先找Teacher身上有没有say ，如果没有那么 去找 Teacher身上的原型链，等同于找
+		 Function的原型 ，如果还没有  Function的原型的原型链 ，等同于找Object的原型
+		 有就执行，没有就报错。
+		 
+		 
+		 
+		 Function.prototype.__proto__ -> Object.prototype
+	*/
+	
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	
+//	Function.prototype.say = function(){
+//		alert(1);
+//	}
+
+	Object.prototype.say = function(){
+		alert(1);
+	}
+	
+	var t1 = new Teacher('莫莫',4500);
+	
+	console.dir(Teacher);
+	Teacher.say();
+	
+	
+	
+	
+</script>
+</body>
+</html>

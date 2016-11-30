@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	Teacher.prototype.say = function(){
+		alert(this.name);
+	}
+	/*
+		如果是对象，那么会先找链 -> 构造函数的原型 ->  构造函数的原型的链 -> 对象的原型
+		
+		如果是找函数：
+			那么会先找链（因为函数的原型是给这个函数的实例化对象使用的）
+			
+			构造函数的原型
+				1.这个函数就是Function -> Function.prototype -> Function.prototype.__proto__ -> Object.prototype
+				
+				2.Array.__proto__ -> Function.prototype -> Function.prototype.__proto__ -> Object.prototype
+				
+	*/
+	var t1 = new Teacher();
+	
+	Function.prototype.say = function(){
+		alert(321);
+	}
+	
+	Array.prototype.say = function(){
+		alert(123);
+	}
+	var arr = new Array();
+	
+	
+	//Teacher.say()
+//	arr.say();
+	Array.say();
+	
+	console.dir(t1);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

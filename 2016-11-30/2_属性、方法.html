@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	//变量
+	var num = 10;
+	
+	num++;
+	
+	//alert(num);
+	//new Array   function Array(){}
+ 	//{}  []
+	//属性一定是在某个(非空) 对象上的。  null（空对象）   只有(非空)对象上才能加属性  [] {}
+	var arr = [];  //属性
+	
+	arr.num = 10;
+	arr.num++;
+	//alert(arr.num);
+	
+//	var str = '';
+//	
+//	str.num = 10;
+//	str.num++;
+//	alert(str.num);//11,10,报错,undefined
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+//方法
+
+	//函数
+	function fn1(){
+		alert(this)
+	}
+	fn1();
+	
+	var arr = [1,2,3];
+	
+	//方法
+	arr.fn1 = function(){
+		alert(this);
+	}
+	
+	arr.fn1();
+	
+
+	/*
+		属性或者方法前面都是有主的，都是挂在某个对象上的。 
+	*/
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

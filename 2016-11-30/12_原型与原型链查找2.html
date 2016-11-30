@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	Teacher.prototype.say = function(){
+		alert(this.name);
+	}
+	Teacher.say = function(){
+		alert(123);
+	}
+	/*
+		Function.say ->  Function.__proto__ -> Function.prototype
+		
+		Function.prototype.__proto__ -> Objcet.prototype
+	*/
+	Function.prototype.say = function(){
+		alert(345);
+	}
+	
+//	Array.prototype.say = function(){
+//		alert('arr');
+//	}
+	
+	Object.prototype.say = function(){
+		alert(2);
+	}
+	var t1 = new Teacher('莫莫',4500);
+	//Function.say();
+	//Array.say();
+	
+	
+	//console.log(Array.prototype.__proto__  == Object.prototype);
+	
+	var arr = new Array();
+	
+//	arr.say();
+	
+	console.dir(arr);
+	
+	
+	
+	
+</script>
+</body>
+</html>

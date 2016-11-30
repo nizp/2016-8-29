@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	//Teacher.say = function(){alert('say');}
+	Teacher.prototype.say = function(){alert(this.name);}
+	Function.prototype.say = function(){alert(321);}
+	Array.prototype.say = function(){alert(123);}
+	var t1 = new Teacher('momo');
+	var arr = new Array();
+//	t1.say();   //momo
+//	Array.say();//321
+//	arr.say();//123
+	Teacher.say();//say
+	
+	console.dir(t1);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

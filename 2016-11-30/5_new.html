@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	var name = '莫莫';
+	var age = 40;
+	var say = '我给你唱首歌,专门逗你开心的';
+	
+	var name2 = '付强';
+	var age2 = 80;
+	var say2 = '嗯！我的妹纸呢？';
+	
+	//class
+	/*
+		构造函数 ：
+		  	这个函数专门拿来构造一个对象的
+		 工厂函数：
+		 	有原材料，有加工，有出厂的函数
+		
+		对于面向对象来说分2类人：
+			使用者：重点在用
+			开发者：重点在实现
+		 
+		  
+	*/
+	function Teacher(name,age,say){  //一类  讲师类  构造函数 （工厂函数）
+		//原材料
+//		var json = {};
+		//加工
+		
+		this.name = name;
+		
+		this.age = age;
+		this.say = function(){
+			alert(say);
+		}
+		//出厂
+//		return json;
+	}
+	
+	
+	var momo = new Teacher('莫莫',40,'我给你唱首歌,专门逗你开心的');
+	console.log(momo)
+	var fuqiang = new Teacher('付强',80,'嗯！我的妹纸呢？');
+	var zp = new Teacher('智鹏',18,'交作业!');
+	
+	momo.say();
+	fuqiang.say();
+	zp.say();
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

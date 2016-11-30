@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		__proto__  原型链    对象有原型链 (对象与构造函数原型的桥梁)
+		
+						     函数有原型
+		对象没有原型只有链
+						     
+		碰到对象找原型链，碰到函数找原型（始终要遵循,原型只给这个类的实例化对象用）
+		
+	*/
+	
+	/*
+		t1.__proto__ ->  Teacher.prototype -> Teacher.prototype.__proto__
+		
+		Object.prototype
+	*/
+	
+	
+	
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+//	Teacher.prototype.say = function(){
+//		alert(this.name);
+//	}
+	Object.prototype.say = function(){
+		alert(1);
+	}
+	var t1 = new Teacher('莫莫',4500);
+	
+	//console.log(Teacher.prototype.__proto__ == Object.prototype);
+	
+	
+//	t1.say = function(){
+//		alert(1);
+//	}
+//	t1.say();
+	console.dir(t1);
+
+
+
+//	var arr = [1,2];
+//	var arr2 = [];
+//	
+//	Array.prototype.push = function(){
+//		alert('呵呵，我把你改了');
+//	}
+//	
+//	arr2.push();
+	
+	
+		
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

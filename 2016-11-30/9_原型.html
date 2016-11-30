@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	/*
+		prototype是给这个类的实例化对象使用的。（自身用不了）; 
+	*/
+	
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	Teacher.say = function(){
+		alert('我在这儿');
+	}
+	
+	/*
+		t1.say -> t1.say(没有的) ->  Teacher.prototype.say 
+	*/
+	
+//	Teacher.prototype.say = function(){
+//		alert(this.name);
+//	}
+	//console.dir(Teacher)
+	var t1 = new Teacher('莫莫',4500);
+	var t2 = new Teacher('韩影',45000);
+	//t1.say();
+	Teacher.say();
+	//alert(Teacher.num);
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

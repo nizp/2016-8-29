@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		因为简单类型的赋值就是赋值
+			简单类型的赋值是不会影响另一个数据
+		而对象类型的赋值是赋址
+			对象类型赋值都是引用一个内存地址，所以说，改变arr2，同样会改变arr
+		
+		解决：
+			通过循环，将对象中每个简单类型赋值给另一个对象，就不会出现引用关系。
+		
+		arr = [1,2,3]  //?
+		
+		arr2 = [1,2,3]  //?
+		
+		
+	*/
+	
+//	var num = 10;
+//	var num2 = num;
+//	num2++;
+//	//alert(num2);
+//	alert(num);
+	
+	
+
+	//var arr = [1,2,3];
+	var json = {
+		name:'momo',
+		age:-1
+	}
+	
+	var json2 = {};
+	
+	for(var attr in json){
+		json2[attr] = json[attr];
+	}
+	
+//	var json2 = json;
+	
+	json2.name = '付强';
+	
+	console.log(json)
+	
+	
+	
+	/*
+		json = {
+			0:'momo',
+			1:23,
+			length:2
+		}
+	*/
+	//	var json3 = {
+//		0:'momo',
+//		1:23,
+//		length:2
+//	}
+//	
+//	for(var i=0;i<json3.length;i++){
+//		
+//	}
+
+
+	//var arr2 = arr;
+	
+	//arr2.push(4);
+	
+	
+	//想解决一个问题：改变arr2，并不会影响arr
+	//如果能做到，在赋值的时候，就是赋值（把简单类型给另个数据）
+//	console.log(arr2);
+	//console.log(arr);
+	
+//	var arr2 = [];
+//	for(var i=0;i<arr.length;i++){
+//		arr2.push(arr[i]);
+//	}
+//	
+//	arr2.push(4);
+//	
+//	console.log(arr)
+
+	
+	var arr = [1];
+	var arr2 = [1];
+	
+	console.log(arr[0] == arr2[0])
+	
+
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

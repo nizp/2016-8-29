@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	
+	Teacher.prototype.say = function(){
+		alert(this.name);
+	}
+	Teacher.say = function(){
+		alert('say');
+	}
+	Function.prototype.say = function(){
+		alert('function');
+	}
+	Object.prototype.say = function(){
+		alert('obj');
+	}
+	Function.say = function(){
+		alert('f直接的say');
+	}
+	
+	/*
+		arr.say():
+			arr.say ->  arr.__proto__ -> Array.prototype -> Array.prototype.__proto__   ->  Object.prototype  -> obj
+			
+		Array.say:
+			Array.say -> Array.__proto__ -> Function.prototype
+		
+	*/
+	
+	//var arr = new Array();
+	
+	console.dir(Array)
+	//Array.say();
+	//arr.say();
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

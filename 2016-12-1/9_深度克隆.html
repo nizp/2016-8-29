@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		写个函数，只要是复合类型，就继续循环，否则直接赋值 。
+	*/
+	var arr = [1,2,3,4,[1,2],function abc(){},{name:'momo'}];
+	var arr2 = extend(arr);
+	console.log(arr2);
+	
+	function extend(obj){
+		var o = !!obj.push?[]:{};
+		for(var attr in obj){
+			if(typeof obj[attr] == 'object'){
+				o[attr] = extend(obj[attr]);
+			}else{
+				o[attr] = obj[attr];
+			}
+		}
+		return o;
+	}
+	
+	
+
+	//var json = JSON.stringify(arr); //将对象转成字符串
+	
+	//arr2 = JSON.parse(json);//将字符串转成对象
+//	console.log(arr2);
+	
+	//arr2.push(5);
+	
+//	arr2[4].push(3);
+//	
+//	console.log(arr2)
+//	console.log('这是arr');
+//	console.log(arr)
+	
+	
+	
+	
+</script>
+</body>
+</html>

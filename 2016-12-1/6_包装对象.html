@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		包装对象：
+		
+			str.length  -> new String()  ->  length -> 2个 -> str
+			
+			当简单类型去查看某个属性或者方法的时候，系统会偷偷地将这个简单类型转成对象类型的对象，从这个对象去查找要查看的结果，之后这个包装对象自动销毁这个被销毁的对象为包装对象，整个过程就是简单类型也能查看（调用）某个属性或者方法的原理。
+			
+			简单类型的属性只能读，不能写。str.length = 1 (这样是设置不了的)
+		
+		
+	什么是包装对象
+		当使用原始类型的值（string、number、boolean），在调用对应属性和方法的时候，内部会自动转成对应的对象。隐式创建的这个对象，就成为包装对象
+		内置的对象
+			String、Number、Boolean
+	  
+		包装对象的特点
+			隐式创建对象后，可以调用对应的属性和方法，使用后，立马销毁，所以不能给原始类型的值添加属性和方法
+
+		
+		String  -> 字符串
+		Array  ->  数组
+		Object ->  对象
+		Number ->  数字
+		
+			
+			
+	*/
+//	var arr = [1,2,3,4,5];
+//	arr.length = 1;
+//	console.log(arr);
+//	
+//	arr.num++;
+//	
+//	alert(arr.num);
+
+
+	/*
+		就算内置对象，也不能随意去修改属性 ，只能读。
+	*/
+	var str = '323';
+	var str2 = new String('abc');
+	
+	str2.num = 1;
+	str2.length = 0;
+	
+	console.log(str2.length);
+	
+	
+	//console.log(new Number('a'))
+	
+	
+	
+//	str.num = 10;
+//	str.num++;
+//	str.say = function(){
+//		alert(1)
+//	}
+//	str.say();
+//	alert(str.num);
+	
+	
+</script>
+</body>
+</html>

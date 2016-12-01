@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	//JSON.stringify  //对象转字符串
+	/*
+		三个参数：
+			1：放对象的
+			2.回调函数，可以处理数据
+			3.为了看
+	*/
+	
+	//JSON.parse() //字符串转对象
+	
+	//{} -> 但是，在转换的时候一定会转成标准格式
+	
+//	var arr = [1,2,3,4];
+//	var str = JSON.stringify(arr);
+//	
+//	// MoMo
+//	
+//	var obj = {
+//		name:'momo',
+//		age:10
+//	};
+//	
+//	console.log(JSON.stringify(obj,function(key,val){
+//		 if(key == 'name'){
+//		 	return val.replace(/m/g,'M');
+//		 }
+//		//console.log(1111)
+//		 return val;
+//	},1));
+
+	//字符串转对象的方法
+	var json = '{"name":"momo","age":23,"obj":{"name":"qq"}}';  //'[]'  如果一个字符串中有多个key值，那么会一次性都更改。
+	
+	var json2 = eval('('+json+')');
+	
+	json2.obj.name = 'xqq';
+	
+	console.log(json2)
+	
+	
+	
+//	console.log(JSON.parse(json,function(key,val){
+//		if(key == 'name'){
+//			return 'MoMo';
+//		}
+//		if(key == 'age'){
+//			return 18;
+//		}
+//		return val;
+//	}));
+	
+	
+	
+	
+	
+	
+	
+	
+	//console.log(str);
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

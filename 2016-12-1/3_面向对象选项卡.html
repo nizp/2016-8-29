@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#divs div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+#divs div.hide{
+	display: none;
+}
+#divs div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div id="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div id="divs">
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	/*
+		1.先分 
+		2.变量变属性，函数变方法
+		3.排错。
+		99%都死在this上
+	*/
+	
+	
+	function Tab(id){
+		this.box = document.getElementById(id);
+		this.btns = this.box.getElementsByTagName('input');
+		this.divs = document.getElementById('divs');
+		this.divChild = this.divs.getElementsByTagName('div');
+		this.events();
+	}
+	
+	Tab.prototype.events = function(){
+		var _this = this;
+		for(var i=0;i<this.btns.length;i++){
+			(function(index){
+				_this.btns[index].onclick = function(){
+					//alert(this);
+					_this.change(index);
+				}
+			})(i);
+		}
+	}
+	
+	Tab.prototype.change = function(index){
+		for(var i=0;i<this.btns.length;i++){
+			this.btns[i].className = '';
+			this.divChild[i].className = 'hide';
+		}
+		this.btns[index].className = 'active';
+		this.divChild[index].className = 'show';
+	}
+	
+	
+	new Tab('box');
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

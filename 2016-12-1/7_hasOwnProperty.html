@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		hasOwnProperty：
+			查看某个属性是不是这个对象自身的。
+			
+			注意：***自身，一定是在当前这个对象中（不会沿着原型链查找属性，只查找自身属性
+			
+		boolean object.hasOwnProperty(prop);
+	*/
+	
+	
+	Object.prototype.running = function(){
+		alert(123);
+	}
+	
+	function Teacher(name,age){
+//		this.name = name;
+		this.age = age;
+	}
+	//当前name属性是挂在这个对象的原型上，不算是自身的属性（而Teacher.prototype为一个对象）
+	Teacher.prototype.name = 'momo';
+	
+	
+	var t1 = new Teacher('莫莫',6);
+	//running能调用到，但是同样不是自身的方法
+	t1.running();
+	//console.log(t1.name);
+	
+	console.log(t1.hasOwnProperty('name'))
+	
+	
+</script>
+</body>
+</html>

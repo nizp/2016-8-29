@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+.divs div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+.divs div.hide{
+	display: none;
+}
+.divs div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div class="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div class="divs">
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+	<div id="box2">
+		<div class="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div class="divs" >
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+	<input type="button" name="btn1" id="btn1" value="按钮一" />
+	<input type="button" name="btn2" id="btn2" value="按钮二" />
+	<input type="button" name="btn3" id="btn3" value="按钮三" />
+	<input type="button" name="btn4" id="btn3" value="按钮四" />
+<script type="text/javascript">
+	/*
+		面向过程的程序会越写越复杂
+		
+		1.自动播放
+		2.第一个播放，第二个不走
+		3.点击btn1的时候，让第二个走，第一个停
+		4.点击btn2的时候，2个都停
+		5.点击btn3的时候，2个都走
+		6.反向走（走的停，停的走）
+	*/
+	
+	
+	function Tab(id,onOff){
+		var box = document.getElementById(id);
+		var btns = box.getElementsByTagName('input');
+		var divs = box.getElementsByClassName('divs')[0];
+		var divChild = divs.getElementsByTagName('div');
+		var num = 0;
+		var timer = null;
+		for(var i=0;i<btns.length;i++){
+			(function(index){
+				btns[index].onclick = function(){
+					chang(index);
+				}
+			})(i);
+		}
+		
+		if(onOff){
+			timer = setInterval(function(){
+				num++;
+				if(num >= btns.length){//0,1,2,3  4
+					num = 0;
+				}
+				chang(num);
+			},1000)
+		}
+		
+		
+		
+		function chang(index){
+			for(var i=0;i<btns.length;i++){
+				btns[i].className = '';
+				divChild[i].className = 'hide';
+			}
+			btns[index].className = 'active';
+			divChild[index].className = 'show';
+		}
+		
+	}
+	
+	Tab('box',true);
+	Tab('box2');
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

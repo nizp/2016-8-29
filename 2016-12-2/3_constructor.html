@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	/*
+		constructor:可以查看某个对象的构造函数是谁
+		
+		obj.constructor == Objcet
+		
+		注意：
+			constructor会无形被修改,虽然不会改变某个方法的执行结果，但是会影响你的客户维护。
+		解决：
+			手动修改constructor指向
+		
+		
+	*/
+	function Teacher(name,age){
+		this.name = name;
+		this.age = age;
+	}
+//	Teacher.prototype.say = function(){
+//		alert(this.name);
+//	}
+	
+	Teacher.prototype = {
+		constructor:Teacher,
+		say:function(){
+			alert(this.name);
+		}
+	}
+	
+	var t1 = new Teacher('莫莫',5);
+	
+	t1.say();
+	console.dir(t1.constructor);
+	
+	//console.dir(t1.constructor == Teacher)
+	
+	
+//	var arr = [];
+//	console.log(arr.constructor == Array);
+
+//	var str = '';
+//	console.log(str.constructor == String);
+	
+	
+	
+</script>
+</body>
+</html>

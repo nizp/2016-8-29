@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	/*
+		对象继承
+		
+		常用的继承：
+			拷贝继承、类式继承、对象继承 （任选其一即可）
+	*/
+	var obj = {
+		say:function(){
+			console.log(1)
+		},
+		running:function(){
+			console.log(2)
+		}
+	}
+//	var obj2 = obj;
+	paoh.prototype = obj;
+	function paoh(){}
+	var ph = new paoh;
+	obj2 = ph;
+	obj2.say = function(){
+		alert(1);
+	}
+	
+	obj.say();
+	
+</script>
+</body>
+</html>

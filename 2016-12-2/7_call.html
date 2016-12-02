@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		call:
+			方法
+			当某个函数声明的时候系统就默认给这个函数加了一些属性或者方法
+			其中有一个方法为call
+			
+		参数：
+			有无数个参数
+				
+				第一个参数：
+					改变this指向，你写什么this就是什么。
+					
+				第二个参数或第二个参数以后：
+					为实参。（有几个形参就写对应的实参即可）
+					
+					
+		
+		函数会被：
+			事件调用、函数名+括号、定时器、匿名函数自执行、new、call、apply
+		
+	*/
+	function fn1(a,b,c){
+		alert(this);
+		alert(a+b+c);
+	};
+	
+//	fn1(5);
+	
+	fn1.call(document,5,6);
+	
+	console.dir(fn1);
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var arr = [1,2,3,4,[true,function abc(){}],{name:'momo',arr:[5,6,7]}];
+	
+	//引用关系
+	//var arr2 = arr;
+	var arr2 = extend(arr);
+	
+	//arr2[5].arr.push(8);
+	arr2[0] = 10;
+	
+	console.log(arr);
+	
+	
+	
+	function extend(obj){
+		var o = !!obj.pop?[]:{};
+		for(var attr in obj){
+			if(typeof obj[attr] === 'object'){
+				o[attr] = extend(obj[attr]);
+			}else{
+				o[attr] = obj[attr];
+			}
+		}
+		return o;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

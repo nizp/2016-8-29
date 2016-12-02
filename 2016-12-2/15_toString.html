@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		toString:
+			将某种数据类型转成字符串
+			内置对象都有toString方法
+			Array
+			String
+			Object
+		只要使用alert，那么系统会自动调用该数据类型toString
+		
+		[object(始终是对象类型) Object(构造函数是谁)]
+		
+		arr ->  [object Array]
+		str ->  [object String]
+		
+		
+		可以将某个数字转成进制数，默认为10进制
+		var num = 10;
+	
+		console.log(num.toString(16))  这个16代表转几进制  -> a 
+		
+		
+	*/
+	//console.dir(Function);
+	
+	var arr = [1,2,3,4];
+	var obj = {};
+	
+//	Array.prototype.toString = function(){
+//		//alert('');
+//		return '呵呵！我又把你改了';
+//	}
+	
+	//alert(arr);
+	//console.log(arr.toString())
+//	alert(obj)
+	//console.log(obj.toString())
+	
+	var str = '';
+	var fn = function(){}
+	var num = 10;
+	var tS = Object.prototype.toString;
+	console.log(tS.call(num));
+	
+	var aEle = document.getElementsByTagName('*');
+	
+	var A = Array.prototype.slice;
+	
+	var arr2 = A.call(aEle);
+	
+	arr2.forEach(function(e){
+		e.className = 'caicaikan';
+	});
+	
+
+	//var arr2 = Array.from(aEle);
+	console.log(tS.call(arr2))
+	
+	var num = 10;
+	
+	console.log(num.toString(16))
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

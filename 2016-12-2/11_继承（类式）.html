@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<style>
+#box{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:absolute;
+	top:0;
+	left:0;
+}
+#box2{
+	width:100px;
+	height: 100px;
+	background:green;
+	position:absolute;
+	top:0;
+	left:150px;
+}	
+</style>
+<body>
+	<div id="box"></div>
+	<div id="box2"></div>
+<script type="text/javascript">
+	/*
+		继承：
+			在JavaScript中，继承就是让一个对象拥有另一个对象的方法或者属性
+		
+	*/
+	function Drag(id){
+//		alert(1);
+//		alert(2);
+		this.box = document.querySelector(id);
+		this.disX = 0;
+		this.disY = 0;
+	}
+	
+	Drag.prototype.init = function(){
+		var _this = this;
+		this.box.addEventListener('mousedown',function(ev){
+			_this.fnDown(ev);
+		});
+	}
+	
+	Drag.prototype.fnDown = function(ev){
+		var _this = this;
+		this.disX = ev.pageX - this.box.offsetLeft;
+		this.disY = ev.pageY - this.box.offsetTop;
+		
+		document.addEventListener('mousemove',move);
+		
+		function move(ev){
+			_this.fnMove(ev);
+		}
+		
+		document.addEventListener('mouseup',up);
+		
+		function up(){
+			_this.fnUp(move,up);
+		}
+		
+		ev.preventDefault();
+		
+	}
+	Drag.prototype.fnMove = function(ev){
+		this.box.style.left = ev.pageX - this.disX + 'px';
+		this.box.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	Drag.prototype.fnUp = function(move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	/*
+	 	类式继承：
+	 		属性继承：
+	 			调用父类将this修改为子类
+	 		方法继承：
+	 		
+	 		
+	 			
+
+	*/
+	
+//	Object.prototype.say = function(){
+//		alert(1);
+//	}
+	
+	function Drag2(id){
+		Drag.call(this,id);
+	}
+	
+	paohui.prototype = Drag.prototype;
+	function paohui(){};
+	
+	var ph = new paohui;//obj      paohui.prototype={}
+	
+	Drag2.prototype = ph;
+	
+	/*
+		t2.init -> t2.__proto__ -> Drag2.prototype
+		
+		Drag2.prototype -> {}
+		
+		{}  -> {}.__proto__
+		
+		paohui.prototype -> Drag.prototype
+		
+	*/
+	
+
+//	Drag2.prototype.fnMove = function(ev){
+//		var l = ev.pageX - this.disX;
+//		var t = ev.pageY - this.disY;
+//		if(l < 0){
+//			l = 0;
+//		}else if(l > document.documentElement.clientWidth - this.box.clientWidth){
+//			l = document.documentElement.clientWidth - this.box.clientWidth;
+//			
+//		}
+//		
+//		if(t < 0){
+//			t = 0;
+//		}else if(t > document.documentElement.clientHeight - this.box.clientHeight){
+//			t = document.documentElement.clientHeight - this.box.clientHeight;
+//		}
+//		
+//		this.box.style.left = l + 'px';
+//		this.box.style.top = t + 'px';
+//	}
+	
+	
+	var t1 = new Drag('#box');
+	t1.init();
+	var t2 = new Drag2('#box2');
+	t2.init();
+</script>	
+</body>
+</html>

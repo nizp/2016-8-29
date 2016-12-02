@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var obj = {
+		say:1,
+		arr:[1,2]
+	}
+	
+	// {} == {}  引用关系  赋址
+	
+//	var obj2 = obj;
+	var obj2 = {}
+	
+	obj2.say = obj.say;
+	
+	obj2.say++;
+	
+	//obj2.arr.push(3);
+	console.log(obj.say)
+	
+	
+	
+</script>
+</body>
+</html>

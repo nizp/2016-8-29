@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<style>
+#box{
+	width:100px;
+	height: 100px;
+	background: red;
+	position:absolute;
+	top:0;
+	left:0;
+}	
+</style>
+<body>
+	<div id="box"></div>
+<script type="text/javascript">
+	/*
+		鼠标拖拽写不出来
+		原型里面如何改变this指向  (方法由哪个对象调用，this就是谁[前提是这个对象必须要有这个方法])
+		匿名函数怎么解绑(绑什么函数名就解什么函数名)
+		方法能不能传参数
+		如何去抽离
+		函数里面的event为什么用不了？？？？？
+	*/
+	
+	function Drag(id){
+		this.box = document.querySelector(id);
+		this.disX = 0;
+		this.disY = 0;
+		this.init();
+	}
+	
+	// this.fnDown   box.fnDown
+   	
+	Drag.prototype.init = function(){
+		var _this = this;
+		this.box.addEventListener('mousedown',function(ev){
+			_this.fnDown(ev);
+		});
+	}
+	
+	Drag.prototype.fnDown = function(ev){
+		var _this = this;
+		this.disX = ev.pageX - this.box.offsetLeft;
+		this.disY = ev.pageY - this.box.offsetTop;
+		
+		document.addEventListener('mousemove',move);
+		
+		function move(ev){
+			_this.fnMove(ev);
+		}
+		
+		document.addEventListener('mouseup',up);
+		
+		function up(){
+			_this.fnUp(move,up);
+		}
+		
+		ev.preventDefault();
+		
+	}
+	Drag.prototype.fnMove = function(ev){
+		this.box.style.left = ev.pageX - this.disX + 'px';
+		this.box.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	Drag.prototype.fnUp = function(move,up){
+//		alert(move)
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	
+	
+	var d1 = new Drag('#box');
+	
+	
+	
+	
+	
+</script>	
+</body>
+</html>

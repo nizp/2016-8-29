@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:200px;
+	height: 200px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+<script type="text/javascript">
+	/*
+		先分清楚this属性的值是什么类型;
+		
+		单纯的函数名+括号， this -> window
+		
+		将一个函数交给事件调用  this -> 是触发事件的这个对象（*PC）
+		
+		定时器中this -> window{
+			只要定时器是直接调用某个函数或者方法，那么this就是window
+			否则this该是谁就是谁
+		}
+		
+		有主一般情况下 this就是主,如果被定时器调用，那么this一样是window
+		
+		call、apply 写的this是谁就是谁
+		
+		
+		new -> this为对象
+		
+		提前存一个this,当使用这个this的时候，this就是存的那个
+		
+		小技巧：
+			匿名函数自执行的时候，前面加;目的是为了避免报错。
+	*/
+	
+	
+	var div1 = document.getElementById('div1');
+	var _this = window;
+	function fn1(){
+		alert(this);
+	}
+	
+	var arr = [1,2,3];
+	arr.fn1 = function(){
+		alert(this);
+	}
+	
+	//arr.fn1(); // arr
+	
+	document.onclick = function(){
+		//setTimeout(arr.fn1,1000);//window
+		
+//		setTimeout(arr.fn1(),1000);//arr
+		
+//		arr.fn1();  //arr
+		
+		setTimeout(function(){
+			//arr.fn1(); //arr
+			//fn1(); //window
+//			arr.fn1.call(document);  //document
+			
+			//new fn1();    //obj
+			
+		},1000);
+	};
+
+	
+	document.onclick = function(){
+		//fn1();   //window	
+	}
+	
+	;(function(){
+		alert(this);
+	})();
+	
+	
+	
+//	document.onclick = arr.fn1;    //arr
+	
+	//fn1();  
+	
+	
+	
+	
+	
+	
+	
+	
+/******************************移动端事件****************************************/	
+
+/*
+	ontouchstart      mousedown
+		
+	ontouchmove  		mousemove
+	
+	ontouchend		mouseup 
+*/
+
+
+//	div1.addEventListener('touchstart',fn1);
+//	div1.addEventListener('touchmove',fn2);
+//	div1.addEventListener('touchend',fn3);
+//	
+//	function fn1(){
+//		console.log('按下');
+//	}
+//	function fn2(){
+//		console.log('移动');
+//	}
+//	function fn3(){
+//		console.log('抬起');
+//	}
+	
+	
+</script>
+</body>
+</html>

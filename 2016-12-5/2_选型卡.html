@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+.divs div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+.divs div.hide{
+	display: none;
+}
+.divs div.show{
+	display: block;
+}
+#box{
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div class="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div class="divs">
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	/*
+		1.自动播放  (OK)
+		2.第一个播放，第二个不走 ()
+		3.点击btn1的时候，让第二个走，第一个停
+		4.点击btn2的时候，2个都停
+		5.点击btn3的时候，2个都走
+		6.反向走（走的停，停的走） 
+		
+		面向过程
+			关注实现过程和每一步的实现细节
+		
+		面向对象
+			关注特性和功能
+		
+		面向对象的好处
+		1、代码的层次结构更清晰
+		2、更容易复用
+		3、更容易维护
+		4、更容易扩展
+		5、more...
+
+		
+		
+	*/
+	
+	function Drag(id){
+		this.div1 = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+	}
+	Drag.prototype.init = function(){
+		var _this = this;
+		this.div1.addEventListener('mousedown',down);
+		function down(ev){
+			_this.fnDown(ev,down,_this);
+		}
+	}
+	
+	Drag.prototype.fnDown = function(ev,down,that){
+		this.disX = ev.pageX - this.div1.offsetLeft;
+		this.disY = ev.pageY - this.div1.offsetTop;
+		document.addEventListener('mousemove',move);
+		document.addEventListener('mouseup',up);
+		
+		
+		function move(ev){
+			that.fnMove(ev);
+		}
+		function up(ev){
+			that.fnUp(ev,down,move,up);
+		}
+		
+		ev.preventDefault();
+		
+	}
+	
+	Drag.prototype.fnMove = function(ev){
+		this.div1.style.left = ev.pageX - this.disX +'px';
+		this.div1.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	
+	Drag.prototype.fnUp= function(ev,down,move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	function Tab(id){
+		this.box = document.getElementById(id);
+		this.btns = this.box.getElementsByTagName('input');
+		this.divs = this.box.getElementsByClassName('divs')[0];
+		this.divChild = this.divs.getElementsByTagName('div');
+		this.timer = null;
+		this.num = 0;	
+	}
+	
+	Tab.prototype.init = function(){
+		this.over();
+		this.out();
+		this.events();
+		this.autoPlay();
+	}
+	
+	Tab.prototype.events = function(){
+		var _this = this;
+		for(var i=0;i<this.btns.length;i++){
+			(function(index){
+				_this.btns[index].onclick = function(){
+					_this.num = index;
+					_this.change(index);
+				}
+			})(i);
+		}
+	}
+	
+	Tab.prototype.over = function(){
+		var _this = this;
+		this.box.addEventListener('mouseover',function(){
+			_this.stop();
+		});
+	}
+	
+	Tab.prototype.out = function(){
+		var _this = this;
+		this.box.addEventListener('mouseout',function(){
+			_this.autoPlay();
+		});
+	}
+	
+	Tab.prototype.change = function(index){
+		for(var i=0;i<this.btns.length;i++){
+			this.btns[i].className = '';
+			this.divChild[i].className = 'hide';
+		}
+		this.btns[index].className = 'active';
+		this.divChild[index].className = 'show';
+	}
+	
+	Tab.prototype.autoPlay = function(){
+		var _this = this;
+		clearInterval(this.timer);
+		this.timer = setInterval(function(){
+			_this.num++;
+			if(_this.num >= _this.btns.length){
+				_this.num = 0;
+			}
+			_this.change(_this.num);
+		},1000);
+	}
+	
+	Tab.prototype.stop = function(){
+		clearInterval(this.timer);
+		this.timer = null;
+	}
+	
+	Tab.prototype.fanx = function(){
+		return !!this.timer;  //this.timer = null  !null !true false
+	}
+	
+	
+	var t1 = new Tab('box');
+	var d1 = new Drag('box');
+	t1.init();
+	d1.init();
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+<script type="text/javascript">
+/*
+	常用的继承：
+		拷贝继承
+		类式继承
+		对象继承	
+		
+	拖拽：
+		有变量
+		init
+		down
+		move
+		up
+		...
+*/
+	function Drag(id){
+		this.div1 = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+	}
+	Drag.prototype.init = function(){
+		var _this = this;
+		this.div1.addEventListener('mousedown',down);
+		function down(ev){
+			_this.fnDown(ev,down,_this);
+		}
+	}
+	
+	Drag.prototype.fnDown = function(ev,down,that){
+		this.disX = ev.pageX - this.div1.offsetLeft;
+		this.disY = ev.pageY - this.div1.offsetTop;
+		document.addEventListener('mousemove',move);
+		document.addEventListener('mouseup',up);
+		
+		
+		function move(ev){
+			that.fnMove(ev);
+		}
+		function up(ev){
+			that.fnUp(ev,down,move,up);
+		}
+		
+		ev.preventDefault();
+		
+	}
+	
+	Drag.prototype.fnMove = function(ev){
+		this.div1.style.left = ev.pageX - this.disX +'px';
+		this.div1.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	
+	Drag.prototype.fnUp= function(ev,down,move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+
+	var d1 = new Drag('div1');
+	
+	d1.init();
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

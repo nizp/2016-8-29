@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background:green;
+	position: absolute;
+	top:0;
+	left:110px;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+<script type="text/javascript">
+	/*
+		组件：
+			提供一个完善的功能的方法或数据的封装
+		
+		组件要求
+			易扩展，易维护
+			
+		当按下的时候让div变色（蓝色）
+		当抬起的时候让div变色（红色）
+		
+	*/
+	
+	function Drag(id){
+		this.div1 = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+		this.settings = {
+			d:function(){},
+			m:function(){},
+			u:function(){}
+		}
+	}
+	Drag.prototype.init = function(json){//json  多个配置的方法
+		var _this = this;
+		for(var attr in json){
+			this.settings[attr] = json[attr];
+		}
+		
+		this.div1.addEventListener('mousedown',down);
+		function down(ev){
+			_this.settings.d.call(_this);
+			trigger(_this,'按下');
+			_this.fnDown(ev,down,_this);
+		}
+	}
+	
+	Drag.prototype.fnDown = function(ev,down,that){
+		this.disX = ev.pageX - this.div1.offsetLeft;
+		this.disY = ev.pageY - this.div1.offsetTop;
+		document.addEventListener('mousemove',move);
+		document.addEventListener('mouseup',up);
+		function move(ev){
+			that.settings.m.call(that);
+			that.fnMove(ev);
+			trigger(that,'移动');
+		}
+		function up(ev){
+			that.settings.u.call(that);
+			that.fnUp(ev,down,move,up);
+			trigger(that,'抬起');
+		}
+		
+		ev.preventDefault();
+	}
+	
+	Drag.prototype.fnMove = function(ev){
+		this.div1.style.left = ev.pageX - this.disX +'px';
+		this.div1.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	
+	Drag.prototype.fnUp= function(ev,down,move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	function addEvent(obj,events,fn){
+		obj.zdy = obj.zdy || {};//方便管理！！！
+		obj.zdy[events] = obj.zdy[events] || [];
+		obj.zdy[events].push(fn);
+	}
+	
+	function trigger(obj,events){
+		if(!obj.zdy[events]){return null};
+		for(var i=0;i<obj.zdy[events].length;i++){
+			obj.zdy[events][i](obj);
+		}
+	}
+	
+	
+
+	var d1 = new Drag('div1');
+	var d2 = new Drag('div2');
+	
+	d1.init();
+	
+	/*
+		down的时候加虚线黄色的虚线
+		up的时候去掉虚线
+	*/
+	d2.init({
+		u:function(){
+			//function abc(){};
+			this.div1.style.border = 'none';//A
+			
+			//B同学开发的 2016-12-5   start
+			//function abc(){};
+			
+			//B同学开发的 2016-12-5  end
+		},
+		d:function(){
+			this.div1.style.border = '2px dashed yellow';
+		}
+	});
+	
+	/*
+		B同学要对这个 div进行其他操作的时候，不用修改别人的代码，直接写自己的业务逻辑即可，避免了命名冲突和后期维护高成本的开发。
+	*/
+	addEvent(d2,'按下',function(that){
+		//console.log(that);
+		that.div1.style.opacity = '.5';//B
+	});
+	
+	
+	
+	
+	
+	
+		
+</script>
+</body>
+</html>

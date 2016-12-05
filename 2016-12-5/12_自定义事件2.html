@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	overflow:hidden;
+}
+#wrap{
+	transition:1s;
+	position: relative;
+	top:0;
+	left:0;
+}
+
+</style>
+</head>
+<body>
+	<section id="wrap">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</section>
+<script type="text/javascript">
+
+	var arr = ['green','yellow','pink','skyblue'];
+	
+	var wrap = document.getElementById('wrap');
+	var divs = wrap.children;
+	var iW = document.documentElement.clientWidth;
+	var iH = document.documentElement.clientHeight;
+	
+	var lis = Array.prototype.slice.call(divs);
+	var num = 0;
+	
+	lis.forEach(function(e,i){
+		e.style.cssText = 'width:'+iW+'px;height:'+iH+'px;background:'+arr[i];
+	});
+	
+	
+	//方便给人使用：为了绑定事件函数，往数组中push函数
+	wrap.onOff = true;
+	addEvent(wrap,'下滚',function(){
+		if(!wrap.onOff){return};
+		wrap.onOff = false;
+		num++;
+		if(num > divs.length-1){
+			num = divs.length-1;
+		}
+		wrap.style.top = -num * iH + 'px';
+		setTimeout(function(){
+			wrap.onOff = true;
+		},1010);
+	});
+	
+	
+	addEvent(wrap,'上滚',function(){
+		if(!wrap.onOff){return};
+		wrap.onOff = false;
+		num--;
+		if(num < 0){
+			num = 0;
+		}
+		wrap.style.top = -num * iH + 'px';
+		setTimeout(function(){
+			wrap.onOff = true;
+		},1010);
+	});
+	
+	
+	addEvent(wrap,'下滚',function(){
+		divs[num].style.opacity = '.5';
+	});
+	
+	
+	
+	
+	/*
+		{
+			'下滚':[
+				function(){},
+				function(){}
+			],
+			
+		}
+		
+		
+		
+		触发器：
+			依次调用这个事件的这些方法
+			
+	*/
+	
+	function addEvent(obj,events,fn){
+		obj.zdy = obj.zdy || {};
+		obj.zdy[events] = obj.zdy[events] || [];
+		obj.zdy[events].push(fn);
+	}
+	
+	function trigger(obj,events){
+		if(!obj.zdy[events]){return null};
+		for(var i=0;i<obj.zdy[events].length;i++){
+			obj.zdy[events][i]();
+		}
+	}
+	
+	function addWheel(obj,fn){
+		obj.addEventListener('mousewheel',fnW);
+		function fnW(ev){
+			var down = 0;
+			down = ev.wheelDelta>0?true:false;
+			fn && typeof fn === 'function' && fn(down);
+		}
+		
+	}
+	
+	
+	addWheel(document,function(down){
+		//上滚的时候触发这个事件
+		if(down){
+			trigger(wrap,'上滚');
+		}else{
+		//下滚的时候触发这个事件
+			//alert(1)
+			trigger(wrap,'下滚');
+		}
+	})
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	//obj为默认的参数
+	var obj = {
+		name:'杨梦环',
+		age:80
+	}
+	
+	//obj2为配置的参数
+	var obj2 = {
+		age:20
+	}
+	
+	//有配置走配置，没配置走默认
+	
+	for(var attr in obj2){
+		obj[attr] = obj2[attr];
+	}
+	
+	console.log(obj);
+	
+	
+	
+</script>
+</body>
+</html>

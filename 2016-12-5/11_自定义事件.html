@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+//	wx.addEventListener('划屏',function(){
+//		function abc(){}
+//	});
+//	wx.addEventListener('划屏',function(){
+//		function abc(){}
+//	});
+
+	/*
+		addEventListener,同一个事件绑定一次或者多次的时候，将同样事件的事件函数，提取出来
+		当这个事件被触发的时候，依次执行这个事件下的所有事件函数
+		
+		映射：自定义事件
+		
+		核心：
+			找到某个事件函数,只要调用一次addEvent，就往一个对象的数组中push这个函数
+			当触发某个事件的时候，循环这个数组，依次调用
+		
+		{
+			'click':[]
+		}
+		
+		
+		document.Event = {
+				'click':[
+					function a(){},
+					function b(){},
+					function c(){},
+				],
+				'mouseover':[
+					function a(){},
+					function b(){}
+				]
+			}
+		
+		
+		
+		
+		
+		
+	*/
+	
+	function addEvent(obj,events,fn){//绑定事件：目的{记录对应事件名的事件函数}
+		//如果这个对象有这个属性，那么就从这个属性下去创建数组，如果没有，就为一个空对象
+		obj.Event = obj.Event || {};
+		/*
+			如果这个对象的这个属性下有这个事件名，说明之前绑定过，从之前的数组中push新的函数就可以了，否则创建一个空白数组
+		*/
+		obj.Event[events] = obj.Event[events] || [];
+		/*
+			把当前绑定的这个函数push到这个对象 Event 属性的事件名数组中
+		*/
+		obj.Event[events].push(fn);
+	}
+	
+	
+	//触发：
+	
+	function tirgger(obj,events){ //一次性执行某个对象的对应事件名的所有函数
+		//如果这个对象没有这个事件名，直接返回空
+		if(!obj.Event[events])return null;
+		//有的情况下就循环这个事件下的所有函数，并且调用，再把绑定的对象传入进去
+		obj.Event[events].forEach(function(e){
+			e(obj);//obj绑定的对象
+		});
+	}
+	
+	
+	addEvent(document,'点击',function(){
+		alert(1);
+	});
+	
+	addEvent(document,'点击',function(){
+		alert(2);
+	});
+	
+	
+	
+	
+	
+	
+	document.onclick = function(){
+		tirgger(document,'点击');
+	}
+	
+	console.log(document.Event)
+	
+	
+	
+	
+</script>
+</body>
+</html>

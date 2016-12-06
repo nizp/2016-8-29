@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li>111</li>
+		<li>222</li>
+		<li>333</li>
+		<li>444</li>
+		<li>555</li>
+	</ul>
+<script type="text/javascript">
+	/*
+		[]
+		new Array
+		length -> 读写
+		方法，一般数据的方法都会改变原数组的长度
+		存放多种类型的数据。
+		虽然为空，但是为对象类型，所以在判断中为真的
+		可以用forEach
+		JSON.parse
+		JSON.stringify
+		
+		类数组：
+			长的像数组
+				[]而且有length，但是不能使用数组的方法，一般获取一组元素的
+				时候为类数组,一般的类数组为动态的（获取）
+				
+				querySelectorAll为静态的类数组
+				
+		https://predictiveworld.watchdogs.com （炫酷的地址）
+		
+		http://www.68design.net/   设计师联盟
+				
+	*/
+	
+	var lis = document.getElementsByTagName('li');
+	//var lis = document.querySelectorAll('li');
+	
+	//12345   A:1234512345   B:12345  c:112345,212345,312345...  d:112233..
+	
+	document.onclick = function(){
+		var li = document.createElement('li')
+		ul.appendChild(li);
+		console.log(lis.length)
+	}
+	
+//	for(var i=0;i<lis.length;i++){
+//		ul.appendChild(lis[i]);
+//	}
+	
+	
+</script>
+</body>
+</html>

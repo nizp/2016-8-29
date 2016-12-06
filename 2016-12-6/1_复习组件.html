@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+<script type="text/javascript">
+/*
+		slice的问题
+		组件有点懵{
+			一个绑定函数
+			一个触发函数
+			要执行的函数{
+				传参：懵懵哒         
+			}
+			通过事件来触发
+		}
+		自定义事件
+		绑定传参
+		
+		映射：
+			将某个事件的函数push到数组中
+			
+			当这个事件被触发的就执行之前绑定的函数
+
+	*/
+	function Drag(id){
+		this.div1 = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+		
+		this.settings = {
+			d:function(){},
+			m:function(){},
+			u:function(){}
+		}
+	}
+	Drag.prototype.init = function(json){
+		
+		for(var attr in json){
+			this.settings[attr] = json[attr];
+		}
+		
+		var _this = this;
+		this.div1.addEventListener('mousedown',down);
+		function down(ev){
+			_this.fnDown(ev,down,_this);
+			_this.settings.d();
+		}
+	}
+	
+	Drag.prototype.fnDown = function(ev,down,that){
+		this.disX = ev.pageX - this.div1.offsetLeft;
+		this.disY = ev.pageY - this.div1.offsetTop;
+		document.addEventListener('mousemove',move);
+		document.addEventListener('mouseup',up);
+		function move(ev){
+			that.fnMove(ev);
+			that.settings.m();
+		}
+		function up(ev){
+			that.fnUp(ev,down,move,up);
+			that.settings.u();
+		}
+		ev.preventDefault();
+	}
+	
+	Drag.prototype.fnMove = function(ev){
+		this.div1.style.left = ev.pageX - this.disX +'px';
+		this.div1.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	
+	Drag.prototype.fnUp= function(ev,down,move,up){
+		if(this.disX == ev.pageX && this.disY == ev.pageY){
+			this.trigger('点击');
+		}
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+
+	Object.prototype.addEventListener = function(events,fn){
+		
+		this.Event = this.Event || {};
+		
+		this.Event[events] = this.Event[events] || [];
+		
+		if(this.Event[events].length == 0){
+			this.Event[events].push(fn);
+		}else{
+			this.Event[events].forEach(function(e,i){
+//				console.log(e)
+//				console.log(fn)
+				if(e != fn){
+					this.Event[events].push(fn);
+				}
+			},this);
+		}
+		
+		
+		
+	}
+	
+	Object.prototype.trigger = function(events){
+		if(!this.Event[events])return;
+		this.Event[events].forEach(function(e){
+			e();
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	var d1 = new Drag('div1');
+	/*
+		d1.event = {
+			'click':[
+				function(){},
+				
+			],
+			'点击':[
+				function(){}
+			]
+			
+		}
+		
+		fn(100,200,300,100,0.5)
+		{
+			h:200,
+			w:100,
+			t:300,
+			l:100,
+			o:.5
+		}
+	*/
+	
+	d1.init({
+		d:function(){
+			console.log(this);
+			d1.div1.style.border = '5px dashed yellow';
+		},
+		u:function(){
+			d1.div1.style.border = 'none';
+		}
+	});
+	
+	d1.addEventListener('点击',fn2);
+	
+	
+	function fn2(){
+		alert('我点击了2');
+	}
+	
+	d1.addEventListener('点击',fn2);
+	
+	function fn2(){
+		alert('我点击了1');
+	}
+	
+//	document.addEventListener('click',fn1)
+//	
+//	function fn1(){
+//		alert(1)
+//	}
+	function fn1(){
+		alert(2)
+	}
+//	
+	document.addEventListener('click',fn1)
+
+	
+	
+	
+	
+	
+	console.log(d1.Event);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

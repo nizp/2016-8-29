@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		因为slice不会改变原数组的长度，所以可以将这个方法借过来用。 
+	*/
+	var arr = [1,2,3,4,5];
+	
+	//console.log(arr.slice(0,2))
+	
+	//console.log(arr.splice(0,2))
+	var aEle = document.getElementsByTagName('*');
+	
+	//Array.prototype.slice.call(aEle);
+	
+	var arr = [];
+	
+	console.log(arr.slice.call(aEle))
+	
+	
+	
+	//Array.prototype.splice.call(aEle);  //splice会改变原数组的长度，所以会报错
+	
+	console.log(arr)
+	
+	
+	
+</script>
+</body>
+</html>

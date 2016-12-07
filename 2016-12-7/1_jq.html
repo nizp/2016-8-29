@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<ul>
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+<script src="jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+/*
+	 JQuery:
+	 	js方法库，集成了许多解决问题的方法{
+	 		提供强大的选择器、简洁的API、优雅的链式、便捷的操作
+	 	}
+	 	
+	 	优点：
+	 		快速、高效开发（处理很多兼容性问题）
+	 	
+	 	核心：
+	 		写的少，干的多
+	 		
+	 	版本：
+	 		1开头
+	 			兼容低版本浏览器
+	 		2开头
+	 			去掉了兼容问题
+	 		3开头
+	 			在2开头的基础上又加了些新方法（也不兼容低版本浏览器）
+	 		
+	 		
+	 		min.js 压缩版本可以直接用来开发
+	 		版本号.js 学习版
+	 		
+	 	http://www.jquery123.com/
+	 	
+	 	script  src="jq.js"
+	 	$('#div1')
+*/
+
+//	$('#div').click(function(){	
+//		//$(this).css('background','yellow');
+//		$(this).hide(200);
+//	})
+	
+	$('li').click(function(){
+		$(this).animate({
+			width:100,
+			height:100,
+			opacity:.4
+		});
+		//$(this).addClass('active').siblings('li').removeClass('active');
+	});
+	
+	
+
+
+</script>
+</body>
+</html>

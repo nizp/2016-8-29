@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<!--<ul>
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>-->
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+	
+	/*
+		css:对某个元素的样式可读可写 
+		
+			一个参数：
+				如果是字符串->获取，直接写要获取的属性名即可
+				
+				如果是对象{} -> 批量设置 
+				
+			两个参数：
+				设置：
+					obj.css(key,val);
+					
+			
+			
+	*/
+	
+	var $div = $('#div'); 
+	
+//	console.log($div.css('background'))
+	
+//	$div.css('background','green');
+	
+	$div.css({
+		width:200,
+		height:200,
+		background:'green'
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--<div id="div1">
+		我是一个div
+	</div>-->
+	<input type="button" name="" id="" value="全选" />
+	<input type="button" name="" id="" value="反选" />
+	<input type="checkbox" name="" id="" value=""/>
+	<input type="checkbox" name="" id="" value="" />
+	<input type="checkbox" name="" id="" value="" />
+	<input type="checkbox" name="" id="" value="" />
+	<input type="checkbox" name="" id="" value="" />
+	<input type="checkbox" name="" id="" value="" />
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		attr:属性
+			一个参数：
+				获取
+			两个参数：
+				设置
+				
+		val:value
+			$.val()  获取
+			$.val('写东西') 设置
+			
+		checked为内存中的属性，直接在页面设置checked为false的时候是没用的
+		那么，就不能用attr，prop()
+		
+		prop():专门用来读、写checked
+		
+	*/
+//	console.log($('#div1').attr('id'))
+//	$('#div1').attr('index','0');
+	
+	var $c = $('input:checkbox');
+	$('input:button').click(function(){
+		if($(this).val() == '全选'){
+			$('input:checkbox').prop('checked',true);
+		}else{
+			for(var i=0;i<$c.length;i++){
+				if($c.eq(i).prop('checked')){
+					$c.eq(i).prop('checked',false);
+				}else{
+					$c.eq(i).prop('checked',true);
+				}
+			}
+		}
+	});
+	
+	
+	
+	
+	//console.log()
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="div1">我是div</div>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		text() -> 专门操作文字，就算写上标签也会转成字符串放到元素中
+		 
+		html() -> innerHTML 
+		 
+		val() ->  只能操作表单元素
+		
+		
+		如果直接调用，读
+		传入字符串进去为写
+	*/
+
+	//console.log($('#div1').html());
+	//$('#div1').val();
+	
+	//$('#div1').text('<p>你好</p>');
+	//$('#div1').html('<p>你好</p>')
+//	console.log($('#div1').text())
+
+	var n = 0;
+	$('#div1').html('<p>'+(++n)+'</p>');
+</script>
+</body>
+</html>

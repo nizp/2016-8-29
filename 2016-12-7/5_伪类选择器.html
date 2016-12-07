@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<input type="text">
+	<input type="button">
+	<input type="submit">
+	<input type="checkbox" checked/>
+	<input type="checkbox"/>
+	<input type="checkbox"/>
+	<input type="radio"/>
+	<input type="password"/>
+	<ul>
+		<li a="active"></li>
+		<li a="12index3">
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</li>
+		<li a="index 1234"></li>
+		<li index="abc123"></li>
+		<li a="index-01"></li>
+		<li></li>
+		<li  a="02       index"></li>
+	</ul>
+	<ul>
+		<li a="active"></li>
+		<li a="12index3"><span>span1</span></li>
+		<li a="index 1234"><span>span2</span></li>
+		<li index="abc123"></li>
+		<li a="index-01"></li>
+		<li></li>
+		<li  a="02       index"></li>
+	</ul>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+	//$('li[a*="index"]').css('background','yellow');
+	//$('li[a~="index"]').css('background','yellow');
+	//$('li[a$="index"]').css('background','yellow');
+	//$('li[a!="active"]').css('background','yellow');
+	
+	/*
+		伪类的：
+			元素:
+			找到input中为submit  -> $('input:submit')
+			
+			$('input:checked') 找到input为选中的
+			
+			奇数 ->  :odd     从0开始算的
+			偶数 ->  :even    从0开始算的
+			
+			li:gt(index) ->  找到大于索引的元素
+			li:lt(index) ->  找到小于索引的元素
+			
+			找到的是大于或者小于，但是排除等于
+			
+			
+	*/
+	
+	//$('input:submit').css('background','yellow');
+	//$('input:checked').css('background','yellow');
+	
+	//$('li:odd').css('background','yellow');  //奇数
+	
+	//$('li:even').css('background','yellow');
+	
+	//$('li:eq(0)').css('background','yellow');
+	//$('li:first-child').css('background','yellow'); //找到父级元素下的第一个子元素
+//	$('li:gt(0)').css('background','yellow');
+
+	//$('li:lt(4)').css('background','yellow');
+	
+//	$('li').click(function(){
+//		alert($(this).index('li'));
+//	});
+
+	//$('ul:eq(0) > li').css('background','yellow');
+	
+	//$('li span').text('呵呵');
+	
+	var $ul = $('ul:eq(2)');
+	
+	//console.log($ul)
+
+	//$ul.find('span').text('呵呵da');
+	
+	//console.log($ul.find('li span'))
+	
+	
+	
+</script>
+</body>
+</html>

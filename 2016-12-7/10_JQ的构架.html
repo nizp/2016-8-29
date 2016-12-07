@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		jQ不但可以在浏览器环境下用，还可以在node环境中用 
+		
+		闭包传参的优点：
+			访问速度更快，不会一层一层往上找
+		
+		noGlobal：
+			因为在低版本浏览器下undefined会被修改，那么当函数没有传参的时候，就是undefined，一定不会被修改
+		
+	*/
+	
+	(function(global,factory){
+		factory(global);
+	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+			console.log('这里才是你要写的代码');
+			console.log(noGlobal);
+	});
+	
+//	var undefined = 10;
+//	
+//	console.log(undefined);
+	
+	
+	
+//	function fn1(a){
+//		alert(a)
+//	}
+//	fn1(this);
+//	alert(this);
+	
+</script>
+</body>
+</html>

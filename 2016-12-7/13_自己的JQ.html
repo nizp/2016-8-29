@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<ul>
+		<li style="width:100px" id="li">111</li>
+		<li class="li">222</li>
+		<li>333</li>
+		<li class="li">444</li>
+		<li class="li">555</li>
+	</ul>
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	(function(global,factory){
+		factory(global);
+	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+		function jQuery (selector){
+			return new jQuery.init(selector);
+		}
+		
+		jQuery.prototype = {
+			css:function(){
+				var obj = Object.prototype.toString;
+			
+				if(arguments.length == 1){
+					//是对象的情况下批量设置
+					if(obj.call(arguments[0]) === '[object Object]'){
+						for(var i=0;i<this.length;i++){
+							for(var attr in arguments[0]){
+								this[i].style[attr] = arguments[0][attr]
+							}
+						}
+					}else{
+						//获取
+						//console.log(this)
+						return this[0].style[arguments[0]];
+					}
+				}
+			}
+		}
+		
+		jQuery.init = function(selector){
+			if(typeof selector === 'function'){
+				document.addEventListener('DOMContentLoaded',selector)
+			}else{
+				var arr = Sizzle(selector);
+				for(var i=0;i<arr.length;i++){
+					this[i] = arr[i];
+				}
+				
+				this.length = arr.length;
+			}
+		}
+		
+		jQuery.init.prototype = jQuery.prototype;
+		
+		window.$ = jQuery;
+		
+	});
+	
+$(function(){
+	//console.log($('li'))//.css()
+	/*
+		{
+			0:li,
+			1:li,
+			length:2
+		}
+	*/
+	//console.log($('li'))
+	//console.log()
+	
+//	$('#li').css('width')
+
+//	$('#li').css({
+//		width:'100px',
+//		height:'100px',
+//		background:'red'
+//	})
+
+	$('li').css({
+		width:'100px',
+		height:'100px',
+		background:'red'
+	});
+	
+	//console.log($($('li')[0]).css('width'))
+	
+});
+</script>
+</body>
+</html>

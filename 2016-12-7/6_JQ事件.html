@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<input type="text">
+	<input type="button">
+	<input type="submit">
+	<input type="checkbox" checked/>
+	<input type="checkbox"/>
+	<input type="checkbox"/>
+	<input type="radio"/>
+	<input type="password"/>
+	<ul>
+		<li a="active"></li>
+		<li a="12index3">
+		</li>
+		<li a="index 1234"></li>
+		<li index="abc123"></li>
+		<li a="index-01"></li>
+		<li></li>
+		<li  a="02       index"></li>
+	</ul>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+	/*
+		1.不带on+事件名+() 
+		
+		2.on('click',function(){})
+		
+		
+		分清是JQ对象还是原生对象
+		
+		知道JQ对象上的方法有什么效果
+		
+		逻辑
+		
+		
+		
+	*/
+	
+//	$('li').click(function(){
+//		alert($(this).index('li'));
+//	});
+
+//	$('li').mouseover(function(){
+//		alert($(this).index('li'));
+//	});
+	
+	$('li').on('click',click);
+	
+	function click(){
+		//alert($(this).index('li'));
+
+		if($(this)[0] == $('li')[0]){
+			$(this).css('background','red');
+		}else{
+			$(this).css('background','blue');
+		}
+	}
+</script>
+</body>
+</html>

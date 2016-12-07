@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<ul>
+		<li class="active"></li>
+		<li a="12index3"></li>
+		<li a="index 1234"></li>
+		<li index="abc123"></li>
+		<li a="index-01"></li>
+		<li></li>
+		<li  a="02       index"></li>
+	</ul>
+	<input type="text">
+	<input type="button">
+	<input type="submit">
+	<input type="checkbox"/>
+	<input type="radio"/>
+	<input type="password"/>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+	/*
+		class  . 
+		
+		eq() 下标
+		
+		加了下标[]之后JQ对象会变成原生对象，如果要用JQ的方法，要用$()包一下
+		
+		所有JQ的方法基本在JQ对象下才能使用（除工具方法以外都是JQ对象）
+		
+		$('*')  获取所有元素
+		
+		
+		[name|="value"] :  获取有name属性=value值的时候或者以value-开头的元素
+		
+		
+		[name="vlaue"]:获取有name属性=value值元素
+		
+		[name*="value"]:获取有name属性=所有包含value值元素
+		
+		[name!="value"]:获取有name属性不包含value值元素
+		
+		[name~="value"]:获取有name属性=value值元素||获取有name属性空格value值元素
+		
+		[name$="value"]:获取以value结尾
+		 
+		[name^="value"]：获取以value开头
+		
+		
+		
+	*/
+	//$('li').css('background','yellow');
+	
+	//$('li').eq(1).css('background','yellow');
+	
+	//$($('li')[0]).css('background','yellow');
+	
+	//$('*').css('background','yellow')
+	
+//	$('li[a|="index"]').css('background','yellow')
+
+//	$('li[a*="index"]').css('background','yellow')
+
+	//$('li[a!="index"]').css('background','yellow')
+	
+//	$('li[a~="index"]').css('background','yellow');
+
+//	$('li[a$="index"]').css('background','yellow');
+
+	//$('li[a^="index"]').css('background','yellow');
+	
+	
+	$('input[type="submit"]').click(function(){
+		alert('走你!')
+	});
+	
+	
+	//console.log(/a="index|(\w+\s+index)|(\w+\s+index\s+\w?)"/.test('a="index 12"'));
+	
+	
+	
+
+</script>
+</body>
+</html>

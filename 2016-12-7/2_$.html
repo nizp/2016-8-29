@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+li{
+	float: left;
+	list-style: none;
+	width:50px;
+	height: 50px;
+	background: green;
+	margin: 5px;
+}
+li.active{
+	background: red;
+}
+</style>
+</head>
+<body>
+	<div id="div"></div>
+	<!--<ul>
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>-->
+	<img src="http://img15.3lian.com/2015/a1/13/d/12.jpg" alt="" />
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+/*
+	$ 就是jquery一个函数名
+	
+	$('') -> 获取元素、创建元素..
+	
+	$(function(){}) -> readay事件
+	
+	$(obj) -> 可以把原生对象转成JQ对象
+	
+	
+*/
+
+
+	var div1 = document.getElementById('div');
+	
+	$(div1).css('background','green');
+	
+
+//console.log($)
+//window.onload = function(){
+//	alert(2)
+//}
+//$(function(){
+//	alert(1)
+//});
+
+	//$('#div')
+	
+
+
+</script>
+</body>
+</html>

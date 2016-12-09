@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="btn" id="btn" value="点击创建" />
+	<ul id="ul">
+		<li>1111
+			<div>ddd</div>
+		</li>
+		<li>2222
+			<div>ddd</div>
+		</li>
+		<li>
+			4444
+			<p>ppp</p>
+		</li>
+		<li>5555
+			<span>span</span>
+		</li>
+	</ul>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		
+		$('#ul').before($li)
+		$(添加到谁的前面).before(添加谁)
+		
+		$li.insertBefore($('#ul'))
+		(添加谁).insertBefore$(添加到谁的前面)
+		
+		
+		$('#ul').after($li);
+		$(添加到谁的后面).after(添加谁);
+		
+		$li.insertAfter($('#ul'));
+		
+		prependTo()   prepend() 
+		
+		子级.prependTo(父级)
+		父级.prepend(子级)
+		
+	*/
+	var num = 5;
+	
+	$('#btn').click(function(){
+		num++;
+		var $li = $('<li>'+num+'</li>');
+		
+		//$('#ul').before($li)
+		//$('#ul')[0].insertBefore($li[0],$('li').first()[0])
+
+		//$li.insertBefore($('#ul'))
+		
+		//$('#ul').after($li);
+		
+	//	$li.prependTo($('#ul'))  
+	
+		//$('#ul').prepend($li)
+		
+	});
+	
+	
+	
+</script>
+</body>
+</html>

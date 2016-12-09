@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body class="li">
+	<ul id="ul">
+		<li>1111
+			<div>ddd</div>
+		</li>
+		<li>2222
+			<div>ddd</div>
+		</li>
+		<li class="li">3333
+			<div>
+				<ul>
+					<li class="li">
+						<div class="li">
+							<p  class="li"></p>
+							<p name="p">
+								<span class="li">111</span>
+							</p>
+							<p class="li"></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+		</li>
+		<li>
+			4444
+			<p>ppp</p>
+		</li>
+		<li>5555
+			<span>span</span>
+		</li>
+	</ul>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		$(子级).parent()
+			找到某个子级的父节点
+		
+		
+		$(子级).parents(筛选)
+			批量查找子级的祖先级节点
+			筛选：指定的祖先级节点
+		
+		精准的查找能力，实战开发之王
+		找的是最近的唯一一个元素（包括自身）
+		
+		只从自身开始查找，找离的最近的父级，如果有自身就找自身。
+		
+		
+	*/
+	
+	
+//	console.log($('p[name="p"]').parent()[0]);
+	
+	//console.log($('p[name="p"]').parents('#ul'))
+	
+	$('p[name="p"]').closest('.li').css('background','red');
+	
+	
+	
+</script>
+</body>
+</html>

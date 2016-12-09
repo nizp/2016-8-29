@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="btn" id="btn" value="点击创建" />
+	<ul id="ul">
+		<li>1111
+			<div>ddd</div>
+		</li>
+		<li>2222
+			<div>ddd</div>
+		</li>
+		<li>
+			4444
+			<p>ppp</p>
+		</li>
+		<li>5555
+			<span>span</span>
+		</li>
+	</ul>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		$(子级).parent()
+			找到某个子级的父节点
+		
+		
+		$(子级).parents(筛选)
+			批量查找子级的祖先级节点
+			筛选：指定的祖先级节点
+		
+		精准的查找能力，实战开发之王
+		找的是最近的唯一一个元素（包括自身）
+		
+		只从自身开始查找，找离的最近的父级，如果有自身就找自身。
+		
+		$('<li></li>') 创建元素
+		
+		添加到父级末尾：
+			$父级.append(子级);
+			如果需要链式操作，那么this是父级;
+			
+			
+			$子级.appendTo(父级)
+			如果需要链式操作，那么this是子级
+		
+			
+		
+		
+	*/
+	var num = 5;
+	
+	$('#btn').click(function(){
+		num++;
+		var $li = $('<li>'+num+'</li>');
+		$('#ul').append($li).click(function(){
+			$(this).css('background','red');
+		})
+
+		$li.appendTo($('#ul')).click(function(){
+			$(this).css('background','red');
+		})
+		
+		
+	});
+	
+	
+	
+</script>
+</body>
+</html>

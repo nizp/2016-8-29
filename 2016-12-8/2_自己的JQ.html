@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<ul>
+		<li style="width:100px" id="li">111</li>
+		<li class="li">222</li>
+		<li>333</li>
+		<li class="li">444</li>
+		<li class="li">555</li>
+	</ul>
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		链式调用核心：
+			在当前方法下，return this
+	*/
+
+	(function(global,factory){
+		factory(global);
+	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+		function jQuery(selector){
+			return new jQuery.init(selector);
+		}
+		
+		jQuery.prototype = {
+			constructor:jQuery,
+			css:function(){
+				if(arguments.length == 1){
+					if(typeof arguments[0] === 'object'){
+						for(var i=0;i<this.length;i++){
+							for(var attr in arguments[0]){
+								this[i].style[attr] = arguments[0][attr];
+							}
+						}
+						return this;
+					}else{
+						return this[0].style[arguments[0]];
+					}
+				}else if(arguments.length == 2){
+					for(var i=0;i<this.length;i++){
+						this[i].style[arguments[0]] = arguments[1];	
+					}
+					//console.log(this)
+					return this;
+				}
+			}
+		}
+		
+		jQuery.init = function(selector){
+			var arr = [];
+			if(typeof selector === 'function'){
+				document.addEventListener('DOMContentLoaded',selector);
+			}else if(selector.nodeType === 1){
+				//console.log(selector)
+				arr.push(selector);
+				for(var i=0;i<arr.length;i++){
+					this[i] = arr[i];
+				}
+				this.length = arr.length;
+//				return selector;
+			}else if(typeof selector === 'string'){
+				arr = Sizzle(selector);
+				for(var i=0;i<arr.length;i++){
+					this[i] = arr[i];
+				}
+				this.length = arr.length;
+			}
+		};
+		
+		jQuery.init.prototype = jQuery.prototype;
+		
+		window.$ = jQuery;
+	});
+	
+	console.log($('li'));
+	
+	
+	$(function(){
+//		$('li').css({
+//			width:'100px',
+//			height:'100px',
+//			background:'red'
+//		}).css({
+//			border:'1px solid #000'
+//		});
+		//console.log($('li').css('width'))
+		
+		$('li').css('width','200px').css({
+			height:'200px',
+			background:'red'
+		})
+		
+		
+		//$($('li')[0]).css('width','200px').css('height','200px')
+		//console.log()
+		
+	});
+
+	
+</script>
+</body>
+</html>

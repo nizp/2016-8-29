@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li>1111
+			<div>ddd</div>
+		</li>
+		<li>2222
+			<div>ddd</div>
+		</li>
+		<li>3333
+			<p class="p" name="p">ppp</p>
+		</li>
+		<li>
+			4444
+			<p>ppp</p>
+		</li>
+		<li>5555
+			<span>span</span>
+		</li>
+	</ul>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		节点：
+			first(){
+				一堆里面的第一个
+			}
+			
+			last(){
+				一堆里面的最后一个
+			}                      
+			slice(从哪开始,到哪结束但不包含这位)
+			
+			
+			children(筛选) 
+				如果有指定的子元素要获取，那么括号中可以筛选。
+				
+			
+			find():
+				类似tagName
+				找到某个元素下的指定的子|孙元素
+				
+				$('ul li a')
+				
+				建议：
+					var $ul = $('#ul');  //先ul缓存起来，然后通过find去查找，节省性能。
+					
+					$ul.find('[]').css()...
+
+			上一个
+				prev()
+			
+			下一个
+				next()
+			
+	*/
+	$('li').first().css('background','red');
+	$('li').last().css('background','yellow');
+	$('li').slice(1,4).css('background','pink');
+	
+	$('li').first().next().css('background','green');
+	$('li').last().prev().css('background','blue');
+	
+	//$('li').children('[name="p"]').css('background','skyblue');
+	
+	$('ul').find('[name="p"]').css('background','skyblue');
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="btn" id="btn" value="点击创建" />
+	<ul id="ul">
+		<li>1111
+			<div>ddd</div>
+		</li>
+		<li>2222
+			<div>ddd</div>
+		</li>
+		<li>
+			4444
+			<p>ppp</p>
+		</li>
+		<li>5555
+			<span>span</span>
+		</li>
+	</ul>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		$('li').first().remove(); 
+		
+		clone(true)
+			原生的只能克隆内容，不能克隆事件
+			
+			JQ中的clone(true)就可以克隆事件，不加true连内容也能克隆。
+			
+		
+		要删除谁.remove();
+	*/
+
+	
+	$('#btn').click(function(){
+		
+		//$('li').first().remove();
+		
+		 $('li').first().click(function(){
+		 	alert(1)
+		 });
+		
+		var a = $('li').first().clone(true);
+		a.appendTo($('#ul'))
+		
+	});
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:20px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	left:0;
+	top:20px;
+}
+</style>
+</head>
+<body>
+	<input type="button" id="btn" value="按钮" />
+	<div id="div"></div>
+	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		fast 快       200
+		normal 正常   400
+		slow 慢   600
+		
+		animate:
+		
+		step：每次运动记录的细节信息（比如:位置,进度）
+			可以利用step：function(now){}做进度条...
+			
+		duration:时间
+		
+		easing:运动的方式
+			默认：swing 、 linear
+			
+		complete:回调函数
+		
+		
+		$('#div').animate({
+			left:200
+		},3000,function(){})
+				
+			
+	*/
+	$('#btn').click(function(){
+		$('#div').animate({
+		 	width:300,
+		 	height:500
+		},
+		{
+		  	step: function(now, fx) {
+		  		document.title = (now/600)*100
+		  		if(fx.prop == 'width'){
+		  			console.log(fx.now)
+		  		}
+		  		if(fx.prop == 'height'){
+		  			console.info(fx.now)
+		  		}
+		   		//console.log(fx.prop+'值当前在'+fx)
+		  	},
+		  	duration:1000,
+		  	easing:'linear',
+		  	complete:function(){
+		  		$('#div').css({
+		  			'transition':'1s',
+		  			'transform':'rotate(360deg)'
+		  		});
+		  	}
+		})
+	});
+</script>
+</body>
+</html>

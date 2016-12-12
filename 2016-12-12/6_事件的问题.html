@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+img{
+	opacity: 0;
+	transition: 1s;
+}	
+</style>
+</head>
+<body>
+	<input type="button" id="btn" value="按钮" />
+	<ul>
+	</ul>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	
+	/*
+		off();解除绑定某个JQ对象的所有事件
+		
+		如果只解除指定的事件，那么off(传入要解除的事件名)
+		
+		如果某个JQ对象上的同一个事件有多套事件绑定函数，要解除其中一个，
+		那么off(事件名,函数名)
+		
+		这个问题以后使用JQ的时候一定会碰到。
+		
+		一定要注意的是：
+			只要用JQ事件中还有事件，就容易出现重复绑定的问题。
+			在绑定之前先解除上个事件函数。
+			
+			 off().on('click')
+		
+		on('click',{},fn1);
+		function fn1(){}
+		
+		on('click','li',function(){})
+		
+		on('click',function(){})
+
+		on('click.fn1',function(){})
+		
+		off()  
+		
+		off('click')
+		
+		off('.fn1')
+		
+		off(fn1);
+		
+		
+		
+	*/
+	var arr = [1,2,3,4,5]
+	
+	$(document).on('click.f1','#btn',fn1);
+//	$(document).on('click.f2','#btn',fn2);
+//	$('#btn').on('click.f3',fn3);
+	
+	function fn1(){
+		var $li = $('<li>123</li>');
+		$('ul').append($li);
+		
+		$('li').off().on('click',function(){
+			console.log(arr);
+		});
+	}
+	
+//	function fn2(){
+//		alert(111);
+//	}
+//	
+//	function fn3(){
+//		alert(333);
+//	}
+//	
+//	$(document).on('click',function(){
+//		$(document).off('.f2');
+//	});
+
+	
+	
+</script>
+</body>
+</html>

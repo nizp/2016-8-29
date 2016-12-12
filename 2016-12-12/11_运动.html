@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:200px;
+	height: 200px;
+	background: red;
+	
+}
+</style>
+</head>
+<body>
+	<input type="button" id="btn" value="按钮" />
+	<div id="div"></div>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		fast 快       200
+		normal 正常   400
+		slow 慢   600
+		
+		toggle : 显示隐藏
+ 
+	*/
+	var onOff = true;
+	$('#btn').click(function(){
+//		if(onOff){
+//			//$('#div').hide('slow');
+//			$('#div').fadeOut(200)
+//		}else{
+//			//$('#div').show('slow');
+//			$('#div').fadeIn(200)
+//		}
+//		onOff = !onOff;
+		//$('#div').toggle(400);
+//		$('#div').fadeToggle(300);
+		$('#div').slideToggle(300);
+//		$('#div').slideUp();
+		
+	});
+</script>
+</body>
+</html>

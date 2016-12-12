@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#box div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+#box div.hide{
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+			
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+			
+		
+	</div>
+<script type="text/javascript" src="jquery-1.11.1.js"></script>
+<script type="text/javascript">
+	$('input').click(function(){
+		//当前加class，当前的兄弟节点删除active
+		$(this).addClass('active').siblings('input').removeClass('active');
+		$('#box div').eq($(this).index('input')).show().siblings('div').hide();
+	});
+</script>
+</body>
+</html>

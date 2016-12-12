@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				font-family: "微软雅黑";
+				color: #333;
+			}
+			#form{
+				text-align: center;
+				
+			}
+			#txt{width: 486px;margin:5px auto;text-align: left;}
+			#txt span{																
+				display: inline-block;
+				font-family: "微软雅黑";
+				font-size: 14px;
+				color: #333;
+			}
+			#txt span:nth-of-type(1){
+				width:156px;
+				height:20px;
+			}
+			#txt span:nth-of-type(2){
+				width:120px;
+				height:20px;
+			}
+		    #box{
+		    	margin: 120px auto;
+		    	width: 600px;
+		    }
+			.c1{
+				background: skyblue;
+			}
+			.c2{
+				background: #fff;
+			}
+			.c3{
+				background: #00BFFF;
+			}
+			.c4{
+				background: #00BFFF;
+				color: #fff;
+			}
+			.c5{
+				background:pink;
+				color: #fff;
+			}
+			table {
+				border: 1px solid #000;
+				border-right:0;
+				border-bottom: none;
+			}
+			table thead th,table tbody td{
+				text-align: center;
+				line-height:25px;
+				border-right:1px solid #000;
+			}
+			table thead th,table tbody td{
+				border-bottom: 1px solid #000;
+			}
+			.sortmode{
+				width: 100px;
+				height: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<div id="txt">
+				    <span>请输入姓名</span>
+				    <span>请选择性别</span>
+				    <span>请输入年龄</span>
+				</div>
+				<div id="form">
+				<form id="form1">
+				    <input type="text" name="username" placeholder="姓名" />
+				    <select name="sex">
+				        <!--<option value="">请选择一个性别</option>-->
+				        <option value="男">男</option>
+				        <option value="女">女</option>
+				    </select>
+				    <input type="text" name="age" placeholder="年龄"/>
+				    <input type="button" name="btn" value="提交">
+				</form>
+				<p>
+				    <form id="form2">
+				    	<span>请选择编号：</span>
+				        <select name="orderName" class="sortmode">
+				            <option value="id" >编号</option>
+				            <option value="age">年龄</option>
+				        </select>
+				        <span>请选择排序方式：</span>
+				        <select name="orderBy" class="sortmode">
+				            <option value="asc">升序</option>
+				            <option value="desc">降序</option>
+				        </select>
+				        <input type="button" name="orderButton" value="排序">
+				      <input type="button" value="批量删除">  
+				    </form>
+				</p>
+				</div>
+			</div>
+			<table width="100%" id="tab1" border="0" cellspacing="0" >
+			    <thead>
+				    <tr>
+				        <th>全选 <input type="checkbox" id="checkAll"></th>
+				        <th>编号</th>
+				        <th>姓名</th>
+				        <th>性别</th>
+				        <th>年龄</th>
+				        <th>操作</th>
+				    </tr>
+			    </thead>
+			    <tbody id="tbody">
+			    	<tr>
+			    		<td><input type="checkbox" id="checkAll"></td>
+			    		<td>1</td>
+			    		<td>大红</td>
+			    		<td>女</td>
+			    		<td>23</td>
+			    		<td>
+			    			<input type="button" value="上移"/>
+			    			<input type="button" value="下移" />
+			    			<input type="button" value="删除"/>
+			    		</td>
+			    	</tr>
+			    </tbody>
+			</table>
+		</div>
+	</body>
+<script type="text/javascript" src="jquery-1.11.1.js" ></script>
+<script>
+$(function(){
+	 var data = [
+        {
+             'id' : 1,
+            'username' : 'LEO',
+            'age' : 36,
+            'sex' : '男'
+        },
+        {
+            'id' : 2,
+            'username' : 'MOMO',
+            'age' : 16,
+            'sex' : '男'
+        },
+        {
+            'id' : 3,
+            'username' : 'DUODUO',
+            'age' : 29,
+            'sex' : '男'
+        },
+        {
+            'id' : 4,
+            'username' : '勇升',
+            'age' : 46,
+            'sex' : '男'
+        },
+        {
+            'id' : 5,
+            'username' : '小美',
+            'age' : 40,
+            'sex' : '女'
+        }
+    ];
+</script>
+</html>

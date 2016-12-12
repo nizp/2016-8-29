@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+div{
+	width:100px;
+	height: 100px;
+	background: red;
+	margin: 10px;
+}	
+</style>
+</head>
+<body>
+	<div>1</div>
+	<div>2</div>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		trigger();
+		触发器
+		在哪个JQ对象上触发.trigger('触发什么事件')
+		
+		如果绑定的时候事件有类名，那么在触发的时候也加上这个类名
+		
+		注意：
+			触发的事件名必须写。
+		 
+		 
+	*/
+	$('div').eq(0).on('click.fn1',function(){
+		console.log(this);
+	});
+	$('div').eq(0).on('click.fn2',function(){
+		alert(2222);
+	});
+	$('div').eq(1).on('mouseout',function(){
+		$('div').eq(0).trigger('click.fn1');
+	});
+</script>
+</body>
+</html>

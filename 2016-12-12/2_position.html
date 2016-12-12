@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:200px;
+	height: 200px;
+	background: red;
+	position: relative;
+}	
+#div2{
+	width: 50px;
+	height: 50px;
+	background: yellow;
+	position: absolute;
+	top:10px;
+	left:10px;
+}
+</style>
+</head>
+<body>
+	
+	<div id="div1">
+		<div id="div2"></div>
+	</div>
+	
+	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	/*
+		position().left
+			获取匹配元素中第一个元素的当前坐标，相对于offset parent的坐标。( 译者注：offset parent指离该元素最近的而且被定位过的祖先元素 )
+	*/
+	
+	console.log($('#div2').position().left);
+	
+	
+</script>
+</body>
+</html>

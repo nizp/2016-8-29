@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+body,html{
+	margin: 0;
+}
+img{
+	display: block;
+	width: 100%;
+}
+nav{
+	position: fixed;
+	top:30%;
+	
+}
+nav a{
+	display: block;
+	width:30px;
+	height: 30px;
+	background: #fff;
+	margin: 5px;
+	border-radius: 50%;
+	
+}
+nav a.active{
+	background: red;
+}
+
+</style>
+</head>
+
+<body>
+	<div><img src="img/1.jpg"/></div>
+	<div><img src="img/2.jpg"/></div>
+	<div><img src="img/3.jpg"/></div>
+	<div><img src="img/4.jpg"/></div>
+	<div><img src="img/5.jpg"/></div>
+	
+	<nav>
+		<a href="javascript:;" class="active"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+	</nav>
+	
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var h = $(window).innerHeight();
+	
+	$('img').css('height',h);
+	
+	
+	$('a').click(function(){
+		var index = $(this).index('a');
+		var t = $('div').eq(index).offset().top;  //position().top
+		$('html,body').animate({
+			scrollTop:t
+		});
+		//$(this).addClass('active').siblings('a').removeClass('active');
+	});
+	
+	$(window).scroll(function(){
+		$('div').each(function(i,e){
+			//如果当前的滚动距离 
+			if(e.getBoundingClientRect().top < h/3 && e.getBoundingClientRect().top > (-h*2/3)){
+		 		$('a').eq(i).addClass('active').siblings('a').removeClass('active');
+		 	}
+		});
+	});
+	
+	
+	
+</script>
+</body>
+</html>

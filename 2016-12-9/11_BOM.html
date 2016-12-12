@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height: 100px;
+	padding:10px;
+	background: red;
+	border: 10px solid #000;
+	_display: none;
+	margin-left:20px;
+}	
+</style>
+</head>
+<body>
+<div id="div"></div>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		获取宽高:
+			$('#div').width() / $('#div').height()   不算padding和border
+			
+			$('#div').innerWidth() / $('#div').innerHeight() 就是clientWidth/clientHeight (元素隐藏也能获取到)
+			
+			有padding没有border
+			
+			$('#div').outerWidth(true)
+			
+			在参数里面还可以传数值，就是设置
+			
+			outerWidth设置的时候只是设置元素可视区的宽高，不带margin值
+			只有获取的时候带margin值。
+			
+			$(window)|$(document) 获取的时候都不加引号
+			
+			
+	*/
+	//$('#div').css('width')
+	
+	//console.log($('#div').width());
+	
+	//$('#div').width(200)
+	
+	//$('#div').innerWidth(200)
+	
+//	console.log($('#div').innerWidth());
+	
+	$('#div').outerWidth(200)
+	
+	//console.log($('#div').outerWidth(true));
+	
+	//console.log($(window).innerHeight());
+
+	
+</script>
+</body>
+</html>

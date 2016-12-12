@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:200px;
+	height: 200px;
+	background: red;
+	position: absolute;
+	left:0;
+	top:20px;
+}
+</style>
+</head>
+<body>
+	<input type="button" id="btn" value="按钮" />
+	<div id="div"></div>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		fast 快       200
+		normal 正常   400
+		slow 慢   600
+		
+		animate:
+			
+	*/
+	$('#btn').click(function(){
+		 $('#div').animate({
+		 	top:200,
+		 	left:200
+		 },function(){
+		 	 $('#div').animate({
+			 	width:500,
+			 	left:500,
+//			 	transform:'rotate(30deg)'
+			 },function(){
+			 	$('#div').css({
+			 		'transition':'1s',
+				 	'transform':'rotate(360deg)'
+				 });
+				setTimeout(function(){
+					 $('#div').css({
+					 	'transform':'rotate(-360deg)'
+					 });
+				},1010)
+				 
+			 });
+			 
+		 });
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:200px;
+	height: 200px;
+	background: red;
+	position: relative;
+}	
+#div2{
+	width: 50px;
+	height: 50px;
+	background: yellow;
+	position: absolute;
+	top:10px;
+	left:10px;
+}
+#div3{
+	width:100px;
+	height: 100px;
+	position: absolute;
+	left:300px;
+	top:10px;
+	background: yellowgreen;
+}
+</style>
+</head>
+<body>
+	
+	<div id="div1">
+		<div id="div2"></div>
+	</div>
+	
+	
+	<div id="div3"></div>
+	
+	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	/*
+		JQ事件都是事件绑定，on(事件名,'选择器(可以多选)',事件绑定函数) ->  click -> mouseover 
+		
+		on(事件名,data,函数)
+	*/
+	
+	
+	$('#div1').on('click',{'name':'momo'},function(ev){
+		console.log(ev.data.name);
+	});
+
+	
+	//$('#div1').attr('index','function(){}')
+	
+	
+	
+	
+	
+//	$(document).on('click','#div1',function(){
+//		alert(1);
+//	}).on('click','#div2',function(ev){
+//		alert(2);
+//		return false;
+//	});
+	
+	
+//	$(document).on('click','#div1,#div3',function(){
+//		alert(1);
+//	}).on('mouseleave','#div1',function(){
+//		alert(2);
+//	})
+	
+//	$('#div1').hover(function(){
+//		alert(1)
+//	},function(){
+//		alert(2)
+//	})
+	
+	
+	
+//	$('#div1').on('click','#div2',function(){
+//		alert(1);
+//	})
+	
+</script>
+</body>
+</html>

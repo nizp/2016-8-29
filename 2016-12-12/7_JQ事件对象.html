@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+body{
+	height: 3000px;
+}
+</style>
+</head>
+<body>
+	<input type="button" id="btn" value="按钮" />
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	/*
+		JQ中事件函数的第一个参数就是事件对象，不过是JQ二次封装之后的对象
+		基本上原生有的，这个对象都有。
+		
+		不过在JQ版本为3.0之前，移动端的事件对象就没有了，ev.originalEvent(原生的事件对象);
+		
+		ev.which  键盘键值
+		
+		stopPropagation();  阻止冒泡（cancelBubble是没有的）
+		
+		
+		JQ中的return false即可以阻止默认行为也可以阻止冒泡
+		
+		
+	*/
+	
+	$(window).on('keydown',function(ev){
+		alert(111);
+	});
+	
+	$(document).on('keydown',function(ev){
+		alert(2222)
+		//console.log(ev.stopPropagation)
+//		ev.preventDefault(); //阻止浏览器默认行为
+		return false;
+	});
+
+//	$('#btn').on('touchstart',function(ev){
+//		//console.log(ev.originalEvent)
+//		console.log(ev.which)
+//	});
+	
+</script>
+</body>
+</html>

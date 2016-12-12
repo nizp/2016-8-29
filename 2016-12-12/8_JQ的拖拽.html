@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	left:0;
+	top:0;
+}
+</style>
+</head>
+<body>
+	ewewqewqe
+	<div id="div1"></div>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	$('#div1').on('mousedown',function(ev){
+		var disX = ev.pageX - $(this).offset().left;
+		var disY = ev.pageY - $(this).offset().top;
+		$(document).on('mousemove',function(ev){
+			$('#div1').css({
+				left:ev.pageX - disX,
+				top:ev.pageY - disY
+			}); 
+		});
+		$(document).on('mouseup',function(){
+			$(this).off();
+		});
+		return false;
+	});
+</script>
+</body>
+</html>

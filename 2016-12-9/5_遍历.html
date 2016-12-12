@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+div{
+	width:50px;
+	height: 50px;
+	float: left;
+	margin:5px;
+}
+</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var arr = ['red','yellow','blue','green','skyblue'];
+	
+	/*
+		each里面的e为原生对象。
+		一般操作一组中每个不同需求时，使用each
+	*/
+	$('div').each(function(i,e){
+		//$('div').eq(i).css('background',arr[i%arr.length]);
+		$('div').eq(i).click(function(){
+			alert($(this).index('div'));
+		})
+		$(e).css('background',arr[i%arr.length])
+//		$(e).click(function(){
+//			alert($(this).index('div'));
+//		})
+	});
+	
+//	console.log($('div'))
+	
+	
+</script>
+</body>
+</html>

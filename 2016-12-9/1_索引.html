@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+div{
+	width: 50px;
+	height: 50px;
+	background: red;
+	margin: 5px;
+}
+</style>
+</head>
+<body>
+	<section>
+		<div>1234</div>
+	</section>
+	<nav>
+		<div>1</div>
+		<div>
+			2
+			<!--<div>2.2</div>-->
+		</div>
+		<div id="div2">
+			3
+			<div style="position: absolute;left:100px">3.2</div>
+			<div style="position: absolute;left:100px;top:300px">3.3</div>
+		</div>
+		<div>4</div>
+	</nav>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		$(this).index();
+			
+			注意：
+				默认index相对父级，找到当前这个元素排第几位
+		
+		index(指定范围【推荐使用】)
+			
+			
+			
+			
+	*/
+	$('div').click(function(){
+		alert($(this).index('#div2 div'));
+	});
+</script>
+</body>
+</html>

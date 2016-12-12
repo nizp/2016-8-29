@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#box div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+#box div.hide{
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+			
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+			
+		
+	</div>
+<script type="text/javascript" src="jquery-1.11.1.js"></script>
+<script type="text/javascript">
+	/*
+		hover(function(){
+			onmouseenter
+		},function(){
+			onmouseleave
+		})
+	*/
+	var num = 0;
+	var timer = null;
+	$('input').click(function(){
+		num = $(this).index('input');
+		change(num);
+	});
+	
+	$('#box').hover(function(){
+		clearInterval(timer);
+	},function(){
+		timer = setInterval(function(){
+			num++;
+			change(num%$('input').length);
+		},1000);
+	})
+	
+	timer = setInterval(function(){
+		num++;
+		change(num%$('input').length);
+	},1000)
+	
+	
+	function change(num){
+		$('input').removeClass('active');
+		$('#box div').hide();
+		$('input').eq(num).addClass('active');
+		$('#box div').eq(num).show();
+	}
+	
+</script>
+</body>
+</html>

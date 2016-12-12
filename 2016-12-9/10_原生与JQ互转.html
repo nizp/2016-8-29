@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>-->
+	
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		原生对象转JQ对象：
+			用$()包一下就转成JQ对象了
+			
+		JQ对象转原生对象:
+			用[下标值] | get(下标值)
+			
+		width()
+		height()
+		outerWidth()
+		...
+		
+	*/
+	var $div = $('div');
+	var div = document.getElementsByTagName('div')[0];
+	
+//	$(div).css({
+//		width:100,
+//		height:100,
+//		background:'red'
+//	});
+	
+	//$div[0].style.display = 'none';
+	
+	//$div.eq(0).hide();
+	
+	//console.log($div.get(0));
+	
+	$('li').click(function(){
+		//console.log($(this).next().get(0))
+		//if($(this).next()[0]){
+		if($(this).next().length){
+			$(this).css('backgroundColor','red');
+		}
+	});
+	
+
+	
+</script>
+</body>
+</html>

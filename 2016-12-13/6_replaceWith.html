@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<!--<div style="width:300px;height:300px;background: red;"></div>-->
+	<div class="container">
+	  <div class="inner first">Hello</div>
+	  <div class="inner second">And</div>
+	  <div class="inner third">Goodbye</div>
+	</div>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		要换谁.replaceWith(换成什么) 
+	*/
+	$(document).click(function(){
+//		var $p = $('<p>换了就换了</p>');
+//		
+//		$('div').replaceWith($p)
+		
+		$('<h2>New heading</h2>').replaceAll('.inner');
+		
+	});
+</script>
+</body>
+</html>

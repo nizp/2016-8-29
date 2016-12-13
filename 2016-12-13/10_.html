@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var data = [1,2,3,4,5];
+	
+	var arr = [1,2,3];
+	
+	for(var i=0;i<data.length;i++){
+		for(var j=0;j<arr.length;j++){
+			console.log(i,j)
+			if(data[i] == arr[j]){
+				data.splice(i,1);
+				i--;
+			}
+		
+		}
+	}
+	console.log(data)
+	
+</script>	
+</body>
+</html>

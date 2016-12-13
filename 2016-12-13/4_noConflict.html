@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		$容易被覆盖 
+		
+		如果被覆盖，用jQuery或者jQuery.noConflict();
+		
+		;(function($){
+		
+		})(jQuery);
+		
+	*/
+	
+	
+	var $ = function(){};
+	//var v = jQuery.noConflict();
+//	var v = jQuery;
+	;(function($){
+		
+	})(jQuery);
+	
+	
+	console.log(v(document))
+	
+	//console.log(v())
+	
+</script>
+	
+</body>
+</html>

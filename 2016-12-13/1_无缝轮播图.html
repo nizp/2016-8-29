@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+<style type="text/css">
+body,ul,li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	
+}
+ul{
+	position: relative;
+}
+ul li{
+	position: absolute;
+	top:0;
+	left: 0;
+	_transition:.5s;
+}
+
+a {
+	text-decoration: none;
+}
+#box {
+	width: 470px;
+	margin: 100px auto;
+	height: 150px;
+	overflow: hidden;
+	border: 5px solid #666;
+	position: relative;
+}
+
+.a {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #000;
+	position: absolute;
+	top: 50%;
+	margin-top: -10px;
+	font: 14px/20px "宋体";
+	text-align: center;
+	background: red;
+	opacity: .4;
+	color: #fff;
+	font-weight: bold;
+}
+img{
+	vertical-align: top;	
+}
+.left {
+	left: 5px;
+}
+
+.right {
+	right: 5px;
+}
+
+nav {
+	position: absolute;
+	left: 50%;
+	bottom: 5px;
+	margin-left: -75px;
+	z-index: 999;
+}
+nav a {
+	width: 20px;
+	height: 20px;
+	background: red;
+	border-radius: 50%;
+	float: left;
+	margin: 5px;
+	line-height:20px;
+	text-align: center;
+	color: #fff;
+	/*opacity: .5;*/
+}
+.active{
+	background:green;
+}
+a{
+	z-index: 999;
+}
+nav a:hover {
+	opacity: 1;
+}
+</style>
+
+</head>
+<body>
+<div id="box">
+	<ul>
+		<li><img src="img/1.jpg"/></li>
+		<li><img src="img/2.jpg"/></li>
+		<li><img src="img/3.jpg"/></li>
+		<li><img src="img/4.jpg"/></li>
+		<li><img src="img/5.jpg"/></li>
+	</ul>
+	<a href="javascript:;" class="left a">&lt;</a>
+	<a href="javascript:;" class="right a">&gt;</a>
+	<nav>
+		<a href="javascript:;" class="active">1</a>
+		<a href="javascript:;">2</a>
+		<a href="javascript:;">3</a>
+		<a href="javascript:;">4</a>
+		<a href="javascript:;">5</a>
+	</nav>
+</div>	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	/*
+		 
+	*/
+	
+	var $r = $('.right'),
+		$l = $('.left'),
+		$ul = $('ul'),
+		$a = $('nav').find('a'),
+		$lis = $ul.find('li'),
+		w = $ul.find('li').eq(0).innerWidth(),
+		num = 0,
+		n = 0,//记录active
+		zIndex = 5;
+		
+	$lis.each(function(i,e){
+		$(e).css('zIndex',$lis.length-i)
+	});
+	
+	$r.onOff = true;
+	$r.on('click',function(){
+		right();
+	});
+
+	function right(nub){
+		zIndex++;
+		if(!$r.onOff)return;
+		$r.onOff = false;
+		$lis.eq(n).css('zIndex',zIndex)
+		$lis.eq(n).stop().animate({
+			left:-w
+		});
+		if(nub){
+			num = nub
+		}else{
+			num++;
+		};
+		if(num > $lis.length-1){
+			num = 0;
+		}
+		$lis.eq(num).css('zIndex',zIndex);
+		$lis.eq(num).css('left',w);
+		$a.eq(num).addClass('active').siblings('a').removeClass('active');
+		
+		$lis.eq(num).stop().animate({
+			left:0
+		},function(){
+			$r.onOff = true;
+			n = num;
+		});
+	}
+	
+	
+	
+	
+	
+	//点击按钮
+	$a.on('click',function(){
+		if($(this).index() > num){
+			right($(this).index());
+		}else{
+			
+		}
+	});
+	
+		
+</script>	
+</body>
+</html>

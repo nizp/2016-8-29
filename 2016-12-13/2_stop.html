@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div{
+	width:100px;
+	height:100px;
+	background: red;
+}	
+</style>
+</head>
+<body>
+	<div id="div"></div>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		stop:
+			让前一次运动出队列
+		
+		2个参数都是将本次运动停止
+		
+		不传参的时候将上次一列队中的运动清掉，执行本次运动
+		
+		1个参数的时候，停止本次运动并且链式运动也不执行
+		
+		加了2个true，是让这个上次运动立马结束，执行后面的运动
+		
+		注意：
+			只要用了animate就要在前面加个stop。
+	*/
+	
+//	$(document).click(function(){
+//		$('#div').stop(true,true);
+//	});
+	
+	$('#div').hover(function(){
+		$(this).stop(true,true).animate({
+			width:600
+		},3000).animate({
+			height:600
+		})
+		
+	},function(){
+//		$(this).stop(false).animate({
+//			width:100
+//		});
+	})
+//		$('#div').animate({
+//			width:600,
+//			height:600
+//		},function(){
+//			$('#div').animate({
+//				height:500
+//			});
+//		});
+//		$('#div').animate({
+//			height:600
+//		});
+//		$('#div').animate({
+//			height:500
+//		});
+	
+	
+	
+	/*
+		队列：
+			1,2,[3,4,5,6]
+	*/
+	
+	
+</script>
+</body>
+</html>

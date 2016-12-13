@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<div style="width:100px;height:100px;background: red;"></div>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		$.queue()
+		$.dequeue()
+		
+		delay()  //延迟
+		
+		data = {
+			
+		}
+ 	*/
+	
+	$('div').animate({
+		width:600
+	}).delay(5000).animate({
+		height:600
+	});
+	
+
+	$.queue(document,'fx',fn1);
+	$.queue(document,'fx',fn3);
+	$.queue(document,'fx',fn2);
+	//[fn1,fn2,fn3]
+	function fn1(){
+		alert(1);
+		$.dequeue(document,'fx');
+	}
+	function fn2(){
+		alert(2);
+		$.dequeue(document,'fx');
+	}
+	function fn3(){
+		alert(3);
+	}
+	
+	//$.dequeue(document,'fx');
+
+</script>
+</body>
+</html>

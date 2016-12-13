@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body data-last-value="88">
+	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		数据缓存
+			data() 
+				 .data()方法允许我们在DOM元素上绑定任意类型的数据,避免了循环引用的内存泄漏风险。
+			prop()                      
+			与attr()三者的区别
+			
+			prop 放在内存里面的。
+			data 有内存优先走内存，没内存走行间
+			attr 走行间
+			
+			removeAttr()   ,  removeProp()  , 
+			
+			removeData()：只能删除内存中的数据，行间的删除不了
+			
+	*/
+	
+//	$(document).data('name','leo');
+	
+		/*$('body').data({
+			'lastValue':'leo'
+		});*/
+		
+		$('body').removeData('lastValue');
+
+		
+//		$('body').attr({
+//			name:'leo'
+//		});
+
+//		$('body').prop({
+//			name:'leo'
+//		});
+		
+	
+	alert($('body').data('lastValue'));
+	
+	
+</script>
+</body>
+</html>

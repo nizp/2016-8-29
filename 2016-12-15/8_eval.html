@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" name="t" id="t" value="" />
+<script type="text/javascript">
+	/*
+		eval:
+			将字符串转成可运行的javascript代码
+	*/
+	
+	var str = 'alert(123)';
+	
+	var str2 = '[1,2,3]';
+	
+	var str3 = "{name:'leo',age:23}";
+	
+	console.log(new Function('','return'+str3)());
+	
+//	(function(){})()
+
+	//Function()
+	
+	
+//	t.onblur = function(){
+//		var v = t.value;
+//		
+//		var i = eval(v);
+//		console.log(i);
+//		
+//	}
+	
+//	console.log(eval('('+str3+')'));
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<!--<form action="php/get.php" method="get">-->
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+	<!--密 码:<input name="pass" type="password"><br />-->
+	<input type="button" value="提交" id="btn"/>
+<!--</form>-->
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var btn = document.getElementById('btn');
+	var s = document.getElementById('s');
+	var user = document.getElementsByTagName('input')[0];
+	
+	user.onblur = function(){
+		/*
+			1.要有个手机      ------->   创建一个ajax对象
+			2.输入号码（010,123456）  -----> 填写地址
+			3.拨号  --->    发送请求
+			4.等待对方的回应  --->   等待服务器响应
+			5.聊天   ----->  接收数据
+			
+			
+			1.get
+			2.true
+			3.地址
+			
+		*/
+		var val = user.value;
+		
+		var ajax = new XMLHttpRequest(); //手机
+
+		ajax.open('get','php/get.php?user='+val,true); //输入号码
+		
+		ajax.send(); //按绿按钮
+		
+		ajax.onload = function(){ //等待
+			//s.innerHTML = ajax.responseText;  //聊天
+			//ajax.responseText永远是个字符串
+			console.log(JSON.parse(ajax.responseText).msg);
+		}	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+//		$.ajax({
+//			url:"php/get.php?user="+val,
+//			success:function(str){
+//				s.innerHTML = str;
+//			}
+//		});
+</script>
+</body>
+</html>

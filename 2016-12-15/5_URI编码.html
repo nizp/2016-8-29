@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var str = '妙味';
+	//在ie下，中文会乱码 ->  中文直接转成uri编码
+	
+	/*
+		encodeURI:将中文转成uri编码格式
+		
+		decodeURI:将uri编码转成中文
+		
+		%E5%A6%99%E5%91%B3
+	*/
+	
+	//console.log(encodeURI('妙味'))
+	console.log(decodeURI('%E5%A6%99'))
+	
+	
+</script>
+</body>
+</html>

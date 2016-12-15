@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var s = document.getElementById('s');
+	var user = document.getElementsByTagName('input')[0];
+	
+	/*
+		 php/get_adduser.php?user=leo
+		 
+		 {
+		 	id:0
+		 	user:leo
+		 	pas:123456
+		 }
+		 
+		 php/get_json.php?user=leo  -> 1 ->  0
+	*/
+	
+	user.onblur = function(){
+		var val = user.value;
+		
+		var ajax = new XMLHttpRequest();
+		ajax.open('get','php/get_json.php?user='+encodeURI(val));
+		ajax.send();
+		ajax.onload = function(){
+			/*
+				如果code为1就是失败
+				如果code为0就成功
+				因为ajax.responseText为字符串（json格式的数据）
+				前端要使用json数据，要把json数据转成对象的格式才能直接使用
+				所以用了JSON.parse
+				
+				
+			*/
+			//var json = JSON.parse(ajax.responseText);
+			
+			console.log(ajax.responseText);
+			
+			var json = eval('('+ajax.responseText+')');
+			
+//			if(json.code){
+//				user.style.borderColor = 'red';
+//				s.innerHTML = '哥们,别乱输入';
+//			}else{
+//				user.style.borderColor = 'green';
+//				s.innerHTML = '哥们,真棒，你已经走到了人生巅峰';
+//			}
+			
+			console.log(json);	
+		}
+	}
+</script>
+</body>
+</html>

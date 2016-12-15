@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<!--<form action="php/get.php" method="get">-->
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+	<!--密 码:<input name="pass" type="password"><br />-->
+	<input type="button" value="提交" id="btn"/>
+<!--</form>-->
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var btn = document.getElementById('btn');
+	var s = document.getElementById('s');
+	var user = document.getElementsByTagName('input')[0];
+	
+	/*
+		get方式请求：
+			通过url地址进行传输数据
+			
+			体积是受浏览器的限制的。（每个浏览器限制是不一样的）
+			
+			因为是url传输，所以填写的信息会暴露出来，相对来说不安全
+			
+			在ie下如果用中文传输要记得把数据转成uri编码。
+			
+	*/
+	user.onblur = function(){
+		var val = user.value;
+		var ajax = new XMLHttpRequest();
+		ajax.open('get','php/get.php?user='+encodeURI(val));
+		ajax.send();
+		ajax.onload = function(){
+			s.innerHTML = ajax.responseText;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

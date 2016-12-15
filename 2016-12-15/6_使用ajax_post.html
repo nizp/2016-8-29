@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<!--<form action="php/get.php" method="get" enctype="">-->
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+	<!--密 码:<input name="pass" type="password"><br />-->
+	<input type="button" value="提交" id="btn"/>
+<!--</form>-->
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var btn = document.getElementById('btn');
+	var s = document.getElementById('s');
+	var user = document.getElementsByTagName('input')[0];
+	user.onblur = function(){
+		
+		/*
+			post:
+				是通过服务器来进行传输数据的
+				
+				体积：
+					理论上是无限 -> 一般后端会给限制
+				
+				相对get来说是比较安全的
+				
+				要*在send之前*加请求头信息：告诉服务器当前传输的数据格式是什么样的。
+				
+				
+		*/
+		
+		var val = user.value;
+		var ajax = new XMLHttpRequest();
+		ajax.open('post','php/post.php');
+		ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+		ajax.send('user='+val);
+		ajax.onload = function(){
+			s.innerHTML = ajax.responseText;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				font-family: "微软雅黑";
+				color: #333;
+			}
+			#form{
+				text-align: center;
+				
+			}
+			#txt{width: 486px;margin:5px auto;text-align: left;}
+			#txt span{																
+				display: inline-block;
+				font-family: "微软雅黑";
+				font-size: 14px;
+				color: #333;
+			}
+			#txt span:nth-of-type(1){
+				width:156px;
+				height:20px;
+			}
+			#txt span:nth-of-type(2){
+				width:120px;
+				height:20px;
+			}
+		    #box{
+		    	margin: 120px auto;
+		    	width: 600px;
+		    }
+			.c1{
+				background: skyblue;
+			}
+			.c2{
+				background: #fff;
+			}
+			.c3{
+				background: #00BFFF;
+			}
+			.c4{
+				background: #00BFFF;
+				color: #fff;
+			}
+			.c5{
+				background:pink;
+				color: #fff;
+			}
+			table {
+				border: 1px solid #000;
+				border-right:0;
+				border-bottom: none;
+			}
+			table thead th,table tbody td{
+				text-align: center;
+				line-height:25px;
+				border-right:1px solid #000;
+			}
+			table thead th,table tbody td{
+				border-bottom: 1px solid #000;
+			}
+			.sortmode{
+				width: 100px;
+				height: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<div id="txt">
+				    <span>请输入姓名</span>
+				    <span>请选择性别</span>
+				    <span>请输入年龄</span>
+				</div>
+				<div id="form">
+				<form id="form1">
+				    <input type="text" name="username" placeholder="姓名" />
+				    <select name="sex">
+				        <!--<option value="">请选择一个性别</option>-->
+				        <option value="男">男</option>
+				        <option value="女">女</option>
+				    </select>
+				    <input type="text" name="age" placeholder="年龄"/>
+				    <input type="button" name="btn" value="提交">
+				</form>
+				<p>
+				    <form id="form2">
+				    	<span>请选择编号：</span>
+				        <select name="orderName" class="sortmode">
+				            <option value="id" >编号</option>
+				            <option value="age">年龄</option>
+				        </select>
+				        <span>请选择排序方式：</span>
+				        <select name="orderBy" class="sortmode">
+				            <option value="asc">升序</option>
+				            <option value="desc">降序</option>
+				        </select>
+				        <input type="button" name="orderButton" value="排序">
+				      <input type="button" value="批量删除">  
+				    </form>
+				</p>
+				</div>
+			</div>
+			<table width="100%" id="tab1" border="0" cellspacing="0" >
+			    <thead>
+				    <tr>
+				        <th>全选 <input type="checkbox" id="checkAll"></th>
+				        <th>编号</th>
+				        <th>姓名</th>
+				        <th>性别</th>
+				        <th>年龄</th>
+				        <th>操作</th>
+				    </tr>
+			    </thead>
+			    <tbody id="tbody">
+			    	 <!--<tr>
+			    		<td><input type="checkbox" id="checkAll"></td>
+			    		<td>1</td>
+			    		<td>大红</td>
+			    		<td>女</td>
+			    		<td>23</td>
+			    		<td>
+			    			<input type="button" value="上移"/>
+			    			<input type="button" value="下移" />
+			    			<input type="button" value="删除"/>
+			    		</td>
+			    	</tr> -->
+			    </tbody>
+			</table>
+		</div>
+	</body>
+<script type="text/javascript" src="jquery-3.1.1.js" ></script>
+<script>
+
+$(function(){
+	 var data = [
+        {
+             'id' : 1,
+            'username' : 'LEO',
+            'age' : 36,
+            'sex' : '男'
+        },
+        {
+            'id' : 2,
+            'username' : 'MOMO',
+            'age' : 16,
+            'sex' : '男'
+        },
+        {
+            'id' : 3,
+            'username' : 'DUODUO',
+            'age' : 29,
+            'sex' : '男'
+        },
+        {
+            'id' : 4,
+            'username' : '勇升',
+            'age' : 46,
+            'sex' : '男'
+        },
+        {
+            'id' : 5,
+            'username' : '小美',
+            'age' : 40,
+            'sex' : '女'
+        }
+    ];
+    
+    /*
+    	bug:
+    		1.删除点2下(√)
+    		2.点击排序的bug(√)
+    		3.全部全选的时候去掉勾（√）
+    		4.在全选的情况下创建应该取消全选(√)
+    		5.选中排序加钩（√）
+    		6.数据问题（√）
+    		7.点击123，去掉2，批量删除（√）
+    		
+    */
+    
+    /*添加数据*/
+   
+   var tBody = $('#tbody'),
+   id = data.length, //记录新添加时的id
+   checked = [];//为了记录勾选了哪些
+   init(); //通过数据渲染页面
+  function init(){
+  	tBody.html('');//清空tBody的内容
+  	//循环数据渲染，顺便隔行变色
+  	$.each(data,function(i,e){
+   		var tr = createTr(e);
+   		if(i%2){
+   			tr.addClass('c1');
+   		}
+   		tBody.append(tr);
+   	});
+  }
+   
+	/*
+		通过绑定tBody做到事件监听   	 
+		
+		[{1},{2}]  -> arr[1]   -> arr[0]  c = 
+		
+		
+	*/
+   tBody.on('click',function(ev){
+   		//找到当前点击的tr
+		var parentTr = $(ev.target).closest('tr');
+		//点击上移操作
+		if(ev.target.value === '上移'){
+			//如果tr有上个兄弟节点
+			if(parentTr.prev().length){
+				//tr往上个兄弟节点前面插入
+				//parentTr.insertBefore(parentTr.prev());
+				//保证每次上移都是隔行变色
+				
+				var index = arrIndex(parentTr.attr('index'));
+				
+				/*
+					a = 10
+					b = 5
+					
+					a = a+b
+					
+					[a,b] = [b,a]
+					
+				*/
+				var c = data[index];
+				data[index] = data[index-1];
+				data[index-1] = c;
+				
+				init();
+				
+//				console.log(index)
+
+//				clear();
+			}
+		}
+		//下移，跟上移一样的套路
+		if(ev.target.value === '下移'){
+			if(parentTr.next().length){
+				parentTr.insertAfter(parentTr.next());
+				clear();
+			}
+		}
+		
+		//删除  
+		if(ev.target.value === '删除'){
+			//点击删除的时候，将data数据中对应的数据删除
+			removeDate(data,parentTr.attr('index'));
+			//删除点击的DOM
+			parentTr.remove();
+			//删除之后保证隔行变色
+			clear();
+			//如果删除的tr为选中状态，DOM删除之后，也要删除选中id
+			removeDate(checked,parentTr.attr('index'));
+			//有没有被全选，全选就给全选按钮打钩
+			isChecked();
+			//console.log(checked)
+		}
+		
+		//点选
+		if(ev.target.type === 'checkbox'){
+			//如果当前元素为选中状态
+			if($(ev.target).prop('checked')){
+				//把选中的id存到checked
+				checked.push(parentTr.attr('index'));
+			}else{
+				//取消选中就将checked中有的id删除
+				removeDate(checked,parentTr.attr('index'));
+			}
+			
+			//e.checked为自定义属性，在数据中记录当前选中的状态（一个选中一个没选中）
+//			console.log( $(ev.target).prop('checked') )
+			//[{id,age,checked:true},{id,age,checked:false}]
+			$(data).each(function(i,e){
+				//如果data中有点选的id
+				if(e.id == parentTr.attr('index')){
+					//就当前对应的数据中设置一个checked的一个状态
+					e.checked = $(ev.target).prop('checked');
+				}
+			});
+			//是否全选
+			isChecked();
+		}
+	});
+   
+   	/*
+   	 	提交
+   	*/
+   	$('#form1').click(function(ev){
+   		if(ev.target.value === '提交'){
+   			//输入姓名框中的value
+   			var name = $('#form1').find('input[name="username"]').val();
+   			//性别列表中的value
+   			var sex = $('#form1').find('select').val();
+   
+   			//如果年龄框中的值都是为纯数字
+   			if(/^\d+$/.test($('#form1').find('input[name="age"]').val())){
+   				//获取年龄框中的值
+   				var age = $('#form1').find('input[name="age"]').val();
+   			}else{
+   				alert('喂!喂!喂!');
+   				return;
+   			}
+			
+			//提交的时候，其实是添加数据
+   			var json = {
+	            'id' : ++id,
+	            'username' : name,
+	            'age' : age,
+	            'sex' : sex
+	       }
+   			//新创建的数据push到data数组中
+       		data.push(json); 
+       		//创建DOM
+	   		var tr = createTr(json);
+	   		tBody.append(tr);
+	   		//新建的时候，保证隔行变色
+	   		clear();
+	   		//创建的时候检查是否都选中
+	   		isChecked();
+   		}
+   	});
+   	
+   	
+   	//排序：
+   	$('#form2').on('click',function(ev){
+   		//拿到编号或者年龄的状态
+   		//拿到升序还是降序的状态
+   		//拿到以上2种状态
+   		var orderName = $('#form2').find('select[name="orderName"]');
+   		var orderBy = $('#form2').find('select[name="orderBy"]');
+   		if(ev.target.value === '排序'){
+   			//如果升序按照升序来排列
+   			if(orderBy.val() === 'asc'){
+   				/*
+   					orderName.val() -> 有可能是编号也有可能是年龄
+   					a数据的id和b数据的id比较
+   					a数据的age和b数据的age比较
+   				*/
+   				data.sort(function(a,b){
+	   				return a[orderName.val()] - b[orderName.val()];
+	   			});
+   			}else{
+   				/*
+   					降序操作 
+   				*/
+   				data.sort(function(a,b){
+	   				return b[orderName.val()] - a[orderName.val()];
+	   			});
+   			}
+   			//当数据被排序之后，重新渲染页面即可
+   			init();
+   		}
+   		
+   		if(ev.target.value === '批量删除'){
+   			/*
+   				循环已经已经勾选的id,把data中对应id的数据删除
+   				
+   			*/
+   			for(var i=0;i<checked.length;i++){
+   				removeDate(data,checked[i]);
+   			}
+   			//删除之后把数组清空
+   			checked.length = 0;
+   			//在全选清空时，取消全选按钮的勾选
+     		$('#checkAll').prop('checked',false);
+     		//数据删除过后，重新渲染数据。
+   			init();
+   		}
+   	});
+   	
+   	//查看当前是否为全选
+   	function isChecked(){
+		//checked数组中的长度是否为tr个数，如果相等说明全选
+   		if(checked.length == tBody.find('tr').length){
+			$('#checkAll').prop('checked',true);
+			
+		}else{
+			$('#checkAll').prop('checked',false);
+		}
+		//如果checked为空的全选按钮就取消
+		if(!checked.length)$('#checkAll').prop('checked',false);
+   	}
+   	
+   	function arrIndex(id){
+   		var index = 0;
+   		$.each(data,function(i,e){
+   			if(e.id === id*1){
+   				index = i; 
+   			}
+   		})
+   		return index;
+   	};
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	//删除数据
+   	function removeDate(data,id){ //data -> 数据,要么是data，要么是checked
+   		$.each(data,function(i,e){
+   			if(e){
+   				//如果data[i].id == id 或者 checked[i] === id
+   				//{id:,age}   [1,2,3,4]
+   				if((e.id === id*1) || (e === id)){
+   					//就把对应的数据删除
+   					data.splice(i,1);
+   				}
+   			}
+   		});
+   	}
+   	
+   	
+   	
+   //全选
+   $('#checkAll').click(function(){
+   		//全选把checked，保证全选的情况下只push所有选中的id，不会被之前的选中所影响
+   		checked.length = 0;
+   		//console.log(checked)
+   		var c = $('#checkAll').prop('checked');
+   		//把所有的checkbox元素的checked属性设置为true或者false（跟checkAll走）
+   		tBody.find('input[type="checkbox"]').prop('checked',c);
+   		
+   		//如果当前为全选状态
+   		if($('#checkAll').prop('checked')){
+   			//把每个选中的id存到checked这个数组中
+   			tBody.find('tr').each(function(i,e){
+   				checked.push($(e).attr('index'));
+   				//给data加个自定义属性checked = true
+   				//自定义属性的意义在于重新渲染数据的时候是否是选中状态
+   				data[i].checked = true;
+   			});
+   		}else{
+   			//如果没全选自定义属性checked = false
+   			
+   			tBody.find('tr').each(function(i,e){
+   				data[i].checked = false;
+   			});
+   		}
+   });
+   
+   
+   
+   //通用清除
+   function clear(){
+   		//隔行变色
+   		tBody.find('tr:even').removeClass('c1');
+   		tBody.find('tr:odd').addClass('c1');
+   		//把输入的姓名和年龄清空
+   		$('#form1').find('input[name="username"]').val('');
+   		$('#form1').find('input[name="age"]').val('');
+   }
+   
+   
+   
+   
+   //生成的结构
+   function createTr(data){
+   		//数据中如果有checked为true那么说明选中的
+   		data.checked = data.checked?'checked':'';
+   		var str = 
+   			`<tr index="${data.id}">
+	    		<td><input type="checkbox" ${data.checked}></td>
+	    		<td>${data.id}</td>
+	    		<td>${data.username}</td>
+	    		<td>${data.sex}</td>
+	    		<td>${data.age}</td>
+	    		<td>
+	    			<input type="button" value="上移"/>
+	    			<input type="button" value="下移" />
+	    			<input type="button" value="删除"/>
+	    		</td>
+    		</tr> `;
+    		//返回的为JQ对象
+    	return $(str);
+   }
+})
+</script>
+</html>

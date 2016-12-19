@@ -1,0 +1,167 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="znsArea">
+<!--留言-->
+     <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="tijiaoText"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="btn1" class="inputs" value="" />
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+<!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+        	<!--<div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>-->
+        </div>
+        <div class="page" id="page">
+        	<a href="javascript:;" class="active">1</a>
+        	<a href="javascript:;">2</a>
+        	<a href="javascript:;">3</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="myAjax_x2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		不请求接口也能操作DOM，那为什么要请求接口，把数据放到数据库中呢？
+		 
+		为了当刷新页面的时候，页面的内容依然不会被"重置 ";
+		
+		在刷新页面的时候，请求一次接口，将接口返回的数据渲染到页面就做到刷新页面还有内容。
+	*/
+	
+	
+	
+	function CreateDate(){
+		this.box = document.getElementById('div1'); //要插入的元素
+		this.txt = document.getElementById('tijiaoText');//输入的内容
+	}
+	
+	
+	CreateDate.prototype = {
+		constructor:CreateDate,
+		//初始化代码
+		init:function(obj,event){
+			var _this = this;
+			obj.onclick = function(){
+				_this.Event(obj);//调用创建的数据
+			};
+			
+			//默认第一页的数据
+			this.loaded(1);
+			
+		},
+		
+		Event:function(){
+			var _this = this;
+			var val = _this.txt.value.trim();
+			if(val){
+				ajax({
+					url:'weibo.php',
+					data:{
+						act:'add',
+						content:val
+					},
+					succ:function(json){
+						//console.log(json);
+						if(!json.error){
+//							console.log(json.time);
+							//数据已经添加到数据库中了
+							_this.loaded(1);
+							_this.txt.value = '';
+						}
+					}
+				});
+			}else{
+				alert('你快勒马？');
+			}
+		},
+		cDiv:function(val,time){//传输入的
+			var div = document.createElement('div');
+			div.className = 'reply';
+			div.innerHTML = `<p class="replyContent">${val}</p>
+                <p class="operation">
+                    <span class="replyTime">${time}</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>`;
+			return div;
+		},
+		cDate:function(time){
+			//只要服务器时间为1970，直接*1000
+			var str = '';
+			var t = new Date(time*1000);
+			var y = t.getFullYear();
+			var mon = t.getMonth()+1;
+			var day = t.getDate();
+			var H = t.getHours();
+			var min = t.getMinutes();
+			var sen = t.getSeconds();
+			//console.log(t)
+			
+			//2018-09-08 16:37:60
+			
+			str = y+'-'+this.toDou(mon)+'-'+this.toDou(day)+' '+this.toDou(H)+':'+this.toDou(min)+':'+this.toDou(sen);
+			
+			return str;
+		},
+		toDou:function(n){
+			return n<10?'0'+n:''+n;
+		},
+		loaded:function(n){
+			//找第几页数据
+			//weibo.php?act=get&page=2
+			var _this = this;
+			ajax({
+				url:'weibo.php',
+				data:{
+					act:'get',
+					page:n
+				},
+				succ:function(arr){
+					//alert(1);
+					_this.box.innerHTML = '';
+					arr.forEach(function(e,i){
+						var div = _this.cDiv(e.content,_this.cDate(e.time));
+						_this.box.appendChild(div);
+					});
+					//console.log(arr);
+				}
+			});
+		};
+	};
+	
+	
+	var c1 = new CreateDate();
+	var btn1 = document.getElementById('btn1');
+	c1.init(btn1);
+	c1.txt.onkeydown = function(ev){
+		if(ev.keyCode === 13 && ev.ctrlKey){
+			c1.Event();
+		}
+	};
+
+	
+</script>
+</html>

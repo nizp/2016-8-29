@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<img src="" id="img">
+	<!--<form action="post_file.php" method="post" enctype="multipart/form-data">-->
+		<!--<input type="file" name="file" id="file" value="" />-->
+		<!--<input type="submit" value="上传"/>-->
+		<input type="file" id="file" value="" />
+		<input type="button" value="上传" id="btn"/>
+	<!--</form>-->
+<script type="text/javascript">
+	/*
+		ajax的缺点：
+			没有返回键
+			
+		在上传的时候，通过上传元素下有个属性files，这个属性就是要上传的数据
+		val = file.files[0];
+		
+		readAsBinaryString
+	*/
+	
+	var btn = document.getElementById('btn');
+	var files = document.getElementById('file');
+	var img = document.getElementById('img');
+	btn.addEventListener('click',click);
+	function click(){
+		var val = files.files[0];
+		var ajax = new XMLHttpRequest();
+		ajax.open('post','post_file.php');
+		//ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+		
+		var f = new FormData();
+		/*
+			 new FormData将上传的数据转成二进制编码格式，
+			 它只有一个方法
+			 append(key,value)
+			 
+			 'user=leo&pass=12345' ->
+			 f.append('user',val)
+			 f.append('pass',pass)
+			 
+		*/
+		
+		f.append('file',val); // ->  'user=leo&pass=12345' ->f.append('pass',pass)
+
+		ajax.send(f);
+		
+//		var fileReader = new FileReader();
+//		fileReader.onload = function(ev){
+//			console.log(ev.target.result)
+//			img.src = ev.target.result; //ev.target.result是上传时的源码
+//			ajax.send('file='+ev.target.result);
+//		}
+//		fileReader.readAsDataURL(val);
+		
+		
+		
+		
+		
+		
+		
+	//	console.dir(f)
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

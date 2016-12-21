@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+	<input type="text" name="" id="txt" value="" />
+	<ul id="ul"></ul>
+<script src="My_jsonp1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	txt.oninput = function(){
+		var val = this.value;
+		jsonp({
+			url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+			callback:'cb',
+			data:{
+				wd:val
+			},
+			succ:function(data){//123456
+				ul.innerHTML = '';
+				for(var i=0;i<data.s.length;i++){
+					var li = document.createElement('li');
+					
+					li.innerHTML = '<a href="https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=0&rsv_idx=1&tn=baidu&wd='+data.s[i]+'" target="_self">'+data.s[i]+'</a>';
+					ul.appendChild(li);
+				}
+			},
+			fail:function(str){
+				alert(str);
+			}
+		});
+	};
+</script>
+</body>
+</html>

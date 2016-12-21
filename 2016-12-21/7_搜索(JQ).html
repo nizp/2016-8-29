@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+	<input type="text" name="" id="txt" value="" />
+	<ul id="ul"></ul>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$('#txt').on('keyup',function(){
+		var val = $(this).val();
+		$.ajax({
+			url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+			data:{
+				wd:val
+			},
+			jsonp: "cb",
+			dataType:'jsonp',
+			success:function(json){
+				console.log(json);
+			},
+			error:function(json){
+				console.log(json)
+			}
+		});
+
+		/*
+
+			$.get(url+'cb=?',data,succ,dataType)
+		*/
+//		$.get(
+//			'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=?',
+//			{
+//				wd:val
+//			},
+//			function(data){
+//				console.log(data)
+//			},
+//			'jsonp'
+//		);
+	});
+</script>
+</body>
+</html>

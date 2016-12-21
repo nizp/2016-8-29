@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background: green;
+}
+
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+/*
+	
+	
+*/
+
+
+
+div1.onclick = function(){
+	jsonp(
+		'http://localhost/2016-12-21/3.data.php',
+		{
+			'num':'number'
+		},
+		'cb',
+		function(json){
+			alert(json);
+		}
+	);
+}
+
+
+
+
+
+
+
+function jsonp(url,data,callback,succ){
+	/*	
+ 		因为回调函数是全局调用，将接收函数放在某个函数内部会报错（找不到），
+ 		所以将这个接收函数挂在window下，保证全局可以调用到这个函数
+	*/
+	window[callback] = function(str){
+		succ && succ(str);
+	};
+	
+	var arr = [];
+	for(var attr in data){
+		arr.push(attr+'='+data[attr]);
+	}
+	data = arr.join('&');
+	
+	var oS = document.createElement('script');
+	oS.src = url + '?' + 'callback='+callback + '&' + data;
+	document.getElementsByTagName('head')[0].appendChild(oS);
+}
+
+
+</script>
+</body>
+</html>

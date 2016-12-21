@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+/*
+	为什么fn必须放在全局？
+	
+	因为通过jsonp请求数据的时候，回调函数是在全局调用，如果fn没在全局，调用的时候就找不到这个函数（要报错）
+	
+	当发送一次请求，只要服务器返回了一个回调函数式的数据，正好也有函数去接收，什么时候删除都可以，问题是不能保证发送完这次请求，一定为回调函数式的数据，有可能在服务器处理数据的时候，出错了，导致返回的数据不是回调函数式的数据，那么就不会调用。
+	
+	
+	
+*/
+
+var oS ;
+function fn(str){
+	
+//	setTimeout(function(){
+//		alert(str);
+//	},5000);
+	
+	//document.getElementsByTagName('head')[0].removeChild(oS);
+	alert(str);
+//	function fn1(){
+//		alert(10)
+//	}
+}
+var urls = 'http://localhost/2016-12-20/a.txt';
+document.onclick = function(){
+	$.get('http://localhost/2016-12-21/3.data.php?callback=?',function(str){
+		alert(str);
+	},'jsonp');
+//	oS = document.createElement('script');
+//	oS.src = 'http://localhost/2016-12-20/a.txt';
+//	document.getElementsByTagName('head')[0].appendChild(oS);
+}
+	//fn('12345');
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background: green;
+}
+
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+<script type="text/javascript">
+
+/*
+	'http://localhost/2016-12-21/3.data.php',
+	
+*/
+
+
+
+div1.onclick = function(){
+	jsonp(
+		'http://localhost/2016-12-21/3.data.php',
+		{
+			'num':'number'
+		},
+		'callback',
+		function(str){
+			alert(str);
+		}
+	);
+}
+
+
+function jsonp(url,data,callback,succ,fn){
+	var oS = document.createElement('script');
+	var head = document.getElementsByTagName('head')[0];
+	
+	/*
+		保证每一次请求数据的接收函数名不重复 
+	*/
+	var fnName = 'jquery_'+new Date().getTime()+Math.random();
+	//因为函数名不能有.所以把.替换成空
+	fnName = fn || fnName.replace('.','');
+	
+	var arr = [];
+	for(var attr in data){
+		arr.push(attr+'='+data[attr]);
+	}
+	data = arr.join('&');
+	
+	
+	//把接收函数挂在全局,要做fn不能是死，如果有固定的就走固定的，如果没有固定的那么随机
+	window[fnName] = function(json){
+//		console.log(json)
+		head.removeChild(oS);
+		succ && succ(json);
+	}
+	oS.src = url + '?' + data + '&'+callback+'='+fnName;
+	head.appendChild(oS);
+}
+
+
+</script>
+</body>
+</html>

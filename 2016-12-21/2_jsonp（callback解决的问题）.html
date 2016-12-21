@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background: green;
+}
+
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+/*
+	为什么fn必须放在全局？
+	
+	因为通过jsonp请求数据的时候，回调函数是在全局调用，如果fn没在全局，调用的时候就找不到这个函数（要报错）
+	
+	当发送一次请求，只要服务器返回了一个回调函数式的数据，正好也有函数去接收，什么时候删除都可以，问题是不能保证发送完这次请求，一定为回调函数式的数据，有可能在服务器处理数据的时候，出错了，导致返回的数据不是回调函数式的数据，那么就不会调用。
+	
+	callback解决了函数名冲突的问题，不会出现请求多个数据执行一个函数的问题
+	
+	
+*/
+
+
+function fn(str){
+	alert(str);
+	alert('红色')
+}
+
+function fn1(str){
+	alert(str);
+	alert('绿色')
+}
+
+div1.onclick = function(){
+	var oS = document.createElement('script');
+	oS.src = 'http://localhost/2016-12-21/3.data.php?callback=fn';
+	document.getElementsByTagName('head')[0].appendChild(oS);
+}
+div2.onclick = function(){
+	var oS = document.createElement('script');
+	oS.src = 'http://localhost/2016-12-21/3.data.php?callback=fn1&num=number';
+	document.getElementsByTagName('head')[0].appendChild(oS);
+}
+</script>
+</body>
+</html>

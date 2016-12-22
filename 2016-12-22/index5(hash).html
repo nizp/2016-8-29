@@ -1,0 +1,327 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="znsArea">
+<!--留言-->
+     <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="tijiaoText"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="btn1" class="inputs" value="" />
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+<!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+        	<!--<div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>-->
+        </div>
+        <div class="page" id="page">
+        	<a href="javascript:;" class="active">1</a>
+        	<a href="javascript:;">2</a>
+        	<a href="javascript:;">3</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="mypages-1.0.js" type="text/javascript" charset="utf-8"></script>	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		不请求接口也能操作DOM，那为什么要请求接口，把数据放到数据库中呢？
+		 
+		为了当刷新页面的时候，页面的内容依然不会被"重置 ";
+		
+		在刷新页面的时候，请求一次接口，将接口返回的数据渲染到页面就做到刷新页面还有内容。
+		
+		在做项目一定要知道清楚业务的流程（逻辑）
+		通过流程去找数据
+		
+	*/
+	
+	var $text = $('#tijiaoText'),
+	$btn = $('#btn1'),
+	$box = $('#div1'),
+	$page = $('#page'),
+	hash = window.location.hash;
+	
+	//有hash走hash没hash走1
+	if(hash){
+		hash = hash.split('=')[1];
+	}else{
+		hash = 1;
+		window.location.hash = 'page=1';
+	}
+	
+	/*
+		当hash值发现改变的时候就会触发 
+	*/
+	window.onhashchange = function(){
+//		alert(1111)
+		//拿到当前的hash值
+		hash = window.location.hash.split('=')[1];
+		//通过hash值去请求哪组数据（第几页数据）
+		getPage(hash);
+		//刷新新的页码
+		createPage(hash);
+	}
+	
+	
+	/*
+		weibo.php?act=add&content=xxx	添加一条
+		返回：{error:0, id: 新添加内容的ID, time: 添加时间} 
+	*/
+	$btn.on('click.add',function(){
+		var val = $text.val();
+		if(val){
+			$.ajax({
+				url:'weibo.php',
+				data:{
+					act:'add',
+					content:val
+				},
+				dataType:'json',
+				success:function(data){
+					if(!data.error){ //data.error === 0 说明输入的内容已经添加到数据库了
+						//如果hash为1说明当前在第一页
+						if(hash == 1){
+							getPage(1);
+							createPage(1);
+						}else{
+							window.location.hash = 'page=1';
+						}
+						
+						$text.val('');
+					}
+				}
+			});
+		}else{
+			alert('请输入内容!');
+		}
+	});
+	
+	/*
+		 ctrlKey + enter
+	*/
+	$text.on('keydown',function(ev){
+		if(ev.keyCode === 13 && ev.ctrlKey){
+			$btn.trigger('click.add');
+		}
+	});
+	
+	
+	/*
+		创建一条数据 
+	*/
+	function createDiv(val,time,id,acc){
+		var $div = $('<div class="reply" pid="'+id+'">');
+		$div.html(`
+			<p class="replyContent">${val}</p>
+            <p class="operation">
+                <span class="replyTime">${time}</span>
+                <span class="handle">
+                	<a href="javascript:;" class="top">${acc}</a>
+                    <a href="javascript:;" class="down_icon">0</a>
+                    <a href="javascript:;" class="cut">删除</a>
+                </span>
+            </p>
+		`);
+		
+		$div.on('click',function(ev){
+			//说明点赞
+			/*
+				weibo.php?act=acc&id=num			顶某一条数据
+				返回：{error:0} 
+			*/
+			if(ev.target.className === 'top'){
+//				console.log($(ev.target).closest('.reply').attr('pid'))
+				$.ajax({
+					url:'weibo.php',
+					data:{
+						act:'acc',
+						id:$(ev.target).closest('.reply').attr('pid')
+					},
+					success:function(json){
+						json = eval('('+json+')');
+						if(!json.error){
+							var num = $(ev.target).text()*1;
+							num++;
+							$(ev.target).text(num);
+							alert('点赞成功!');
+						}
+					}
+				});
+			}
+			
+			/*
+				weibo.php?act=ref&id=num  踩
+				返回：{error:0}
+			*/
+			if(ev.target.className === 'down_icon'){
+				$.ajax({
+					url:'weibo.php',
+					data:{
+						act:'ref',
+						id:$(ev.target).closest('.reply').attr('pid')
+					},
+					success:function(json){
+						json = eval('('+json+')');
+						if(!json.error){
+							var num = $(ev.target).text()*1;
+							num++;
+							$(ev.target).text(num);
+							alert('啊!');
+						}
+					}
+				});
+			}
+			
+			/*
+				删除 
+				weibo.php?act=del&id=num
+				返回：{error:0}
+			*/
+			if(ev.target.className === 'cut'){
+				
+				$.ajax({
+					url:'weibo.php',
+					data:{
+						act:'del',
+						id:$(ev.target).closest('.reply').attr('pid')
+					},
+					success:function(json){
+						json = eval('('+json+')');
+						if(!json.error){
+							/*
+								当删除的时候刷新数据和页码 
+							*/
+							getPage(hash);
+							createPage(hash);
+							
+							/*
+								删除之后的总页数，
+								
+							*/
+							$.ajax({
+								url:'weibo.php',
+								data:{
+									act:'get_page_count'
+								},
+								dataType:'json',
+								success:function(json){
+									/*
+										获取当前的hash值，
+										如果当前的总页数小于hash值，说明最后一页已经删完了，要显示json.count那页。 
+									*/
+									var a = window.location.hash.split('=')[1];
+									if(a - json.count == 1){
+										window.location.hash = 'page='+json.count;
+									};
+								}
+							});
+						}
+					}
+				});
+			}
+		});
+		return $div;
+	}
+	
+	/*
+		页码 
+		weibo.php?act=get_page_count	获取页数
+		返回：{count:页数}
+	*/
+	
+	createPage();
+	function createPage(){
+		$page.html('');
+		$.ajax({
+			url:'weibo.php',
+			data:{
+				act:'get_page_count'
+			},
+			dataType:'json',
+			success:function(json){
+				pagesFn({
+					parent:'#page',
+					pageAll:json.count,
+					num:hash*1,
+					indexFn:function(num){
+						/*
+							点击哪个页码，就说明要渲染对应页面的数据
+							通过点击的页码，改变hash值，从而触发hashchange事件来
+							改变页面内容。
+						*/
+						window.location.hash = 'page='+num;
+					}
+				});
+			}
+		});
+	}
+
+	
+	
+	/*
+		weibo.php?act=get&page=2		获取一页数据
+		返回：[{id: ID, content: "内容", time: 时间戳, acc: 顶次数, ref: 踩次数}, {...}, ...] 
+	*/
+	getPage(hash);
+	function getPage(n){
+		$box.html('');
+		$.ajax({
+			url:'weibo.php',
+			data:{
+				act:'get',
+				page:n
+			},
+			success:function(arr){
+				arr = eval('('+arr+')');
+				$.each(arr,function(i,e){
+					$box.append(createDiv(e.content,cDate(e.time),e.id,e.acc));
+				});
+				//console.log(arr);
+			}
+		});
+	}
+
+	function cDate(time){
+		//只要服务器时间为1970，直接*1000
+		var str = '';
+		var t = new Date(time*1000);
+		var y = t.getFullYear();
+		var mon = t.getMonth()+1;
+		var day = t.getDate();
+		var H = t.getHours();
+		var min = t.getMinutes();
+		var sen = t.getSeconds();
+		//console.log(t)
+		
+		//2018-09-08 16:37:60
+		
+		str = y+'-'+toDou(mon)+'-'+toDou(day)+' '+toDou(H)+':'+toDou(min)+':'+toDou(sen);
+		
+		return str;
+	}
+	
+	function toDou(n){
+		return n<10?'0'+n:''+n;
+	}
+
+	
+</script>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.red{
+	background: red;
+}	
+</style>
+</head>
+<body>
+
+<div id="box"></div>
+<script type="text/javascript" src="artTemplate.js"></script>
+<script type="text/html" id="tep">
+	<div id="box1">
+		<%list.forEach(function(e){%>
+			<%if(e === 'miaov'){%>
+				<p><%=e.charAt().toUpperCase()+e.substring(1)%></p>
+			<%}else{%>
+				<p class="red"><%=e%></p>
+			<%}%>
+		<%})%>
+	</div>
+	
+	<div id="box2">
+		<%list2.forEach(function(e){%>
+			<%if(e === 'miaov'){%>
+				<strong><%=e.charAt().toUpperCase()+e.substring(1)%></strong>
+			<%}else{%>
+				<strong class="red"><%=e%></strong>
+			<%}%>
+		<%})%>
+	</div>
+	
+	
+	
+</script>
+
+
+
+
+<script type="text/javascript">
+	
+	/*
+		模板引擎：
+			为了数据渲染页面的速度快（大数据处理非常明显的优化）
+		
+		template风 -> 模板引擎
+		
+		性能卓越，执行速度通常是 Mustache 与 tmpl 的 20 多倍（性能测试）
+		支持运行时调试，可精确定位异常模板所在语句（演示）
+		对 NodeJS Express 友好支持
+		安全，默认对输出进行转义、在沙箱中运行编译后的代码（Node版本可以安全执行用户上传的模板）
+		支持include语句，可在浏览器端实现按路径加载模板
+		支持预编译，可将模板转换成为非常精简的 js 文件
+		模板语句简洁，无需前缀引用数据
+		支持所有流行的浏览器
+		
+		
+		1.创建一个script标签并且type/html 添加id
+			<script type="text/html" id="tep">
+			模板的内容就在这里写
+		
+		2.页面新建一个元素(之后渲染的内容都会放在这个元素中)，并且加上id
+			<div id="box"></div>
+			
+		3.在script标签中
+			调用template函数把第一步中的id名传入进去,数据
+			var html = template('tep', data);
+		4.把函数的返回值等于第二步的innerHTML
+		
+		
+		
+	*/
+	
+	var json = {
+	    title: '标签',
+	    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他','miaov'],
+	    list2:['文艺2', '博客2', '摄影', '电影', '民谣', '旅行', '吉他','miaov'],
+	};
+	
+	 
+	
+
+	
+	var box = document.getElementById('box');
+	var html = template('tep', json);
+	
+	
+	
+	box.innerHTML = html;
+	
+</script>
+</body>
+</html>

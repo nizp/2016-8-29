@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" name="txt" id="txt" value="" />
+	<button id="btn">按钮</button>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		ajax\jsonp:
+			*什么时候使用它们*，能够获取到什么样的数据
+		
+		
+		ajax的缺点：
+			没有浏览器自带的返回键（因为本页面刷新数据，不跳转）
+		
+		jsonp的缺点:
+		
+			只有带回调的数据才能访问（ajax的数据，jsonp一定访问不了）
+			而jsonp的数据，ajax是可以访问的。
+			
+			jsonp只能用get方式，不能用post
+
+			
+	*/
+	
+	$('#btn').click(function(){
+		var val = $('#txt').val();
+		$.ajax({
+			url:'https://api.douban.com/v2/movie/search?callback=?',
+			data:{
+				q:val
+			},
+			success:function(json){
+				console.log(json)
+			},
+			dataType:'jsonp'
+		});
+	});
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

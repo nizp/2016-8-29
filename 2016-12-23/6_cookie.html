@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="div"></div>
+<script type="text/javascript">
+	/*
+		必须要在服务器下运行
+		cookie:
+			类似于存在浏览器中的一个自定义属性，这个属性是加在document身上的。
+			并且可以通过浏览器查看到。
+			
+		体积：
+			cookie字字千金
+			每个域名cookie有限制，每个浏览器限制是不一样的
+			Firefox每个域名cookie限制为50个。
+
+　　			Opera每个域名cookie限制为30个。
+			...
+		
+		一般用来记录用户信息...
+		
+		设置cookie是key=value来配置的，一般一个cookie做一件事情。
+			
+	*/
+	var div = document.getElementById('div');
+	
+	//div.index = 1;
+	
+	//alert(div.index)
+	
+	document.cookie = '名字';
+	
+	document.cookie = 'name={name:"leo",age:23}';
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	用户名:<input type="text" id="user"  autocomplete="off"><br /><br />
+	密 码:<input type="password" id="pas">
+	<input type="button" value="登陆" id="btn">
+	<ul id="ul"></ul>
+<script type="text/javascript">
+	var user = document.getElementById('user');
+	var pass = document.getElementById('pas');
+	var btn = document.getElementById('btn');
+	
+	
+	btn.addEventListener('click',fn1);
+	function fn1(){
+		var val = user.value;
+		var val2 = pass.value;
+		if(val && val2){
+			setCookie('id','{"name":"'+val+'","pass":"'+val2+'"}');
+		}else{
+			alert('请正确输入用户名或密码');
+		}
+	}
+	
+	
+	
+	//name=momo1; age=23; job=web
+	//id:[{name:'杨文杰'},{name:'倪文广'},{name:'娄宇'}]
+	
+	if(getVal('id')){
+		user.value = getVal('id');
+	}
+	function getVal(key){
+		var c = document.cookie;
+		var re = new RegExp('(^|\\s)'+key+'=\.+(;|$)');
+		console.log(c.match(re))
+		if(c.match(re)){
+			var arr = c.match(re)[0].split('=')[1];
+			var json = JSON.parse(arr);
+			return json.name; 
+		}else{
+			return false;
+		}
+	}
+	
+	function setCookie(key,val,time){
+		time = time?time:0;//如果没有设置时间，走默认的生命周期否则走设置的时间
+		var data = new Date();
+		data.setDate(data.getDate()+time);		
+		document.cookie = key+'='+val+';expires='+(time?data:0);
+	}
+	
+	function getCookie(key,value){
+		var c = document.cookie;
+		var str = key + '=' + value;
+		var re = new RegExp('(^|\\s)'+str+';?($|\\s)');
+		return re.test(c);
+	}
+</script>
+</body>
+</html>

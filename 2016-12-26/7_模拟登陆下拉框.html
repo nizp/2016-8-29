@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	用户名:<input type="text" id="user"  autocomplete="off"><br /><br />
+	密 码:<input type="password" id="pas">
+	<input type="button" value="登陆" id="btn">
+	<ul id="ul"></ul>
+	<div style="display: none;" id="hl">欢迎回来!</div>
+<script type="text/javascript">
+
+	/*
+		使用cookie要刷新一遍，为了 将设置好的cookie值*获取出来*发送给后端。
+	*/
+	var user = document.getElementById('user');
+	var pass = document.getElementById('pas');
+	var btn = document.getElementById('btn');
+	var ul = document.getElementById('ul');
+	
+	btn.addEventListener('click',fn1);
+	function fn1(){
+		var val = user.value;
+		var val2 = pass.value;
+		if(val && val2){
+			/*
+				获取那个数组 ,如果是真的就说明已经有要push的数组了，否则创建一个空数组
+			*/
+			if(getVal('id')){
+				var arr = getVal('id');
+				arr.push({"name":val,"pass":val2});
+				setCookie('id',JSON.stringify(arr));
+			}else{
+				setCookie('id','[{"name":"'+val+'","pass":"'+val2+'"}]');
+			}
+			//顺便设置了user
+			setCookie('user',val);
+		}else{
+			alert('请正确输入用户名或密码');
+		}
+		window.location.reload();
+	}
+	
+	/*
+		进入焦点的时候，会将之前所有登录过的用户名按照列表的方式显示 
+	*/
+	user.onfocus = function(){
+		ul.style.display = 'block';
+		if(getVal('id')){
+			ul.innerHTML = '';
+			var arr = getVal('id');
+			arr.forEach(function(e){
+				var li = document.createElement('li');
+				li.innerHTML = e.name;
+				ul.appendChild(li);
+			});
+		}
+	}
+	user.onblur = function(){
+		ul.style.display = 'none';
+	}
+
+	//name=momo1; age=23; job=web
+	//id:[{name:'杨文杰'},{name:'倪文广'},{name:'娄宇'}]
+
+	/*
+		当刷新页面的时候，如果有id，说明用户曾经登录过的，那么把最后一次登录的用户名放到input中 
+	*/
+	if(getVal('id')){
+		user.value = getVal('id')[getVal('id').length-1].name
+	}
+	
+	//假设用户已经登录过，user才会存在，将已经登录的用户名放到显示div#hl中。
+	if(getUser('user')){
+		hl.innerHTML = getUser('user').split('=')[1]+',欢迎进坑!!';
+		hl.style.display = 'block';
+		//window.location.href = 'http://www.miaov.com';
+	}
+	
+
+
+	function getUser(user){
+		var c = document.cookie;
+		var re = new RegExp('(^|\\s)'+user+'=\.+(;|$)');
+		if(c.match(re)){
+			return c.match(re)[0];
+		}
+	}
+
+	
+	function getVal(key){
+		var c = document.cookie;
+		var re = new RegExp('(^|\\s)'+key+'=\.+(;|$)');
+	
+		if(c.match(re)){
+			var str = c.match(re)[0].split('=')[1].replace(/;.+/g,'');
+			return eval('('+str+')');
+		}else{
+			return false;
+		}
+	}
+	
+	function setCookie(key,val,time){
+		time = time?time:0;//如果没有设置时间，走默认的生命周期否则走设置的时间
+		var data = new Date();
+		data.setDate(data.getDate()+time);		
+		document.cookie = key+'='+val+';expires='+(time?data:0);
+	}
+	
+	function getCookie(key,value){
+		var c = document.cookie;
+		var str = key + '=' + value;
+		var re = new RegExp('(^|\\s)'+str+';?($|\\s)');
+		return re.test(c);
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+	cookie:
+		生命周期：
+			默认当这次浏览器被关闭就结束生命周期
+			
+		;expires=  设置生命周期
+		
+	设置cookie:
+		
+		setCookie(key,val,设置的时间)
+			设置的时间，以当前天为基础增加。
+	
+	获取cookie:
+		当获取cookie的时候，会将这个域名下的所有cookie都获取出来
+			key=value;空格key=value;空格....
+		
+		
+*/
+//	var Date = new Date();
+//	Date.setDate(Date.getDate()+1)
+//	document.cookie = 'name=莫莫 ;expires='+(Date);
+
+	
+	function setCookie(key,val,time){
+		time = time?time:0;//如果没有设置时间，走默认的生命周期否则走设置的时间
+		var data = new Date();
+		data.setDate(data.getDate()+time);		
+		document.cookie = key+'='+val+';expires='+(time?data:0);
+	}
+	
+	
+	setCookie('name','momo',1);
+	setCookie('age','23',1);
+	setCookie('job','web',1);
+	setCookie('name1','莫莫',1);
+	setCookie('name2','莫莫e',1);
+	
+	
+	console.log(document.cookie);  //
+
+	//name=momo1; age=23; job=web  找到name=momo
+//	function getCookie(key,value){
+//		var arr = document.cookie.split('; ');
+//		var onOff = true;
+//		for(var i=0;i<arr.length;i++){
+//			var arr2 = arr[i].split('=');
+//			if(arr2[0] === key && arr2[1] === value){
+//				onOff = false;
+//				return true;
+//			}
+//		}
+//		if(onOff){
+//			return false;
+//		}
+//	}
+
+	function getCookie(key,value){
+		var c = document.cookie;
+		var str = key + '=' + value;
+		var re = new RegExp('(^|\\s)'+str+';?($|\\s)');
+		return re.test(c);
+	}
+	
+	console.log(getCookie('name','mom1'))
+	
+
+</script>
+</body>
+</html>

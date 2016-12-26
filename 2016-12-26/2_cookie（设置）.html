@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+	cookie:
+		生命周期：
+			默认当这次浏览器被关闭就结束生命周期
+			
+		;expires=  设置生命周期
+		
+	设置cookie:
+		
+		setCookie(key,val,设置的时间)
+			设置的时间，以当前天为基础增加。
+		
+		
+		
+*/
+//	var Date = new Date();
+//	Date.setDate(Date.getDate()+1)
+//	document.cookie = 'name=莫莫 ;expires='+(Date);
+
+	
+	function setCookie(key,val,time){
+		time = time?time:0;//如果没有设置时间，走默认的生命周期否则走设置的时间
+		var data = new Date();
+		data.setDate(data.getDate()+time);		
+		document.cookie = key+'='+val+';expires='+(time?data:0);
+	}
+	
+	
+//	setCookie('name','momo',1)
+	
+
+</script>
+</body>
+</html>

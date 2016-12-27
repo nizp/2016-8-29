@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		本地存储：
+			window.localStorage
+			
+			一般来说是可以在本地协议下存储（IE不支持）, 最好用在服务器环境下
+			
+			每个域名一般是5M，后面可能还会扩大容量
+			
+			
+			
+	*/
+	
+	/*
+		测试浏览器本地存储的最大值 
+	*/
+	
+//	function log( msg ) {
+//	    console.log(msg);
+//	    alert(msg);
+//	}
+//
+//	var limit;
+//
+//	var half = '1'; //这里会换成中文再跑一遍
+//	var str = half;
+//	var sstr;
+//
+//	while ( 1 ) {
+//	    try {
+//	        localStorage.clear();
+//	        str += half;
+//	        localStorage.setItem( 'cache', str );
+//	        half = str;
+//	    } catch ( ex ) {
+//	        break;
+//	    }
+//	}
+//
+//	var base = str.length;
+//	var off = base / 2;
+//	var isLeft = 1;
+//
+//	while ( off ) {
+//	    if ( isLeft ) {
+//	        end = base - (off / 2);
+//	    } else {
+//	        end = base + (off / 2);
+//	    }
+//
+//	    sstr = str.slice( 0, end );
+//	    localStorage.clear();
+//	    try {
+//	        localStorage.setItem( 'cache', sstr );
+//	        limit = sstr.length;
+//	        isLeft = 0;
+//	    } catch ( e ) {
+//	        isLeft = 1;
+//	    }
+//
+//	    base = end;
+//	    off = Math.floor( off / 2 );
+//	}
+//
+//	log( 'limit: ' + limit );
+
+	
+	/*
+		生命周期：
+			只要不删除就一直在。
+	*/
+	
+	/*
+		设置setItem(key,value) 
+	*/
+//	localStorage.setItem('name','leo');
+	localStorage.setItem('name','吴晓倩');
+	localStorage.setItem('age',1000);
+	localStorage.setItem('add','兰若寺');
+	
+	
+	/*
+		获取getItem(key)
+			如果能够查到就返回key对应的value值，否则null
+			
+	*/
+	//console.log(localStorage.getItem('name'));
+	
+	/*
+		删除指定removeItem(key) 
+	*/
+	//localStorage.removeItem('name');
+	
+	/*
+		删除所有的 
+	*/
+	
+	localStorage.clear();
+	
+	
+	
+	
+	//console.dir(window.localStorage)
+	
+	
+	
+</script>	
+</body>
+</html>

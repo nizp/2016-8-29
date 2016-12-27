@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	document.ondblclick = function(){
+		localStorage.setItem('name','刘鑫');
+	}
+	window.addEventListener('storage',function(ev){
+		console.log(ev)
+	})
+</script>	
+</body>
+</html>

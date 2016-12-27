@@ -1,0 +1,68 @@
+﻿Application Cache
+
+使用application cache能带来什么好处？
+使用application cache能够带来以下几点收益：
+    　　用户可以在离线时继续使用
+    　　缓存到本地，节省带宽，加速用户体验的反馈
+    　　减轻服务器的负载
+
+服务器支持
+	配置服务器
+	apache
+	AddType text/cache-manifest .manifest
+	
+在网站的指定目下放置一个以.manifest为后缀的文件
+
+文件的大致结构如下：
+
+CACHE MANIFEST
+# 以上折行必需要写
+
+VERSION: 1
+
+CACHE:
+# 这部分写需要缓存的资源文件列表
+# 可以是相对路径也可以是绝对路径
+index.html
+index.css
+images/logo.png
+js/main.js
+http://img.baidu.com/js/tangram-base-1.5.2.1.js
+
+NETWORK:
+# 可选
+# 这一部分是要绕过缓存直接读取的文件
+login.php
+
+
+FALLBACK:
+# 可选
+# 这部分写当访问缓存失败后，备用访问的资源
+# 每行两个文件，第一个是访问源，第二个是替换文件*.html /offline.html
+
+
+
+在缓存文件列表中加入
+<html manifest="app.manifest">
+
+在js中提供了一个全局applicationCache对象
+这个对象下提供了一些属性和方法来让我们去操作applicationCache
+
+applicationCache
+	.stauts : 状态
+	
+事件：
+	checking : 检测缓存是否需要更新的时候触发
+	noupdate : 检测以后，发现没有更新的缓存文件信息的时候触发
+	downloading : 检测有更新的时候触发
+	progress : 更新缓存的时候触发
+	cached : 更新缓存完毕的时候触发
+	updateready : 所有缓存已经就绪的时候触发
+	obsolete :  manifest的请求出现404或者410错误，应用程序缓存被取消的时候触发
+	error : 更新出错的时候触发
+	
+方法：
+	update() ： 发起应用程序缓存下载进程
+	abort() ：  	取消正在进行的缓存下载
+	swapCache() ： 切换成本地最新的缓存环境
+	

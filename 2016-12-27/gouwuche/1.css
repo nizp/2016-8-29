@@ -1,0 +1,29 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul{
+	list-style: none;
+	width:300px;
+	border: 2px solid #000;
+}
+ul li{
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 30px;
+	border-bottom: 1px solid #000;
+	cursor: pointer;
+}
+ul li:last-child{
+	border-bottom:none;
+}
+#box{
+	float:left;
+}
+#box2{
+	float: right;
+}
+h2{
+	font-size: 50px;
+}

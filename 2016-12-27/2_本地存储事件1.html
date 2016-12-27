@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		
+		storage:
+			当localStorage中的内容被修改的时候就触发
+			
+		只要storage被修改，storage这个事件就会触发 (在本浏览器的所有兄弟页面都会触发)
+		
+		这个事件必须在服务器环境下才能运行
+		
+		如果手动浏览器删除就会在当前页面下触发
+		
+		ev能够记录下之前存储的信息和当前修改的信息，还有所有的数据信息。
+		
+	*/
+	localStorage.setItem('name','张越');
+	document.ondblclick = function(){
+		localStorage.removeItem('name');
+		//localStorage.setItem('name','刘鑫');
+	}
+	window.addEventListener('storage',function(ev){
+		console.log(ev.storageArea)
+	});
+</script>	
+</body>
+</html>

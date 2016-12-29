@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+#box div{
+	width:300px;
+	height: 200px;
+	border: 1px solid #000;
+}
+#box div.hide{
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+.active{
+	background: yellow;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<input type="button" name="" id="" value="新闻" class="active" />
+		<input type="button" name="" id="" value="图片" />
+		<input type="button" name="" id="" value="军事" />
+		<div class="show">今天的新闻是.....</div>
+		<div class="hide">今天的图片有.....</div>
+		<div class="hide">今天的外星人又来袭击地球了，某个人又拯救了世界.....</div>
+	</div>
+	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	(function(global,factor,$){
+		factor(global,$);
+	})(typeof window !== 'undefined'?window:this,function(global,$,noGlobal){
+		
+		var Tab = function (opt,that){
+			this.init();
+		}
+		
+		$.extend(Tab.prototype,{
+			init:function(){
+				this.creteBtn();
+			},
+			creteBtn:function(){
+				alert(1)
+			}
+			
+		});
+		
+		$.fn.extend({
+			tab:function(options){
+				var t = new Tab(options,this);
+				console.log(t.constructor)
+			}
+		})
+		
+		
+	},jQuery);
+	
+	
+	$('#box').tab();
+//	$('#box').tab({
+//		nav:['新闻1','图片1','军事1']
+//	});
+	
+</script>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+#box div{
+	width:300px;
+	height: 200px;
+	border: 1px solid #000;
+}
+#box div.hide{
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+.active{
+	background: yellow;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<!--<input type="button" name="" id="" value="新闻" class="active" />
+		<input type="button" name="" id="" value="图片" />
+		<input type="button" name="" id="" value="军事" />
+		<div class="show">今天的新闻是.....</div>
+		<div class="hide">今天的图片有.....</div>
+		<div class="hide">今天的外星人又来袭击地球了，某个人又拯救了世界.....</div>-->
+	</div>
+	
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	(function(global,factory,$){
+		factory(global,$);
+	})(typeof window !== 'undefined'?window:this,function(global,$,noGlobal){
+		
+		
+		function Tab(that){
+			//存父级
+			this.box = that;
+			//默认配置
+			this.settings = {
+				nav:['新闻1','图片1','军事1'],
+				content:[
+					'今天的新闻是.....',
+					'今天的图片有.....',
+					'今天的外星人又来袭击地球了，某个人又拯救了世界.....'
+				]
+			}
+		}
+		
+//		Tab.prototype.a = function(){} 
+//		Tab.prototype.b = function(){} 
+//		
+//		Tab.prototype = {
+//			
+//			a:function(){}
+//		}
+//		
+//		
+//		var obj = {
+//			a:function(){}
+//		};
+//		
+//		for(var attr in obj){
+//			Tab.prototype[attr] = obj[attr]
+//		}
+		
+		/*
+			for in 
+		*/
+		$.extend(Tab.prototype,{
+			init:function(opt){
+				//有配置走配置，没配置走默认
+//				$.extend(true,this.settings,opt);
+
+				for(var attr in opt){
+					if(this.settings.hasOwnProperty(attr)){
+						this.settings[attr] = opt[attr];
+					}
+				}
+				
+				//console.log(this.settings);
+				
+				/*
+					调一些方法 
+				*/
+				this.createBtn();
+				this.createDiv();
+				this.change();
+			},
+			//创建btn
+			createBtn:function(){
+				var _this = this;
+				
+				$.each(this.settings.nav,function(i,e){
+//					if(i == 0){
+//						$(_this.box).append($('<input type="button" value="'+e+'" class="active"/>'));
+//					}else{
+//						$(_this.box).append($('<input type="button" value="'+e+'" />'));	
+//					}
+				//var a = (i===0)?'active':'';
+				$(_this.box).append($('<input type="button" value="'+e+'" class="'+((i===0)?'active':'')+'"/>'));
+				});
+		},
+		//创建div
+		createDiv:function(){
+			var _this = this;
+			$.each(this.settings.content,function(i,e){
+				$(_this.box).append($('<div class="'+((i===0)?'show':'hide')+'">'+e+'</div>'));	
+			});
+		},
+		//点击事件
+		change:function(){
+			var btns = $(this.box).find('input');
+			var divs = $(this.box).find('div');
+			btns.click(function(){
+				$(this).addClass('active').siblings('input').removeClass('active');
+				divs.eq($(this).index('input')).show().siblings('div').hide();
+			});
+		}
+		});
+		
+		/*
+			写tab这个方法 
+		*/
+		$.fn.extend({
+			tab:function(opt){ //opt配置参数
+				//console.log(this)
+				
+				var t = new Tab(this);//this->绑定的box
+				t.init(opt);///opt配置参数
+				return $(this);
+			}
+		});
+	},jQuery);
+	
+//	$('#box').tab();
+
+	$('#box').tab({
+		nav:[
+			'八卦',
+			'绯闻',
+			'污人误事'
+		]
+	}).width('500px');
+	
+	/*
+		(function(a){alert(a)})();
+	*/
+	
+//	var b = 15;
+//	(function(a,b){
+//		alert(a);
+//		b(1,2);
+//	})(b?b:10,function(a,b){
+//		alert(a);
+//	});
+	
+	
+	
+//	$('#box').tab({
+//		nav:['新闻','图片','军事']
+//	});
+	
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+	<textarea name="" rows="5" cols="20" id="t"></textarea>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		JQ插件：
+			
+			插件：
+				辅助型的，扩充或者完善（优化）的一类
+				插件——就是一些软件的辅助功能的扩展小“附件”；
+			
+			组件：
+				能够多次重复使用的一类
+				组件——就是软件的一些功能所必需有的小“附件”；
+
+		
+		jQuery插件类别
+			1、静态插件（类级别），扩展在jQuery工具方法上
+			一类叫做工具型的，
+			
+				$.ajax()、$.each()、$.isFunction()
+				
+				$.extend({
+					需要扩充的函数名:function(){
+						
+					}
+				})
+			
+			2、动态插件（对象级），扩展在jQuery对象方法上
+			一类叫做功能型的
+			
+				$('div').css()、$('div').height()
+				
+				$.fn.extend({
+					需要扩充的函数名:function(){
+						
+					}
+				})
+				
+			
+			因为JQ的方法很有局限，不能满足所有需求，所以提供了extend对外提供一个
+			可以扩充的接口，方便开发者对JQ的功能进行扩展。
+				$.extend();
+			
+	*/
+	
+	var str = '   dsdsad    ';
+	
+	//console.log($.trim(str))
+
+//	$.extend({
+//		Ltrim:function(str){
+//			str = str.replace(/^\s+/,'');
+//			return str;
+//		}
+//	});
+//	console.log($.Ltrim(str))
+	
+	
+	
+//	$.fn.extend({
+//		scrollH:function(){
+//			return this[0].scrollHeight;
+//		}
+//	});
+
+	$.extend({
+		scrollH:function(obj){
+			return obj[0].scrollHeight;
+		}
+	})
+	
+	
+	$(document).click(function(){
+		console.log($.scrollH($('#t')));
+	});
+	
+	
+	
+	
+</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		三个参数
+		
+			$.extend(target [, object1 ] [, objectN )
+				从左往右依次赋值。
+				
+			
+			$.extend(true,obj1,obj2)
+				深度克隆
+		
+		二个参数
+			$.extend(obj1,obj2)
+				把obj2赋值给obj1 （在普通情况下）
+				
+			
+			$.extent(true,Tab.prototype,{
+				init:function(){
+					
+				},
+				btn:function(){
+					
+				},
+				arr:[]
+			})
+		
+		一个参数：
+			封装插件
+			
+			$.extend({
+				init:function(){
+					
+				}
+			})
+		
+			
+		$.fn.extend()
+		
+		
+	*/
+	
+	var obj = {
+		name:'Z兵军',
+		job:'Zteacher',
+		arr:[1,2,3]
+	}
+	
+	var obj2 = {
+		name:'王松松',
+		job:'student',
+		
+	}
+	obj4 = {
+		age:'NaN'
+	}
+	
+	/*
+		obj2默认
+		obj是配置
+	*/
+
+	//var obj3 = $.extend({},obj4,obj,obj2);
+	$.extend(true,obj2,obj);
+	
+	//console.log(obj3);
+	
+//	obj2.arr.push(6);
+//	console.log(obj2)
+
+	
+	var fn1 = function(){
+		
+	}
+	
+	var fn2 = fn1;
+	
+	fn2 = function(){
+		alert(1)
+	}
+	console.log(fn2)
+	
+	
+	
+	
+</script>
+</body>
+</html>

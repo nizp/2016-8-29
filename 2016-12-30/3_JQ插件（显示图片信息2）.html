@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" href="css/demo.css">
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="upload3.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<section>
+		<div id="loading">
+			<div></div>
+		</div>
+		<header>
+			<input type="file" name="" id="file">
+			<a href="javascript:;">上传</a>
+		</header>
+		<div class="drag">
+			<span>请将图片拖拽至此处</span>
+		</div>
+		<div class="preview">
+			<ul>
+				
+			</ul>
+		</div>
+		<a href="javascript:;" id="upload">确认上传</a>
+	</section>
+<script type="text/javascript">
+	/*
+		配置参数
+		{
+			fileInpit:选择图片的file标签,
+			url:上传时候的url,
+			btn:点击提交那个按钮,
+			viewBox:显示被选择的列表,
+			drag:拖拽的框,
+			viewFn:添加图片之后的回调函数，
+			onLoading:图片上传的时候进度函数,
+			clear:清楚的函数
+		}
+		
+		
+		
+		
+		
+		
+	*/
+	var u = $.upload({
+		fileInpit:$('#file'),//选择图片的file标签
+		url:'php/post_file.php',//上传时候的url
+		btn:$('#upload'),//点击提交那个按钮
+		viewBox:$('.preview'),//显示被选择的列表
+		viewFn:function(json){//打算一个可以添加的数据
+			u.fileReader(json,function(data){//data:一个图片源码
+				$('.preview').find('ul').append('<li><button name="'+json.name+'">就不想要</button><img src="'+data+'"></li>');
+				$('.preview').find('ul').off().click(function(ev){
+					if(ev.target.tagName === 'BUTTON'){
+						u.removeData($(ev.target).attr('name'));
+						$(ev.target).parent('li').remove();
+					}
+				});
+			});
+		},
+		onLoading:function(num){
+			;(function(i){
+				$('#loading div').stop().animate({
+					width:(i/u.obj.length)*600
+				},function(){
+					$('#loading div').stop().animate({
+						opacity:0
+					},function(){
+						u.settings.clear();
+						$('#loading div').css({
+							opacity:1,
+							width:0
+						});
+					});
+				});
+			})(num);
+		},
+		clear:function(){
+			u.deleteDate();
+			$('.preview').find('ul').html('');
+			console.log('成功');
+		},
+		drag:$('.drag')
+	});
+	
+	
+	
+</script>
+</body>
+</html>

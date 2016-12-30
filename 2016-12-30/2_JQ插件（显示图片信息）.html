@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" href="css/demo.css">
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script src="upload2.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<section>
+		<header>
+			<input type="file" name="" id="file">
+			<a href="javascript:;">上传</a>
+		</header>
+		<div class="drag">
+			<span>请将图片拖拽至此处</span>
+		</div>
+		<div class="preview">
+			<ul>
+				
+			</ul>
+		</div>
+		<a href="javascript:;" id="upload">确认上传</a>
+	</section>
+<script type="text/javascript">
+	var u = $.upload({
+		fileInpit:$('#file'),//选择图片的file标签
+		url:'php/post_file.php',//上传时候的url
+		btn:$('#upload'),//点击提交那个按钮
+		viewBox:$('.preview'),//显示被选择的列表
+		viewFn:function(json){//打算放一组对象数据
+			u.fileReader(json,function(data){//data:一组图片源码
+				//
+				console.log(data[0])
+				
+			});
+		}
+	});
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<style type="text/css"> 
+#div1,#div2 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;} 
+</style>
+</head> 
+<body> 
+<div id="div1">
+	32132132132132312
+</div>
+
+<div id="div2">
+</div>
+<script type="text/javascript">
+	/*
+		ondrop
+		
+		ondragover
+		
+		ondragenter
+		
+		ondragend
+	*/
+	
+	div2.ondragover = function(ev){
+		return false;
+	}
+	
+	div2.ondragenter = function(){
+		console.log('移入')
+	}
+	div2.ondragleave = function(){
+		console.log('移出')
+	}
+	div2.ondrop = function(ev){
+		console.log('抬起');
+		console.log(ev)
+	}
+	
+</script>
+	
+</body> 
+</html>

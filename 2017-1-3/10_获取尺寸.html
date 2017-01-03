@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body style="height:3000px">
+<script type="text/javascript">
+	/*
+		window.innerHeight/window.innerWidth(可视区的宽高)
+		document.documentElement.clientWidth/document.documentElement.clientHeight
+		
+		
+		clientWidth/clientHeight  +padding
+		
+		offsetHeight/offsetWidth  +padding + border
+		
+		scrollHeight - >内容撑开的高度
+		
+		
+		window.pageXoffset/window.pageYoffset  -> 滚动条的距离
+		
+		document.body.scrollTop/document.body.scrollLeft  （chrome）
+		
+		document.documentElement.scrollTop/document.documentElement.scrollLeft(非chrome)
+		
+		以前那套：
+			document.body.scrollTop || document.documentElement.scrollTop
+		
+		现在这套：
+			window.pageXoffset || document.documentElement.scrollTop
+		
+		
+		
+	*/
+	
+	document.documentElement.onclick = function(){
+		//alert(1)
+		console.log(document.body.scrollTop)
+	}
+	
+</script>
+</body>
+</html>

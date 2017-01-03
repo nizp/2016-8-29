@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body style="height:3000px;">
+	<div id="div" style="width:100px;height:100px;background: red;"></div>
+<script type="text/javascript">
+	
+	/*
+		addEventListener
+		 	ev.preventDefault()
+		
+		attachEvent
+			return false
+	*/
+	addEvent(document,'keydown',fn1);
+	
+	function fn1(ev){
+		//console.log(this.nodeName);//window
+//		alert(1)
+		var e = ev||event;
+		//e.preventDefault();
+		if(e.keyCode === 13){
+			return false;
+		}
+	}
+
+	
+	function addEvent(obj,evnts,fn){
+		if(obj.addEventListener){
+			return obj.addEventListener(evnts,fn);
+		}else{
+			obj[fn] = function (){
+				var b = fn.call(obj);
+				return (b===false)?false:true;
+			}
+			return obj.attachEvent('on'+evnts,obj[fn]);
+		}
+	}
+	
+	function removeEvent(obj,evnts,fn){
+		if(obj.removeEventListener){
+			return obj.removeEventListener(evnts,fn);
+		}else{
+			return obj.detachEvent('on'+evnts,obj[fn]);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="div" style="width:100px;height:100px;background: red;"></div>
+<script type="text/javascript">
+	
+	/*
+		obj.detachEvent:
+			IE10以下专用解绑
+	*/
+	var div = document.getElementById('div');
+	
+//	div.addEventListener('click',fn1);
+//	
+//	function fn1(){
+//		console.log(this);
+//		div.removeEventListener('click',fn1);
+//	}
+
+
+	
+	
+	//div.attachEvent('onclick',fn1);
+	
+	function addEvent(obj,evnts,fn){
+		if(obj.addEventListener){
+			return obj.addEventListener(evnts,fn);
+		}else{
+			obj[fn] = function (){
+				fn.call(obj);
+			}
+			return obj.attachEvent('on'+evnts,obj[fn]);
+		}
+	}
+	
+	function removeEvent(obj,evnts,fn){
+		if(obj.removeEventListener){
+			return obj.removeEventListener(evnts,fn);
+		}else{
+			return obj.detachEvent('on'+evnts,obj[fn]);
+		}
+	}
+	
+	addEvent(div,'click',fn1);
+	
+	function fn1(){
+		console.log(this.nodeName);//window
+		//div.removeEventListener('click',fn1);
+//		div.detachEvent('onclick',div[fn1]);
+		removeEvent(div,'click',fn1);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

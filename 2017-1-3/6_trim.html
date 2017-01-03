@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var str = '        12312      ';
+	/*
+		trim在I8以下浏览器不兼容 
+	*/
+	
+	String.prototype.trim = function(){
+		return this.replace(/^\s+|\s+$/g,'');
+	}
+	
+	console.log(str.trim());
+	
+	
+</script>
+</body>
+</html>

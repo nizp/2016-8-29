@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+	#div1{
+		/*width:100px;*/
+		height: 100px;
+		background: red;
+		transform:translateX(10px) scale(.5);
+		transition: 1s;
+		filter:alpha(opacity=50);
+		opacity: .5;
+	}
+</style>
+</head>
+<body>
+	<div id="div1" style="width:100px"></div>
+<script type="text/javascript">
+	/*
+		动态获取样式计算后的样式 
+		
+			getComputedStyle(obj)[attr]  IE9以上
+			
+			currentStyle IE8以下可以用它(IE专用属性)
+			
+			obj.currentStyle[attr]
+			
+		注意：
+			获取的时候一定要设置一个默认值
+			css3获取的是矩阵（不能直接找到想要的值，除非做处理）
+			当某元素加上css3的东西，获取到的数值会不准确。比如:scale
+			
+	*/
+//	var scale = .5;
+	
+	var div = document.getElementById('div1');
+	
+//	document.onclick = function(){
+//		//console.log(getComputedStyle(div)['transform'])
+//		var x = getComputedStyle(div)['transform'].match(/(\d+\.?\d*)/g);
+////		console.log(x[x.length-2]);
+//		div.style.transform = 'translateX('+(x[x.length-2]*1+50)+'px) scale(.5)';
+//	}
+	
+	//console.log(getComputedStyle(div)['width']);
+	
+	/*
+		css(obj,'key','value') 
+		css(obj,'height') 
+	*/
+	console.log(css(div,'width',300))
+	function css(obj,key,value){
+		//走获取
+		if(obj.currentStyle){
+			if(arguments.length == 2){
+				/*
+					px
+					不带单位的
+					#000
+					black
+				*/
+				if(key === 'opacity'){
+					//console.log( obj.currentStyle.opacity )
+					return parseFloat(obj.currentStyle[key]);
+				}else{
+					//console.log(obj.currentStyle[key])
+					return parseInt(obj.currentStyle[key]);
+				}
+				
+			}else{
+			//走设置
+				if(key === 'opacity'){
+					obj.style.filter = 'aplha(opacity='+(value*100)+')';
+					obj.style.opacity = value;
+				}else{
+					obj.style[key] = value+'px';
+				}
+				
+				return value;
+			}
+		}else{
+			
+			if(arguments.length == 2){
+				/*
+					px
+					不带单位的
+					#000
+					black
+				*/
+				if(key === 'opacity'){
+					//console.log( obj.currentStyle.opacity )
+					return parseFloat(getComputedStyle(obj)[key]);
+				}else{
+					return parseInt(obj.getComputedStyle[key]);
+				}
+				
+			}else{
+			//走设置
+				if(key === 'opacity'){
+					obj.style.filter = 'aplha(opacity='+(value*100)+')';
+					obj.style.opacity = value;
+				}else{
+					obj.style[key] = value+'px';
+				}
+				return value;
+			}
+			
+		}
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

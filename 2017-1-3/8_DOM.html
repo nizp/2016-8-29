@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	
+<script type="text/javascript">
+	/*
+		firstElementChild ：高版本浏览器 
+		
+		firstChild {
+			IE8以下直接能获取到元素节点(前提条件是结构要遵循w3c标准)
+			而高版本下是获取某个元素的第一个节点（所有节点）。
+			
+		}
+		
+		
+		lastElmentChild
+		
+		lastChild{
+			和第一个子节点一样的特性
+		}
+		
+		nextElementSibling
+		
+		nextSibling{
+			和第一个子节点一样的特性
+		}
+		
+		
+		previousElementSibling
+		
+		previousSibling
+		
+		
+	*/
+	
+	var ul = document.getElementById('ul');
+	
+	var f = ul.firstElementChild || ul.firstChild;
+	var l= ul.lastElementChild || ul.lastChild;
+	var n = f.nextElementSibling || f.nextSibling;
+	var p = l.previousElementSibling || l.previousSibling;
+	
+	f.style.background = 'red';
+	l.style.background = 'yellow';
+	
+	n.style.background = 'pink';
+	p.style.background = 'green';
+	
+	
+	console.log(f)
+	
+	
+</script>
+</body>
+</html>

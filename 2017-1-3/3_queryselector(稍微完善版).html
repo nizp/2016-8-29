@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li1 li2">
+			<div>11</div>
+		</li>
+		<li class="li2"></li>
+		<li class="li3"></li>
+		<li class="li1"></li>
+	</ul>
+	<ul id="ul2">
+		<li class="li1 li2"></li>
+		<li class="li2"></li>
+		<li class="li3">
+			<div>111</div>
+		</li>
+		<li class="li1"></li>
+	</ul>
+<script type="text/javascript">
+	/*
+		querySelectorAll
+		querySelector('#ul li')
+		
+		兼容：
+	
+		标准浏览器、ie8以上
+		
+	*/
+
+	var ul = document.getElementById('ul');
+	
+	var li1 = document.querySelector('.li1 div');
+	
+	console.log(li1);
+	
+//	var li1 = ul.querySelector('.li1');
+
+	//var li1 = querySelector('.li1 div');
+	
+//	var li1 = querySelector('      #ul2 li');
+	
+	//console.log(li1)
+	
+	var li1 = $('                 #ul2            div');
+	
+	
+	
+	li1.style.background = 'red';
+	
+//	console.log(li1)
+	
+	/*
+		一个参数 
+			是字符串
+			前面为父级，后面为子级
+	*/
+	
+	function $(){
+		/*
+			把父级和子级取出来
+		*/
+		//说明传了2个
+		//获取父级
+		var parent = null;
+		//获取子级
+		var child = null;
+		//2个参数的时候
+		if(arguments.length === 2){
+			return selector(arguments[1],arguments[0]);
+		}else{
+			//' #ul  li'
+			
+			//['#ul','li']
+			var arr = arguments[0].match(/\S+/g);
+			//把#ul变成真正的元素
+			//因为selector的第二个参数要传el
+			parent = selector(arr[0]);
+			child = arr[1];
+			//selector(字符串子级,元素的父级)
+			return selector(child,parent);
+		}
+	}
+
+	function selector(str,parent){
+		parent = parent?parent:document;
+		var sele = str.substring(0,1);
+		var String = str.substring(1);
+		switch(sele){
+			case '.':
+				return getByClass(String,parent)[0];
+			break;
+			case '#':
+				return parent.getElementById(String);
+			break;
+			default:
+				//console.log(parent)
+				return parent.getElementsByTagName(str)[0];
+			break;
+		}
+	}
+	
+	function getByClass(str,parent){
+		parent = parent?parent:document;
+		if(parent.getElementsByClassName){
+			return parent.getElementsByClassName(str);
+		}else{
+			var arr = [];
+			var aEle = parent.getElementsByTagName('*');
+			var re = new RegExp('\\b'+str+'\\b');  //   li1
+			for(var i=0;i<aEle.length;i++){
+				if(re.test(aEle[i].className)){
+					arr.push(aEle[i]);
+				}
+			}
+			return arr;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//console.log(li1)
+	
+	
+	
+
+//	
+	
+</script>
+</body>
+</html>

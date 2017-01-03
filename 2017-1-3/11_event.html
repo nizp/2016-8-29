@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+	//alert(document.documentElement.nodeName)
+	
+	/*
+		低版本下的ev并不是函数的第一个参数
+		
+		在低版本下事件对象在全局  event
+		
+		
+		chrome也支持event(只不过初始值为undefined)
+		
+	*/
+	
+	
+	document.onclick = function(ev){
+		/*
+			为什么要用 window.event
+				因为在FF中event被认为是个变量，而页面中并没有这个变量，所以报错
+		*/
+		
+		var e =  event || ev;  //window.event
+		
+		alert(event.clientX);
+	}
+</script>
+</body>
+</html>

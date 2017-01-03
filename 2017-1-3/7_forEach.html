@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		forEach是HTML5的新方法 
+		IE9以下浏览器不兼容
+	*/
+	
+	
+	var arr = [1,2,3,4,5];
+	
+	
+//	
+	Array.prototype.forEach = function(call,that){
+		that = that?that:window;
+		for(var i=0;i<this.length;i++){
+			call.call(that,this[i],i,this);
+		}
+	}
+	
+	
+	arr.forEach(function(e,i,all){
+		alert(this.nodeType);
+	},document);
+	
+//	
+	
+	
+	
+	
+</script>
+</body>
+</html>

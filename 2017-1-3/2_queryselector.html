@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li class="li1 li2"></li>
+		<li class="li2"></li>
+		<li class="li3"></li>
+		<li class="li1"></li>
+	</ul>
+	<ul id="ul2">
+		<li class="li1 li2"></li>
+		<li class="li2"></li>
+		<li class="li3"></li>
+		<li class="li1"></li>
+	</ul>
+<script type="text/javascript">
+	/*
+		querySelectorAll
+		querySelector('#ul li')
+		
+	*/
+
+	var ul = document.getElementById('ul');
+	
+//	var li1 = document.querySelectorAll('.li1');
+	
+	//var li1 = ul.querySelector('.li1');
+
+	var li1 = querySelector(ul,'li');
+	
+	console.log(li1)
+	li1.style.background = 'red';
+	
+	/*
+		 
+	*/
+	
+//	console.log(li1)
+	
+	function querySelector(parent,str){
+		if(parent.querySelector){
+			return parent.querySelector(str);
+		}else{
+			var sele = str.substring(0,1);
+			var String = str.substring(1);
+			switch(sele){
+				case '.':
+					return getByClass(String,parent)[0];
+				break;
+				case '#':
+					return document.getElementById(String);
+				break;
+				default:
+					return parent.getElementsByTagName(str)[0];
+				break;
+			}
+		}
+		
+	}
+	
+	function getByClass(str,parent){
+		parent = parent?parent:document;
+		if(parent.getElementsByClassName){
+			return parent.getElementsByClassName(str);
+		}else{
+			var arr = [];
+			var aEle = parent.getElementsByTagName('*');
+			var re = new RegExp('\\b'+str+'\\b');  //   li1
+			for(var i=0;i<aEle.length;i++){
+				if(re.test(aEle[i].className)){
+					arr.push(aEle[i]);
+				}
+			}
+			return arr;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//console.log(li1)
+	
+	
+	
+
+//	
+	
+</script>
+</body>
+</html>

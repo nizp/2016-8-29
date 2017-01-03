@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	var ajax = new ActiveXObject('Microsoft.XMLHTTP'); //微软的一个控件 (一般IE6下才使用这个)
+	//new XMLHttpRequest();
+	ajax.open('get','php/get.php?user=leo');
+	ajax.send();
+	ajax.onreadystatechange = function(){
+		if(ajax.readyState == 4){
+			alert(ajax.responseText);
+		}
+	}
+	
+	
+	
+	
+</script>
+</body>
+</html>

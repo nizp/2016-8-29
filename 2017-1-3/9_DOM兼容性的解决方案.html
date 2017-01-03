@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<ul id="ul">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	
+<script type="text/javascript">
+	/*
+		firstElementChild ：高版本浏览器 
+		
+		firstChild {
+			IE8以下直接能获取到元素节点(前提条件是结构要遵循w3c标准)
+			而高版本下是获取某个元素的第一个节点（所有节点）。
+			
+		}
+		
+		
+		lastElmentChild
+		
+		lastChild{
+			和第一个子节点一样的特性
+		}
+		
+		nextElementSibling
+		
+		nextSibling{
+			和第一个子节点一样的特性
+		}
+		
+		
+		previousElementSibling
+		
+		previousSibling
+		
+		
+	*/
+	
+	var ul = document.getElementById('ul');
+	
+	var f = ul.firstElementChild || ul.firstChild;
+	var l= ul.lastElementChild || ul.lastChild;
+	var n = l.nextElementSibling || l.nextSibling;
+	var p = l.previousElementSibling || l.previousSibling;
+	
+	//console.log(l.nextElementSibling)
+	
+	if(prev(f)){
+		alert('真');
+	}else{
+		alert('假');
+	}
+	
+	function next(obj){
+		/*
+			如果没有传obj并且没有下个兄弟节点就返回null 
+		*/
+		if(!obj && !obj.nextSibling)return null;
+		
+		if(obj.nextElementSibling){
+			return obj.nextElementSibling;
+		}
+		if(obj.nextSibling && obj.nextSibling.nodeType === 1){
+			return obj.nextSibling;
+		}
+		return null;
+	}
+	
+	function prev(obj){
+		/*
+			如果没有传obj并且没有下个兄弟节点就返回null 
+		*/
+		if(!obj && !obj.previousSibling)return null;
+		
+		if(obj.previousElementSibling){
+			return obj.previousElementSibling;
+		}
+		if(obj.previousSibling && obj.previousSibling.nodeType === 1){
+			return obj.previousSibling;
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+//	f.style.background = 'red';
+//	l.style.background = 'yellow';
+//	
+//	n.style.background = 'pink';
+//	p.style.background = 'green';
+	
+	
+	console.log(f)
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<div id="div" style="width:100px;height:100px;background: red;"></div>
+<script type="text/javascript">
+	var div = document.getElementById('div');
+	
+//	div.addEventListener('click',function(){
+//		console.log(this);
+//	});
+
+	/*
+		在IE8下是可以使用的（IE10以前专用） 
+		
+		注意：
+			1.第一个参数是带on
+			2.监听不到捕获过程
+	*/
+//	div.attachEvent('onclick',function(){
+//		console.log(this);//window
+//	});
+
+	addEvent(div,'click',function(){
+		console.log(this.nodeName);
+	});
+	
+	
+	function addEvent(obj,evnts,fn){
+		if(obj.addEventListener){
+			return obj.addEventListener(evnts,fn);
+		}else{
+			return obj.attachEvent('on'+evnts,function(){
+				fn.call(obj);
+			});
+		}
+	}
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

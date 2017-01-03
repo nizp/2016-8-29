@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.active{
+	background: pink;
+}	
+</style>
+</head>
+<body>
+	<div id="div1" style="width:50px;height:50px"> </div>
+	<img src="shzp.gif" id="img"/>
+<script type="text/javascript">
+	/*
+		cssText:批量设置css样式，注意：设置的时候会将之后行间的样式覆盖 
+		
+		
+		setAttribute:
+			设置行间自定义属性
+			
+		在高版本浏览器下通过	setAttribute 去设置样式，是可以的（也会将之后行间的样式覆盖 ）
+		但是在IE7以下是不兼容的，可以改变行间属性，但是不会更改样式(包括保留字（如：class，在低版本下用className）)
+		
+		getAttribute('src'),ie7下默认不支持,可以传第二个参数为2
+		
+	*/
+	var div = document.getElementById('div1');
+	
+//	div.style.cssText = 'width:100px;height:100px;background:#000';
+
+	//div.setAttribute('style','width:100px;height:100px;background:#000');
+	
+//	div.setAttribute('className','active');
+
+	console.log(img.getAttribute('src',2));
+	
+	
+	
+	
+</script>
+</body>
+</html>

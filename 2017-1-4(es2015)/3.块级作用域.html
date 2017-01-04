@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        * 原来有两个作用域：
+        *   1.全局
+        *   2.局部（函数）
+        *
+        * 新增：
+        *   块级
+        *   由一对{}组成的区域：块级作用域
+        *
+        * let和const支持块级作用域，var不支持
+        * */
+
+        {
+            var a = 10;
+            let b = 20;
+            const c = 30;
+
+            console.log(a, b, c);
+        }
+        console.log(a);
+//        console.log(b);
+//        console.log(c);
+
+        {
+            let d = 10;
+            {
+                console.log(d);
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        * 解构赋值:
+        *   对对象进行解构，然后进行变量赋值
+        *
+        *   对有序集合解构
+        *   对无序集合解构
+        * */
+
+//        var [a, b, c, d] = [1, 2, 3];
+//        console.log(a, b, c, d);
+
+        //结构的变量名称必须和被解构对象的key是对应的关系
+//        var { foo, bar } = { foo: "aaa", bar: "bbb" };
+//        console.log(foo, bar);
+//
+//        var { foo1, bar } = { foo: "aaa", bar: "bbb" };
+//        console.log(foo1, bar);
+
+//        var { foo } = { foo: "aaa", bar: "bbb" };
+//        console.log(foo);
+
+        //如果我们希望结构出来的变量和key不一样
+//        var { foo: foo1 } = { foo: "aaa", bar: "bbb" };
+//        console.log(foo1);
+
+//        var [a, b] = 'miaov';
+////        console.log(new String('abc'));
+//        console.log(a, b);
+
+//        var a = 1;
+//        var b = 2;
+//        var [a, b] = [b, a];
+//        console.log(a, b);
+
+//        a = a + b;
+//        b = a - b;
+//        a = a - b;
+//        console.log(a, b);
+
+    </script>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        let div1 = document.querySelector('div');
+        
+        //console.dir( getComputedStyle(div1).width );
+
+//        var cssStyle = getComputedStyle(div1);
+//        var L = cssStyle.left;
+//        var T = cssStyle.top;
+//        var W = cssStyle.width;
+//        var H = cssStyle.height;
+//
+//        console.log(L, T, W, H);
+
+        let {left: L, top: T, width: W, height: H} = getComputedStyle(div1);
+
+        console.log(L, T, W, H);
+
+    </script>
+</body>
+</html>

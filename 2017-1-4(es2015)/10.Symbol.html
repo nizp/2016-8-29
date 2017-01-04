@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        * String
+        * Number
+        * Boolean
+        * Null
+        * Undefined
+        * Object
+        *
+        * Symbol : 新增数据类型
+        * */
+
+//        var s1 = Symbol();
+//        console.log(s1);
+//
+//        var s2 = Symbol();
+//        console.log(s2);
+//
+//        console.log(s1 == s2);
+
+//        var obj = {};
+//
+//        var a = Symbol();
+//        obj[a] = 1;
+//        obj[a] = true;
+//        console.log(obj[a]);
+
+//        const KEYS = {
+//            LEFT: 37,
+//            TOP: 38,
+//            RIGHT: 39,
+//            BOTTOM: 40
+//        };
+//
+//        document.onkeydown = function(e) {
+//
+//            switch(e.keyCode) {
+//                case KEYS.LEFT:
+//                    console.log('左');
+//                    break;
+//
+//                case KEYS.TOP:
+//                    console.log('上');
+//                    break;
+//
+//                case KEYS.RIGHT:
+//                    console.log('右');
+//                    break;
+//
+//                case KEYS.BOTTOM:
+//                    console.log('下');
+//                    break;
+//            }
+//
+//        }
+
+        const COLORS = {
+            RED: Symbol(),
+            BLUE: Symbol(),
+            GREEN: Symbol()
+        }
+
+        setColor(COLORS.RED);
+
+        function setColor(c) {
+            switch (c) {
+                case COLORS.RED:
+                    console.log(1);
+                    break;
+
+                case COLORS.BLUE:
+                    console.log(2);
+                    break;
+
+                case COLORS.GREEN:
+                    console.log(3);
+                    break;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

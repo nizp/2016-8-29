@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <button>按钮一</button>
+    <button>按钮二</button>
+    <button>按钮三</button>
+
+    <script>
+        var btns = document.querySelectorAll('button');
+
+//        for (var i=0; i<btns.length; i++) {
+//            btns[i].onclick = function() {
+//                alert(i);
+//            }
+//        }
+        for (let i=0; i<btns.length; i++) {
+            btns[i].onclick = function() {
+                alert(i);
+            }
+        }
+
+//        {
+//            i=0;
+//            btns[0].onclick = function() {
+//                alert(i);
+//            }
+//        }
+//        {
+//            i=1;
+//            btns[1].onclick = function() {
+//                alert(i);
+//            }
+//        }
+//        {
+//            i=2
+//            btns[2].onclick = function() {
+//                alert(i);
+//            }
+//        }
+    </script>
+</body>
+</html>

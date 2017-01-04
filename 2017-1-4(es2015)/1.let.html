@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        * 通过使用关键字 var 来申明一个变量
+        *
+        * 2015 增加了一个新的申明变量的关键字 : let
+        *
+        * 特点：
+        *   1.重复申明会报错
+        *   2.没有预解析，所以let必须先申明后使用
+        *       暂存死区: 在一个作用域内，从开始到变量申明的这个阶段或者区域，我们称为 暂存死区
+        *   3.和var不同，如果在全局下申明，并不会在顶层对象window下同时添加一个同名属性
+        * */
+
+//        let a = 10;
+//        let a = 100;
+//        console.log(a);
+
+//        var b = 100;
+//        var b = 1000;
+//        console.log(b);
+
+        //预解析
+//        console.log(c);
+//        var c = 10;
+
+//        console.log(d);
+//        let d = 10;
+
+//        function fn() {
+//            //暂存死区
+//            console.log(document);
+//            console.log(window);
+//            //...
+//            let c = 10;
+//        }
+
+//        var e = 10;
+//        delete e;
+//        console.log(e);
+//        console.log(window)
+
+//        window.e = 10;
+//        delete window.e;
+//        console.log(window.e);
+
+        let f = 100;
+        console.log(window.f);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

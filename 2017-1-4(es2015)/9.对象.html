@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function f( ) {
+
+            var a = 1;
+            var b = 2;
+
+            return {
+                a, b
+            };
+        }
+        
+        console.log(f());
+
+        var o = {
+            method: function() {
+
+            }
+        }
+
+        var o = {
+            method() {  //java
+                return "miaov!";
+            }
+        }
+
+
+        //console.log( Object.is(0, -0) );
+
+        var obj1 = {left:1};
+
+        console.log( Object.assign(obj1, {left:100}, {top: 200}) );
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

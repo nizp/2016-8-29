@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<input type="text" />
+
+<script>
+
+    var input = document.querySelector('input');
+
+    var p1 = {};
+
+    var p1Name = 'Leo';
+    Object.defineProperty(p1, 'name', {
+        set(newValue) {
+            //console.log(newValue);
+            p1Name = newValue;
+            input.value = newValue;
+        },
+        get() {
+            return p1Name;
+        }
+    });
+
+    console.log(p1);
+    p1.name = p1Name;
+
+    /*
+    * 对象属性可接收的值：
+     get ：函数
+     set ：函数
+     enumerable ：布尔值
+     configurable ：布尔值
+     writable ：布尔值
+     value ：任意值
+    * */
+</script>
+</body>
+</html>

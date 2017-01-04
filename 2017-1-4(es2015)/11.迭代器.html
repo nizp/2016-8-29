@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        var arr1 = [1,2,3];
+//
+//        console.log(arr1);
+//
+//        for (var value of arr1) {
+//            console.log(value);
+//        }
+//
+        var obj1 = {left: 100, top: 200, width: 300};
+//        console.log(obj1);
+
+        obj1[Symbol.iterator] = function() {
+            var keys = Object.keys(obj1);
+            var len = keys.length;
+            var i = 0;
+            return {
+                next: function() {
+                    if (i<len) {
+                        return {
+                            //value: keys[i++],
+                            //value: obj1[keys[i++]],
+                            value: {
+                                key: keys[i],
+                                value: obj1[keys[i++]]
+                            },
+                            done: false
+                        }
+                    } else {
+                        return {
+                            value: 100,
+                            done: true
+                        }
+                    }
+                }
+            }
+        };
+//        console.log(obj1);
+        for (var {key: k, value: v} of obj1) {
+            console.log(k, v);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+	1、判断字符串是否是这样组成的，
+			第一个必须是字母，后面可以是字母、数字、下划线，总长度为5-20 
+	console.log(/^[a-zA-Z]\w{4,19}/g.test('sd32123'))
+*/
+/*
+	2，判断一个字符串中出现次数最多的字符，统计这个次数
+		key是字符，value是这个字符出现的次数 ,至少3种方式
+*/
+	
+	var str = 'dshssasjsdhs238s1s29s038kssadjnsni2yess03us8914ymsckslds';
+	var obj = {};
+	
+//	for(var i=0;i<str.length;i++){
+//		if(obj[str.charAt(i)]){
+//			obj[str.charAt(i)]++;
+//		}else{
+//			obj[str.charAt(i)] = 1;
+//		}
+//	};
+	
+	str = str.split('').sort().join('');
+	//console.log(str)
+	var key = '';
+	var val = -Infinity;
+	str.replace(/(\w)\1+/g,function($0,$1){
+		if(val < $0.length){
+			val = $0.length;
+			key = $1; 
+		}
+	});
+	
+	
+	
+
+//	for(var attr in obj){
+//		if(val < obj[attr]){
+//			val = obj[attr];
+//			key = attr; 
+//		}
+//	}
+//	
+	console.log(key+':'+val+'次');
+//	console.log(obj);
+//	
+	
+	
+	
+	
+	
+	
+	
+</script>		
+</body>
+</html>

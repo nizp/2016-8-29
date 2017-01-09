@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		3，规避javascript多人开发函数重名问题;  
+		
+		闭包：封闭空间
+		属性: 命名空间
+		模块化:AMD（require）,CMD（sea）,ES6-module
+	*/
+	function a(){
+		alert(2);
+	}
+	var arr = [];
+	arr.a = function(){
+		alert(1);
+	}
+	
+	arr.a();
+	a();
+	
+	
+//	(function a(){
+//		alert(1);
+//	})()
+//	function a(){
+//		alert(2);
+//	}
+//	a();
+</script>
+</body>
+</html>

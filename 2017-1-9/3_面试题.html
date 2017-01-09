@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+		8，JavaScript中如何检测一个变量是一个String类型？ 
+		
+		
+		9.深度克隆
+		
+	*/
+	
+//	var str = 'abc';
+//	var obj = {};
+//	
+//	var toS = Object.prototype.toString;
+//	
+//	console.log(toS.call(obj) === '[object String]');
+
+
+/******************************************************************/
+/*
+	对象的赋址为引用的关系 
+*/
+var obj = {
+	name:'leo',
+	age:23,
+	arr:[1,2,3,4]
+};
+//
+//{
+//	name:'leo',
+//	age:23
+//}
+
+
+var obj2 = extend(obj);
+
+function extend(obj){
+//	debugger;//快捷键 windows+f10
+	var toS = Object.prototype.toString;
+	var o = (toS.call(obj) == '[object Array]')?[]:{};
+	for(var attr in obj){
+		if(typeof obj[attr] === 'object'){
+			o[attr] = extend(obj[attr]);
+		}else{
+			o[attr] = obj[attr];	
+		}
+	}
+	return o;
+}
+obj2.name = '钟老师';
+obj2.arr.push(5)
+console.log(obj.arr);
+	
+	
+</script>
+</body>
+</html>

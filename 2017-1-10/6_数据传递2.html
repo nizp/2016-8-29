@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box"></div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	
+	var Ul = React.createClass({
+		render:function(){
+			console.log(this.props);//data:arr
+			var arr = [];
+			for(var attr in this.props){
+				arr.push(<li key={attr}>{this.props[attr]}</li>)				
+			}
+			console.log(arr);
+			return (
+				<ul>
+					{
+						arr.map(function(e,i){
+							return e
+						})
+					}
+				</ul>
+			)
+		}
+	})
+	
+	var arr = [1,2,3,4];
+	
+	ReactDOM.render(
+		//<Ul data={arr}/>,
+		<Ul {...arr}/>,
+		document.getElementById('box')
+	)
+	
+	
+</script>
+</body>
+</html>

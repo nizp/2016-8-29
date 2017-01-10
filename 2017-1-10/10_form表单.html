@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box">
+	
+</div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	/*
+		如果使用单标签，一定要加闭合斜线，不然会报错 
+		
+		受限组件
+			交互属性设置
+				input的text设置value
+				input的checkbox设置checked
+				select的value值
+			受限组件中交互属性的值不能改变
+			
+		交互属性设置
+			input的text设置defaultValue
+			input的checkbox设置defaultChecked
+			select的defaultValue值
+		不受限组件中交互属性的值可以改变
+
+
+	*/
+	var Text = React.createClass({
+		render:function(){
+			return (
+				<div>
+					<input type="text" defaultValue="123"/>
+					<input type="checkbox" defaultChecked/>
+					<select name="" defaultValue="广州">
+						<option value="北京">北京</option>
+						<option value="上海">上海</option>
+						<option value="广州">广州</option>
+					</select>
+				</div>
+			)
+		}
+	})
+	
+
+	
+	ReactDOM.render(
+		<Text/>,
+		document.getElementById('box')
+	)
+	
+	
+	
+	
+</script>
+</body>
+</html>

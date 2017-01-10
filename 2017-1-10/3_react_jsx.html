@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box"></div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	/*
+		1.引入3个js库 
+			react、react-dom、browser
+			
+		2.创建组件（type="text/babel"）
+			
+		3.插入
+			ReactDOM.render(
+				组件,
+				显示在哪个元素中,
+				渲染完成的回调函数
+			)
+			
+		jsx语法 -> js + xml
+		
+		browser.js将jsx语法转化为javascript这样才会被浏览器正常解析
+		
+		JSX是React编写组件的一种语法规范，可以看为是js的扩展，它支持将HTML和JS混写在一起，最后编译为常规的js，方便浏览器解析
+
+	*/
+	
+//	ReactDOM.render(
+//		<div className="red">
+//			你好!世界! 
+//		</div>,
+//		document.getElementById('box')
+//	);
+	
+	//创建组件开头一定要大写
+	//注意：如果有多个标签进行嵌套，那么语法只支持顶层有一个标签，如果要使用多个标签，那么应该将多个标签用一个顶层标签包裹。
+	var H1 = React.createClass({
+		//传入一个对象，key:render  val:function
+		render:function(){
+			return (
+				<div>
+					<div className="red">
+						你好,世界!
+					</div>
+					<p>你会不会报错呢?</p>
+				</div>
+			)
+		}
+	})
+	
+	//渲染页面
+	ReactDOM.render(
+		<H1 />,
+		document.getElementById('box')
+	)
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

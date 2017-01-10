@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+	<div id="box2"></div>
+<div id="box">
+	<!--<h1>最新电影</h1>
+	<ul>
+		<li>电影一</li>
+		<li>电影二</li>
+	</ul>
+	
+	<h1>热映</h1>
+	<ul>
+		<li>电影一</li>
+		<li>电影二</li>
+	</ul>-->
+	
+	
+</div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	//默认只能从父组件传递数据到子组件，叫单向数据流
+	var Ul = React.createClass({
+		render:function(){
+			return (
+				<div>
+					<H1 title={this.props.title}/>
+					<ul>
+						{
+							this.props.arr.map(function(e,i){
+								return <Li arr={e} key={i}/>
+							})
+						}
+					</ul>
+					<p>我是一个p标签</p>
+				</div>
+			)
+		}
+	})
+	
+	var Li = React.createClass({
+		render:function(){
+			//console.log(this.props)
+			return (
+				<li>{this.props.arr}</li>
+			)
+		}
+	})
+	var H1 = React.createClass({
+		render:function(){
+			return (
+				<h1>{this.props.title}</h1>
+			)
+		}
+	})
+	
+	
+	var data = {
+		arr:['电影一','电影二','电影三','电影四'],
+		title:'最新电影'
+	}
+	
+	
+	var data2 = {
+		title:'热映'
+	}
+	
+	ReactDOM.render(
+		<Ul {...data}{...data2}/>,
+		document.getElementById('box2')
+	)
+	
+	
+	ReactDOM.render(
+		<Ul {...data}/>,
+		document.getElementById('box')
+	)
+	
+	
+	
+	
+</script>
+</body>
+</html>

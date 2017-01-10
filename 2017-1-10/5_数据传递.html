@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box"></div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	
+	var Ul = React.createClass({
+		render:function(){
+			console.log(this.props)
+			var li = this.props.data.map(function(e,i){
+				return <li key={i}>{e}</li>
+			})
+			return (
+				<ul>
+					{li}
+				</ul>
+			)
+		}
+	})
+	
+	//组件传递一组数据 一般用： 名字={数据}
+	//一个数据 ： 名字="数据"
+	//如果要使用语法糖：在数据前面不用加属性名（...data），如果数据为数据，那么使用语法糖之后会变成对象，如果不是语法糖，那么一定要属性名(data={data})   如果有多个数据，那么直接空格后面再写即可
+	var data = [1,2,3,4,5]
+	ReactDOM.render(
+		<Ul data={[1,2,3,4]}/>,
+		//<Ul data="1"/>,
+		//<Ul {...data} />,
+		document.getElementById('box')
+	)
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box"></div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	
+	var Ul = React.createClass({
+		render:function(){
+			var data = [1,2,3,4];
+			var li = data.map(function(e,i){
+				return <li key={i}>{e}</li>
+			})
+			return (
+				<ul>
+					{li}
+				</ul>
+			)
+		}
+	})
+	
+	ReactDOM.render(
+		<Ul />,
+		document.getElementById('box')
+	)
+	
+	
+	
+</script>
+</body>
+</html>

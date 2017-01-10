@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box"></div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/*
+		1.引入2个js库 
+			react、react-dom
+			
+		2.创建组件
+			 React.createElement('标签',{需要设置的属性},内容)
+		3.插入
+			ReactDOM.render(
+				组件,
+				显示在哪个元素中,
+				渲染完成的回调函数
+			)
+	*/
+	
+	var H2 = React.createElement('h1',{className:'red'},'hello react!');
+	
+	/*
+		3个参数
+			1.组件的名称
+			
+	*/
+	ReactDOM.render(
+		H2,
+		document.getElementById('box'),
+		function(){
+			alert('已经完成');
+		}
+	);
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box">
+	
+</div>	
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	/*
+		React就是通过检测getInitialState的状态，如果初始化的数据被修改了，那么会自动渲染DOM
+		
+		getInitialState:function(){
+			return {
+				初始化的数据
+			}
+		}初始化状态 ** 
+		
+		
+		要修改状态中的数据：
+			this.setState({
+				初始化的数据:被修改的新数据
+			})
+		
+		
+		onClick
+		onChange
+		....
+		
+		
+		
+	*/
+	var Text = React.createClass({
+		getInitialState:function(){
+			return {
+				arr:[],
+				num:0
+			}
+		},
+		click:function(){
+			var arr2 = this.state.arr
+			this.state.num++
+			arr2.push(<Li key={this.state.num} num={this.state.num}/>);
+			
+			this.setState({
+				arr:arr2
+			})
+
+			console.log(this.state.arr)
+		},
+		render:function(){
+			var li = this.state.arr.map(function(e,i){return e})
+			return (
+				<div>
+					<input type="button" defaultValue="按钮" onClick={this.click}/>
+					<ul>
+						{li}
+					</ul>
+				</div>
+			)
+		}
+	})
+	
+	var Li = React.createClass({
+		render:function(){
+			return (
+				<li>{this.props.num}</li>
+			)
+		}
+	})
+	
+	
+	
+
+	
+	ReactDOM.render(
+		<Text/>,
+		document.getElementById('box')
+	)
+	
+	
+	
+	
+</script>
+</body>
+</html>

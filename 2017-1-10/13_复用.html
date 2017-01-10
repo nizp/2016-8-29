@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+</head>
+<body>
+<div id="box"></div>
+<div id="box2">
+<script src="js/react.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/react-dom.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/browser.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/babel">
+	/*
+		如果组件要复用，那么传入的数据一定不能是一样的，不然会修改A也会修改B（因为数据为引用关系）
+		
+	*/
+	var Text = React.createClass({
+		getInitialState:function(){
+			return {
+				arr:this.props.arr,
+				num:this.props.num
+			}
+		},
+		click:function(){
+			this.state.num++;
+			this.state.arr.push(<Li num={this.state.num} key={+new Date()}/>);
+			this.setState({
+				arr:this.state.arr,
+				num:this.state.num
+			})
+		},
+		render:function(){
+			console.log(data)
+			return (
+				<div>
+					<input type="button" defaultValue="按钮" onClick={this.click}/>
+					<ul>
+						{
+							this.state.arr
+						}
+					</ul>
+				</div>
+			)
+		}
+	})
+	var Li = React.createClass({
+		render:function(){
+			return (
+				<li>{this.props.num}</li>
+			)
+		}
+	})
+	
+	var data = {
+		arr:[],
+		num:0
+	}
+	var data2 = {
+		arr:[],
+		num:0
+	}
+	
+	ReactDOM.render(
+		<Text {...data}/>,
+		document.getElementById('box')
+	)
+	
+	ReactDOM.render(
+		<Text {...data2}/>,
+		document.getElementById('box2')
+	)
+	
+	
+	
+	
+</script>
+</body>
+</html>

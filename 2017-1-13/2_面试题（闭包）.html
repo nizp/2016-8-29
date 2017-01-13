@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	/*
+	 	13，什么是闭包？
+	 	
+	 	是一种js的特性，当申明一个函数的时候调用这个函数，能够在外面引用到函数内的
+	 	变量，就形成了闭包环境,子函数调用父函数的参数或者变量,而父函数调用不了子函数的参数或者变量就算闭包特性
+	 	
+	 	
+	 	定时器中使用
+	 	
+	 	
+	 	http://www.jb51.net/article/24101.htm  参考资料
+	 	
+	 	
+	 	window.onload = function(){
+	 		var 
+	 		function f(){
+	 			
+	 		}
+	 	}
+	*/
+	
+//	function fn(){
+//		var a = 10;
+//		return function(){
+//			alert(++a)
+//		}
+//	}
+//	
+//	var f = fn();
+//	f();
+//	f();
+
+//	function fn(){
+//		var a = 10;
+//		window.abc = 12;
+//	}
+//	fn();
+//	
+//	alert(window.abc);
+
+	
+	for(var i=0;i<5;i++){
+//		function fn1(i){
+//			setTimeout(function(){
+//				console.log(i)
+//			},500);
+//		}
+//		fn1(i);
+		
+		(function(i){
+			setTimeout(function(){
+				console.log(i)
+			},500);
+		})(i)
+			
+	}
+
+	
+	
+</script>
+</body>
+</html>
